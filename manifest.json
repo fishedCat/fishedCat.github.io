@@ -1,7 +1,7 @@
 {
-  "name": "随风起の主页",
-  "short_name": "随风起の主页",
-  "description": "一个默默无闻的主页",
+  "name": "摸鱼喵の主页",
+  "short_name": "摸鱼喵の主页",
+  "description": "乾为天，无欲，自强，所以至刚，坤为地，包容，厚重，所以至柔",
   "display": "standalone",
   "start_url": "/",
   "theme_color": "#424242",
