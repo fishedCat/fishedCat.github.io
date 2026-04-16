@@ -5,3 +5,11 @@
     - newpage:
         text: 论文阅读系列开始
         href: /Summary/papereading
+  - "2026-3-31":
+    - newpage:
+        text: 从深度学习到大模型系列开始
+        href: /DL2LLM/index.md
+  - "2026-4-15":
+    - newpage:
+        text: MiniMind学习笔记第一部分
+        href: /DL2LLM/index.md
