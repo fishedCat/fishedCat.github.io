@@ -383,8 +383,7 @@
       Normalization/归一化
     </span>
 </a>
-<nav aria-label="Normalization/归一化" class="md-nav">
-<ul class="md-nav__list">
+</li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#_1">
 <span class="md-ellipsis">
@@ -398,7 +397,8 @@
       Post-LN与Pre-LN:
     </span>
 </a>
-</li>
+<nav aria-label="Post-LN与Pre-LN:" class="md-nav">
+<ul class="md-nav__list">
 <li class="md-nav__item">
 <a class="md-nav__link" href="#qa">
 <span class="md-ellipsis">
@@ -467,8 +467,7 @@
       Normalization/归一化
     </span>
 </a>
-<nav aria-label="Normalization/归一化" class="md-nav">
-<ul class="md-nav__list">
+</li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#_1">
 <span class="md-ellipsis">
@@ -482,7 +481,8 @@
       Post-LN与Pre-LN:
     </span>
 </a>
-</li>
+<nav aria-label="Post-LN与Pre-LN:" class="md-nav">
+<ul class="md-nav__list">
 <li class="md-nav__item">
 <a class="md-nav__link" href="#qa">
 <span class="md-ellipsis">
@@ -512,18 +512,24 @@
 </ul>
 </div>
 <h3 id="normalization"><span>Normalization/<span class="heti-spacing"> </span></span>归一化<a class="headerlink" href="#normalization" title="Permanent link"><span><span class="heti-spacing"> </span>¶</span></a></h3>
-<p>无归一化的情况：经过几层的传播后数据标准差迅速衰减到接近<span class="heti-skip"><span class="heti-spacing"> </span>0(<span class="heti-spacing"> </span></span>梯度消失<span><span class="heti-spacing"> </span>)</span>；数值不稳定<span><span class="heti-spacing"> </span>(1.00 - 0.01)</span>
-使用RMSNorm归一化的情况：经过几层的传播后数据标准差基本维持在不错的数据；数值稳定(1.00 - 0.82)</p>
+<p>无归一化的情况：经过几层的传播后数据标准差迅速衰减到接近<span class="heti-skip"><span class="heti-spacing"> </span>0(<span class="heti-spacing"> </span></span>梯度消失<span><span class="heti-spacing"> </span>)</span>；数值不稳定<span><span class="heti-spacing"> </span>(1.00 - 0.01)</span></p>
+<p>使用<span class="heti-skip"><span class="heti-spacing"> </span>RMSNorm<span class="heti-spacing"> </span></span>归一化的情况：经过几层的传播后数据标准差基本维持在不错的数据；数值稳定<span><span class="heti-spacing"> </span>(1.00 - 0.82)</span></p>
 <ul>
-<li>梯度消失：
-    无归一化的网络，<strong>激活值的标准差会随着层数增加而迅速衰减</strong>，当激活值越来越小，反向传播时梯度也会越来越小，最终接近<span><span class="heti-spacing"> </span>0</span>。模型无法学习深层的特征</li>
-<li>梯度爆炸<span><span class="heti-spacing"> </span>:</span>
-    反之，如果数值越来越大，最终会超出浮点数范围，变成 NaN（Not a Number），训练直接崩溃。</li>
+<li>
+<p>梯度消失：</p>
+<p>无归一化的网络，<strong>激活值的标准差会随着层数增加而迅速衰减</strong>，当激活值越来越小，反向传播时梯度也会越来越小，最终接近<span><span class="heti-spacing"> </span>0</span>。模型无法学习深层的特征</p>
+</li>
+<li>
+<p>梯度爆炸<span><span class="heti-spacing"> </span>:</span></p>
+<p>反之，如果数值越来越大，最终会超出浮点数范围，变成<span><span class="heti-spacing"> </span>NaN</span>（Not a Number<heti-adjacent class="heti-adjacent-half">）</heti-adjacent>，训练直接崩溃。</p>
+</li>
 </ul>
-<h4 id="_1">归一化<span><span class="heti-spacing"> </span>:</span><a class="headerlink" href="#_1" title="Permanent link"><span><span class="heti-spacing"> </span>¶</span></a></h4>
+<h3 id="_1">归一化<span><span class="heti-spacing"> </span>:</span><a class="headerlink" href="#_1" title="Permanent link"><span><span class="heti-spacing"> </span>¶</span></a></h3>
 <ul>
-<li>核心思想：不改变信息内容，而是控制数据分布的尺度，调整到标准范围（均值 ≈ 0，标准差 ≈ 1）
-    每一层的输出都被"归一化"到标准范围,无论输入如何变化，输出都保持稳定。使得梯度能顺利传回每一层</li>
+<li>
+<p>核心思想：不改变信息内容，而是控制数据分布的尺度，调整到标准范围（均值 ≈ 0，标准差 ≈ 1）</p>
+<p>每一层的输出都被<span class="heti-skip"><span class="heti-spacing"> </span>"<span class="heti-spacing"> </span></span>归一化<span class="heti-skip"><span class="heti-spacing"> </span>"<span class="heti-spacing"> </span></span>到标准范围<span class="heti-skip"><span class="heti-spacing"> </span>,<span class="heti-spacing"> </span></span>无论输入如何变化，输出都保持稳定。使得梯度能顺利传回每一层</p>
+</li>
 <li>
 <p>好处<span><span class="heti-spacing"> </span>:</span></p>
 <ul>
@@ -533,29 +539,41 @@
 </ul>
 </li>
 <li>
-<p>RMSNorm:
-    全称：Root Mean Square Normalization（均方根归一化）
-    只做缩放，不减均值，直接除以 RMS，比LayerNorm更简单高效。
-    公式:
-    $$ RMSNorm(x) = \frac{x}{RMS(x)} \odot \gamma \
-        RMS(x) = \sqrt{\frac{1}{d}\sum_{i=1}^{d}x_i^2+\epsilon}
-    $$
-        其中，<span class="arithmatex">\(x\)</span>为输入向量，形状 [batch_size, seq_len, hidden_dim]；d为隐藏维度(hidden_dim)；<span class="arithmatex">\(\epsilon\)</span>为防止除零的小常数(1e-5)；<span class="arithmatex">\(\gamma\)</span>为可学习的缩放参数，形状 [hidden_dim]；<span class="arithmatex">\(\odot\)</span>为逐元素乘法
-    作用：
-        保持每一层的激活标准差在 1.0 附近，确保梯度能够顺利传播回前面的层</p>
-<p>可以不减均值的原因<span><span class="heti-spacing"> </span>:</span>
-- 在深层网络中，经过多层变换后，激活值的均值通常已经接近 0
-- 只控制标准差（尺度）就足够稳定训练
-- 省略减均值 → 减少计算 → 更快
-- 在 LLM 训练中，RMSNorm 和 LayerNorm 的最终效果相当，但 RMSNorm 更快。实验验证了可以不减去均值</p>
+<p>RMSNorm:</p>
+<ul>
+<li>全称：Root Mean Square Normalization（均方根归一化）</li>
+</ul>
+<p>只做缩放，不减均值，直接除以<span><span class="heti-spacing"> </span>RMS</span>，比<span class="heti-skip"><span class="heti-spacing"> </span>LayerNorm<span class="heti-spacing"> </span></span>更简单高效。</p>
+<ul>
+<li>
+<p>公式<span><span class="heti-spacing"> </span>:</span></p>
+<div class="arithmatex">\[ RMSNorm(x) = \frac{x}{RMS(x)} \odot \gamma \]</div>
+<div class="arithmatex">\[ RMS(x) = \sqrt{\frac{1}{d}\sum_{i=1}^{d}x_i^2+\epsilon}
+\]</div>
+<p>其中，<span><span class="arithmatex">\(x\)</span><span class="heti-spacing"> </span></span>为输入向量，形状<span><span class="heti-spacing"> </span>[batch_size, seq_len, hidden_dim]</span>；<span>d<span class="heti-spacing"> </span></span>为隐藏维度<span><span class="heti-spacing"> </span>(hidden_dim)</span>；<span><span class="arithmatex">\(\epsilon\)</span><span class="heti-spacing"> </span></span>为防止除零的小常数<span><span class="heti-spacing"> </span>(1e-5)</span>；<span><span class="arithmatex">\(\gamma\)</span><span class="heti-spacing"> </span></span>为可学习的缩放参数，形状<span><span class="heti-spacing"> </span>[hidden_dim]</span>；<span><span class="arithmatex">\(\odot\)</span><span class="heti-spacing"> </span></span>为逐元素乘法</p>
+</li>
+<li>
+<p>作用：</p>
+<p>保持每一层的激活标准差在<span class="heti-skip"><span class="heti-spacing"> </span>1.0<span class="heti-spacing"> </span></span>附近，确保梯度能够顺利传播回前面的层</p>
+</li>
+<li>
+<p>可以不减均值的原因<span><span class="heti-spacing"> </span>:</span></p>
+<ul>
+<li>在深层网络中，经过多层变换后，激活值的均值通常已经接近<span><span class="heti-spacing"> </span>0</span></li>
+<li>只控制标准差（尺度）就足够稳定训练</li>
+<li>省略减均值 → 减少计算 → 更快</li>
+<li>在<span class="heti-skip"><span class="heti-spacing"> </span>LLM<span class="heti-spacing"> </span></span>训练中，<span>RMSNorm<span class="heti-spacing"> </span></span>和<span class="heti-skip"><span class="heti-spacing"> </span>LayerNorm<span class="heti-spacing"> </span></span>的最终效果相当，但<span class="heti-skip"><span class="heti-spacing"> </span>RMSNorm<span class="heti-spacing"> </span></span>更快。实验验证了可以不减去均值</li>
+</ul>
+</li>
+</ul>
 </li>
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p><img alt="Norm对比" src="../../../imgs/DL2LLM/MiniMind/Norm1.png"/>
-RMSNorm没有 bias的原因:
-RMSNorm 不减均值，所以不需要 bias
-要注意: LayerNorm 有 weight 和 bias 两个参数</p>
+<p><img alt="Norm对比" src="../../../imgs/DL2LLM/MiniMind/Norm1.png"/></p>
+<p><span>RMSNorm<span class="heti-spacing"> </span></span>没有<span class="heti-skip"><span class="heti-spacing"> </span>bias<span class="heti-spacing"> </span></span>的原因<span><span class="heti-spacing"> </span>:</span>
+    RMSNorm 不减均值，所以不需要 bias</p>
+<p>要注意<span class="heti-skip"><span class="heti-spacing"> </span>: LayerNorm<span class="heti-spacing"> </span></span>有<span class="heti-skip"><span class="heti-spacing"> </span>weight<span class="heti-spacing"> </span></span>和<span class="heti-skip"><span class="heti-spacing"> </span>bias<span class="heti-spacing"> </span></span>两个参数</p>
 </div>
 <hr/>
 <ul>
@@ -582,62 +600,89 @@ RMSNorm 不减均值，所以不需要 bias
 </code></pre></div>
 </li>
 <li>
-<p>为什么代码中要用<span class="heti-skip"><span class="heti-spacing"> </span>.float()<span class="heti-spacing"> </span></span>和<span><span class="heti-spacing"> </span>.type_as(x)?</span>
-    FP16/BF16 精度较低，归一化计算中的小数值容易下溢（变成 0）：
-    .float()：转为 FP32，用高精度计算; .type_as(x)：转回原始数据类型，保持一致性
-    流程：输入 (BF16) → .float() (FP32) → 归一化 → .type_as(x) (BF16) → 输出</p>
+<p>为什么代码中要用<span class="heti-skip"><span class="heti-spacing"> </span>.float()<span class="heti-spacing"> </span></span>和<span><span class="heti-spacing"> </span>.type_as(x)?</span></p>
+<p><span>FP16/BF16<span class="heti-spacing"> </span></span>精度较低，归一化计算中的小数值容易下溢（变成<span><span class="heti-spacing"> </span>0</span>）</p>
+<p>.float()：转为<span><span class="heti-spacing"> </span>FP32</span>，用高精度计算<span><span class="heti-spacing"> </span>; .type_as(x)</span>：转回原始数据类型，保持一致性</p>
+<p>流程：输入<span><span class="heti-spacing"> </span>(BF16)</span> → .float() (FP32) → 归一化 → .type_as(x) (BF16) → 输出</p>
 </li>
 </ul>
-<h4 id="post-lnpre-ln"><span>Post-LN<span class="heti-spacing"> </span></span>与<span><span class="heti-spacing"> </span>Pre-LN:</span><a class="headerlink" href="#post-lnpre-ln" title="Permanent link"><span><span class="heti-spacing"> </span>¶</span></a></h4>
+<h3 id="post-lnpre-ln"><span>Post-LN<span class="heti-spacing"> </span></span>与<span><span class="heti-spacing"> </span>Pre-LN:</span><a class="headerlink" href="#post-lnpre-ln" title="Permanent link"><span><span class="heti-spacing"> </span>¶</span></a></h3>
 <ul>
-<li>post-LN:
-    子层 -&gt; 残差连接 -&gt; 归一化
-    缺陷:<ul>
+<li>
+<p>post-LN:</p>
+<p>子层<span class="heti-skip"><span class="heti-spacing"> </span>-&gt;<span class="heti-spacing"> </span></span>残差连接<span class="heti-skip"><span class="heti-spacing"> </span>-&gt;<span class="heti-spacing"> </span></span>归一化</p>
+<ul>
+<li>
+<p>缺陷<span><span class="heti-spacing"> </span>:</span></p>
+<ul>
 <li>残差路径上的梯度会被<span class="heti-skip"><span class="heti-spacing"> </span>LayerNorm<span class="heti-spacing"> </span></span>打断</li>
 <li>深层网络（<span>&gt;12<span class="heti-spacing"> </span></span>层）训练不稳定<span class="heti-skip"><span class="heti-spacing"> </span>,<span class="heti-spacing"> </span></span>尤其是在模型层数很深的时候，梯度容易爆炸或消失</li>
-<li>需要非常小的学习率
+<li>需要非常小的学习率</li>
+</ul>
+</li>
+</ul>
 <div class="highlight"><pre><span></span><code><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="c1"># 先计算，后归一化</span>
 <a href="#__codelineno-1-2" id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">Attention</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 <a href="#__codelineno-1-3" id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="n">x</span> <span class="o">=</span> <span class="n">LayerNorm</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>          <span class="c1"># 归一化在残差之后</span>
 <a href="#__codelineno-1-4" id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">FFN</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 <a href="#__codelineno-1-5" id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="n">x</span> <span class="o">=</span> <span class="n">LayerNorm</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-</code></pre></div></li>
-</ul>
+</code></pre></div>
 </li>
-<li><span>pre-LN(<span class="heti-spacing"> </span></span>用这个<span><span class="heti-spacing"> </span>):</span>
-    归一化 -&gt; 子层 -&gt; 残差连接
-    优势：<ul>
+<li>
+<p><span>pre-LN(<span class="heti-spacing"> </span></span>用这个<span><span class="heti-spacing"> </span>):</span></p>
+<p>归一化<span class="heti-skip"><span class="heti-spacing"> </span>-&gt;<span class="heti-spacing"> </span></span>子层<span class="heti-skip"><span class="heti-spacing"> </span>-&gt;<span class="heti-spacing"> </span></span>残差连接</p>
+<ul>
+<li>
+<p>优势：</p>
+<ul>
 <li>残差路径不会被归一化打断，梯度传播会更平滑<span class="heti-skip"><span class="heti-spacing"> </span>,<span class="heti-spacing"> </span></span>可以直接传播</li>
 <li>每个子层的输入分布稳定</li>
 <li>深层网络更容易训练<span class="heti-skip"><span class="heti-spacing"> </span>/<span class="heti-spacing"> </span></span>收敛<span class="heti-skip"><span class="heti-spacing"> </span>,<span class="heti-spacing"> </span></span>极大地提升了训练的稳定性</li>
-<li>学习率容忍度更高
+<li>学习率容忍度更高</li>
+</ul>
+</li>
+</ul>
 <div class="highlight"><pre><span></span><code><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="c1"># 先归一化，再计算</span>
 <a href="#__codelineno-2-2" id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">Attention</span><span class="p">(</span><span class="n">Norm</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>  <span class="c1"># 归一化在子层之前</span>
 <a href="#__codelineno-2-3" id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">FFN</span><span class="p">(</span><span class="n">Norm</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
-</code></pre></div></li>
+</code></pre></div>
+</li>
+<li>
+<p>为什么<span class="heti-skip"><span class="heti-spacing"> </span>pre-LN<span class="heti-spacing"> </span></span>可以用更大的学习率<span class="heti-skip"><span class="heti-spacing"> </span>/<span class="heti-spacing"> </span></span>训练更稳定，而<span class="heti-skip"><span class="heti-spacing"> </span>post-LN<span class="heti-spacing"> </span></span>不行？</p>
+<p><span>post-LN:<span class="heti-spacing"> </span></span>由于残差连接的输出直接累加到主干路径上，随着层数加深，输出的量级会不断累积，导致梯度在反向传播时变得非常大或非常小。</p>
+<p><span>Post-LN + LayerNorm:<span class="heti-spacing"> </span></span>需要较小的学习率，因为主路径上的梯度流经归一化层，存在数值不稳定风险</p>
+<p><span>Pre-LN + LayerNorm:<span class="heti-spacing"> </span></span>训练稳定，可以使用更大的学习率，因为主路径上的梯度直接通过残差连接，更稳定</p>
+<ul>
+<li>
+<p>数学原理<span><span class="heti-spacing"> </span>:</span></p>
+<ul>
+<li>
+<p>多层堆叠后：</p>
+<div class="arithmatex">\[x_L =x_0 + \sum_{i=0}^{L−1}F(x_i)\]</div>
+<p><span>Post-LN:<span class="heti-spacing"> </span></span>在残差相加之后，无法约束累加和的尺度。随着层数<span class="heti-skip"><span class="heti-spacing"> </span><span class="arithmatex">\(L\)</span><span class="heti-spacing"> </span></span>增加，求和项的数值量级会持续叠加，输出特征的范数不断增大。</p>
+</li>
+<li>
+<p>结合残差求导：</p>
+<div class="arithmatex">\[\frac{\partial x_{l+1}}{​\partial x_l} ​​= I+\frac{\partial F(x_l)}{​\partial x_l​}\]</div>
+<p>梯度爆炸<span class="heti-skip"><span class="heti-spacing"> </span>:<span class="heti-spacing"> </span></span>前向特征量级极大，主干网络<span class="heti-skip"><span class="heti-spacing"> </span><span class="arithmatex">\(F\)</span><span class="heti-spacing"> </span></span>的权重为适配大尺度输入会被训练得很大，<span class="arithmatex">\(\frac{\partial F(x_l)}{​\partial x_l​}\)</span>​数值激增，叠加单位矩阵后梯度爆炸。</p>
+<p>梯度消失<span class="heti-skip"><span class="heti-spacing"> </span>:<span class="heti-spacing"> </span></span>若网络层过多，累加特征尺度极端，激活函数进入饱和区，<span class="arithmatex">\(\frac{\partial F(x_l)}{​\partial x_l​}\)</span>​趋近于<span><span class="heti-spacing"> </span>0</span>，整体梯度趋近于单位矩阵，浅层几乎无有效梯度更新。</p>
+</li>
+<li>
+<p><span>Post-LN<span class="heti-spacing"> </span></span>放大问题，<span>LayerNorm<span class="heti-spacing"> </span></span>仅作用于残差和之后，无法稳定每一层输入<span class="heti-skip"><span class="heti-spacing"> </span><span class="arithmatex">\(F(x_l​)\)</span><span class="heti-spacing"> </span></span>的分布，主干模块的输入尺度持续漂移，导数的波动被进一步放大。​</p>
+</li>
+<li>
+<p><span>Pre-LN<span class="heti-spacing"> </span></span>将归一化放在残差前，每层<span class="heti-skip"><span class="heti-spacing"> </span>F<span class="heti-spacing"> </span></span>的输入都被标准化为稳定分布，从源头抑制了特征量级累积，同时让梯度计算更稳定。</p>
+</li>
 </ul>
 </li>
-<li>为什么<span class="heti-skip"><span class="heti-spacing"> </span>pre-LN<span class="heti-spacing"> </span></span>可以用更大的学习率<span class="heti-skip"><span class="heti-spacing"> </span>/<span class="heti-spacing"> </span></span>训练更稳定，而<span class="heti-skip"><span class="heti-spacing"> </span>post-LN<span class="heti-spacing"> </span></span>不行？
-    post-LN: 由于残差连接的输出直接累加到主干路径上，随着层数加深，输出的量级会不断累积，导致梯度在反向传播时变得非常大或非常小。
-    Post-LN + LayerNorm: 需要较小的学习率，因为主路径上的梯度流经归一化层，存在数值不稳定风险
-    Pre-LN + LayerNorm: 训练稳定，可以使用更大的学习率，因为主路径上的梯度直接通过残差连接，更稳定
-    数学原理:<ul>
-<li>多层堆叠后：
-    <span class="arithmatex">\(x_L =x_0 + \sum_{i=0}^{L−1}F(x_i)\)</span>
-    Post-LN: 在残差相加之后，无法约束累加和的尺度。随着层数<span class="arithmatex">\(L\)</span>增加，求和项的数值量级会持续叠加，输出特征的范数不断增大。</li>
-<li>结合残差求导：<span class="arithmatex">\(\frac{\partial x_{l+1}}{​\partial x_l} ​​= I+\frac{\partial F(x_l)}{​\partial x_l​}\)</span>
-    梯度爆炸: 前向特征量级极大，主干网络<span class="arithmatex">\(F\)</span>的权重为适配大尺度输入会被训练得很大，<span class="arithmatex">\(\frac{\partial F(x_l)}{​\partial x_l​}\)</span>​数值激增，叠加单位矩阵后梯度爆炸。
-    梯度消失: 若网络层过多，累加特征尺度极端，激活函数进入饱和区，<span class="arithmatex">\(\frac{\partial F(x_l)}{​\partial x_l​}\)</span>​趋近于0，整体梯度趋近于单位矩阵，浅层几乎无有效梯度更新。</li>
-<li><span>Post-LN<span class="heti-spacing"> </span></span>放大问题，<span>LayerNorm<span class="heti-spacing"> </span></span>仅作用于残差和之后，无法稳定每一层输入<span class="heti-skip"><span class="heti-spacing"> </span><span class="arithmatex">\(F(x_l​)\)</span><span class="heti-spacing"> </span></span>的分布，主干模块的输入尺度持续漂移，导数的波动被进一步放大。​</li>
-<li><span>Pre-LN<span class="heti-spacing"> </span></span>将归一化放在残差前，每层<span class="heti-skip"><span class="heti-spacing"> </span>F<span class="heti-spacing"> </span></span>的输入都被标准化为稳定分布，从源头抑制了特征量级累积，同时让梯度计算更稳定。</li>
 </ul>
 </li>
 </ul>
 <h4 id="qa">Q&amp;A<a class="headerlink" href="#qa" title="Permanent link">¶</a></h4>
 <ol>
 <li>
-<p><span>loss<span class="heti-spacing"> </span></span>在前<span class="heti-skip"><span class="heti-spacing"> </span>100<span class="heti-spacing"> </span></span>步就变成了<span><span class="heti-spacing"> </span>NaN</span>。可能的原因和解决方案是什么？
-    可能原因：</p>
+<p><span>loss<span class="heti-spacing"> </span></span>在前<span class="heti-skip"><span class="heti-spacing"> </span>100<span class="heti-spacing"> </span></span>步就变成了<span><span class="heti-spacing"> </span>NaN</span>。可能的原因和解决方案是什么？</p>
+<p>可能原因：</p>
 <ul>
 <li>没有使用归一化 → 梯度爆炸</li>
 <li>使用了<span><span class="heti-spacing"> </span>Post-LN</span> → 深层网络不稳定</li>
@@ -645,36 +690,60 @@ RMSNorm 不减均值，所以不需要 bias
 <li>权重初始化不当 → 初始激活值过大</li>
 <li><span>FP16<span class="heti-spacing"> </span></span>精度问题 → 数值下溢或溢出</li>
 </ul>
-<p>解决方案（按优先级<heti-adjacent class="heti-adjacent-half">）</heti-adjacent>：
-- 确保使用 Pre-LN + RMSNorm：
-- 降低学习率：
-    - 从 1e-3 降到 1e-4 或更小
-    -使用 warmup（前 N 步线性增加学习率）
-- 检查权重初始化：
-    - 使用 Kaiming 或 Xavier 初始化
-    - 确保初始激活值在合理范围（std ≈ 1.0）
-- 使用梯度裁剪：
-</p><div class="highlight"><pre><span></span><code><a href="#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">clip_grad_norm_</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">max_norm</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+<p>解决方案（按优先级<heti-adjacent class="heti-adjacent-half">）</heti-adjacent>：</p>
+<ul>
+<li>确保使用<span><span class="heti-spacing"> </span>Pre-LN + RMSNorm</span>：</li>
+<li>
+<p>降低学习率：</p>
+<ul>
+<li>从<span class="heti-skip"><span class="heti-spacing"> </span>1e-3<span class="heti-spacing"> </span></span>降到<span class="heti-skip"><span class="heti-spacing"> </span>1e-4<span class="heti-spacing"> </span></span>或更小
+   -使用 warmup（前 N 步线性增加学习率）</li>
+</ul>
+</li>
+<li>
+<p>检查权重初始化：</p>
+<ul>
+<li>使用<span class="heti-skip"><span class="heti-spacing"> </span>Kaiming<span class="heti-spacing"> </span></span>或<span class="heti-skip"><span class="heti-spacing"> </span>Xavier<span class="heti-spacing"> </span></span>初始化</li>
+<li>确保初始激活值在合理范围（std ≈ 1.0）</li>
+</ul>
+</li>
+<li>
+<p>使用梯度裁剪：</p>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">clip_grad_norm_</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">max_norm</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
 </code></pre></div>
-- 使用 BF16 而不是 FP16,BF16 数值范围更大，更稳定
+<ul>
+<li>使用<span class="heti-skip"><span class="heti-spacing"> </span>BF16<span class="heti-spacing"> </span></span>而不是<span class="heti-skip"><span class="heti-spacing"> </span>FP16,BF16<span class="heti-spacing"> </span></span>数值范围更大，更稳定</li>
+</ul>
 <div class="highlight"><pre><span></span><code><a href="#__codelineno-4-1" id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">autocast</span><span class="p">(</span><span class="n">device_type</span><span class="o">=</span><span class="s1">'cuda'</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">bfloat16</span><span class="p">):</span>
 <a href="#__codelineno-4-2" id="__codelineno-4-2" name="__codelineno-4-2"></a>    <span class="n">output</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
 </code></pre></div>
-调试步骤：
-1. 在每一层后打印激活值的统计量（均值、标准差、max/min）
-2. 检查哪一层首先出现 NaN
-3. 针对性地调整该层的配置
-2. 为什么RMSNorm可以没有bias，LayerNorm需要bias?bias的作用是什么？
-偏置项bias本质是可学习的平移量，作用是:
--  恢复 “平移自由度”，避免归一化破坏数据分布
-    LN 会强制减均值μ，把数据中心拉到 0—— 这会抹掉数据原本的平移信息。用可学习bias把归一化后的数据平移到合适位置，让模型自主决定特征分布的中心，不被强制 0 中心锁死
-- 适配激活函数的零点，保证非线性有效
-    GELU、Swish、ReLU等常用激活，有效非线性区都在零点附近。
-    不同层、不同任务需要微调激活的输入中心 —— bias就是用来精准调整激活输入的零点偏移，让非线性发挥最大作用，避免激活进入饱和区（比如 ReLU 负半轴全 0、GELU 梯度消失）
-- 修正归一化带来的分布偏差，提升表达能力
-    归一化会压缩数据分布；bias作为可学习参数，能在标准化基础上，给模型额外的分布修正能力，让层输出适配后续主干（Attention/FFN）的输入需求，提升模型拟合能力。
-总之，LN = 中心化 + 缩放 + 平移，bias补全 “平移” 这个自由度。
-而RMSNorm 不做均值中心化，天然保留平移信息；不改变数据的中心，只约束数据的尺度，自然不需要用bias去恢复平移自由度。
+<ul>
+<li>
+<p>调试步骤：</p>
+<ol>
+<li>在每一层后打印激活值的统计量（均值、标准差、max/min）</li>
+<li>检查哪一层首先出现<span><span class="heti-spacing"> </span>NaN</span></li>
+<li>针对性地调整该层的配置</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>
+<p>为什么<span class="heti-skip"><span class="heti-spacing"> </span>RMSNorm<span class="heti-spacing"> </span></span>可以没有<span><span class="heti-spacing"> </span>bias</span>，<span>LayerNorm<span class="heti-spacing"> </span></span>需要<span class="heti-skip"><span class="heti-spacing"> </span>bias?bias<span class="heti-spacing"> </span></span>的作用是什么？</p>
+<p>偏置项<span class="heti-skip"><span class="heti-spacing"> </span>bias<span class="heti-spacing"> </span></span>本质是可学习的平移量，作用是<span><span class="heti-spacing"> </span>:</span></p>
+<ul>
+<li>恢复 “平移自由度”，避免归一化破坏数据分布
+       LN 会强制减均值μ，把数据中心拉到 0—— 这会抹掉数据原本的平移信息。用可学习bias把归一化后的数据平移到合适位置，让模型自主决定特征分布的中心，不被强制 0 中心锁死</li>
+<li>适配激活函数的零点，保证非线性有效
+       GELU、Swish、ReLU等常用激活，有效非线性区都在零点附近。
+       不同层、不同任务需要微调激活的输入中心 —— bias就是用来精准调整激活输入的零点偏移，让非线性发挥最大作用，避免激活进入饱和区（比如 ReLU 负半轴全 0、GELU 梯度消失）</li>
+<li>修正归一化带来的分布偏差，提升表达能力
+       归一化会压缩数据分布；bias作为可学习参数，能在标准化基础上，给模型额外的分布修正能力，让层输出适配后续主干（Attention/FFN）的输入需求，提升模型拟合能力。</li>
+</ul>
+<p>总之，<span>LN =<span class="heti-spacing"> </span></span>中心化<span class="heti-skip"><span class="heti-spacing"> </span>+<span class="heti-spacing"> </span></span>缩放<span class="heti-skip"><span class="heti-spacing"> </span>+<span class="heti-spacing"> </span></span>平移，<span>bias<span class="heti-spacing"> </span></span>补全 “平移” 这个自由度。
+而RMSNorm 不做均值中心化，天然保留平移信息；不改变数据的中心，只约束数据的尺度，自然不需要用bias去恢复平移自由度。</p>
 </li>
 </ol>
 <aside class="md-source-file">
@@ -682,13 +751,13 @@ RMSNorm 不减均值，所以不需要 bias
 <span class="md-icon" title="最后更新">
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
 </span>
-<span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime" title="2026年4月16日 15:38:54 CST">2026年4月16日 15:38:54</span>
+<span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime" title="2026年4月17日 12:36:32 CST">2026年4月17日 12:36:32</span>
 </span>
 <span class="md-source-file__fact">
 <span class="md-icon" title="创建日期">
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"></path></svg>
 </span>
-<span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime" title="2026年4月16日 15:38:54 CST">2026年4月16日 15:38:54</span>
+<span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime" title="2026年4月17日 12:36:32 CST">2026年4月17日 12:36:32</span>
 </span>
 </aside>
 <!-- Giscus -->
@@ -766,5 +835,6 @@ RMSNorm 不减均值，所以不需要 bias
 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script src="../../../js/mathjax.js"></script>
 </body>
 </html>

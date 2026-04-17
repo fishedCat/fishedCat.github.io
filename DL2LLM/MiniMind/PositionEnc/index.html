@@ -490,16 +490,16 @@
 </ul>
 </div>
 <h3 id="position-encoding"><span>Position Encoding/<span class="heti-spacing"> </span></span>位置编码<a class="headerlink" href="#position-encoding" title="Permanent link"><span><span class="heti-spacing"> </span>¶</span></a></h3>
-<p><span>self-attention<span class="heti-spacing"> </span></span>本身是排列不变的<span class="heti-skip"><span class="heti-spacing"> </span>(permutation invariant),<span class="heti-spacing"> </span></span>需要额外信息来区分顺序
-如果没有位置编码，两个句子包含相同的词(集合相同)(如：你喜欢我，我喜欢你)，那么Attention权重完全相同，无法区分顺序。但是两个句子的语义完全不同。即对于序列中的每一个token，其他各个位置对其来说都是平等的，即“我喜欢你”和“你喜欢我”在注意力机制看来是完全相同的</p>
+<p><span>self-attention<span class="heti-spacing"> </span></span>本身是排列不变的<span class="heti-skip"><span class="heti-spacing"> </span>(permutation invariant),<span class="heti-spacing"> </span></span>需要额外信息来区分顺序</p>
+<p>如果没有位置编码，两个句子包含相同的词<span class="heti-skip"><span class="heti-spacing"> </span>(<span class="heti-spacing"> </span></span>集合相同<span class="heti-skip"><span class="heti-spacing"> </span>)(<span class="heti-spacing"> </span></span>如：你喜欢我，我喜欢你<span><span class="heti-spacing"> </span>)</span>，那么<span class="heti-skip"><span class="heti-spacing"> </span>Attention<span class="heti-spacing"> </span></span>权重完全相同，无法区分顺序。但是两个句子的语义完全不同。即对于序列中的每一个<span><span class="heti-spacing"> </span>token</span>，其他各个位置对其来说都是平等的，即“我喜欢你”和“你喜欢我”在注意力机制看来是完全相同的</p>
 <h3 id="rope">RoPE<a class="headerlink" href="#rope" title="Permanent link">¶</a></h3>
 <ul>
-<li>核心思想<span class="heti-skip"><span class="heti-spacing"> </span>:<span class="heti-spacing"> </span></span>用旋转角度编码位置，通过旋转向量来表示不同位置。位置<span class="heti-skip"><span class="heti-spacing"> </span>i<span class="heti-spacing"> </span></span>的向量旋转<span class="heti-skip"><span class="heti-spacing"> </span>i×θ<span class="heti-spacing"> </span></span>度，相对位置<span class="heti-skip"><span class="heti-spacing"> </span>=<span class="heti-spacing"> </span></span>相对旋转角度
-<strong><span>RoPE<span class="heti-spacing"> </span></span>同时包含绝对和相对位置信息</strong></li>
+<li>核心思想<span class="heti-skip"><span class="heti-spacing"> </span>:<span class="heti-spacing"> </span></span>用旋转角度编码位置，通过旋转向量来表示不同位置。位置<span class="heti-skip"><span class="heti-spacing"> </span>i<span class="heti-spacing"> </span></span>的向量旋转<span class="heti-skip"><span class="heti-spacing"> </span>i×θ<span class="heti-spacing"> </span></span>度，相对位置<span class="heti-skip"><span class="heti-spacing"> </span>=<span class="heti-spacing"> </span></span>相对旋转角度</li>
+<li><strong><span>RoPE<span class="heti-spacing"> </span></span>同时包含绝对和相对位置信息</strong></li>
 <li>
 <p>公式<span><span class="heti-spacing"> </span>:</span>
-对于向量 <span class="arithmatex">\(\mathbf{x} = [x_0, x_1, ..., x_{d-1}]\)</span>，位置 <span class="arithmatex">\(m\)</span> 的 RoPE 变换：
-<span class="arithmatex">\(<span class="arithmatex">\(\text{RoPE}(\mathbf{x}, m) = \begin{bmatrix}
+    对于向量 <span class="arithmatex">\(\mathbf{x} = [x_0, x_1, ..., x_{d-1}]\)</span>，位置 <span class="arithmatex">\(m\)</span> 的 RoPE 变换：</p>
+<div class="arithmatex">\[\text{RoPE}(\mathbf{x}, m) = \begin{bmatrix}
 \cos(m\theta_0) &amp; -\sin(m\theta_0) &amp; &amp; &amp; \\
 \sin(m\theta_0) &amp; \cos(m\theta_0) &amp; &amp; &amp; \\
 &amp; &amp; \cos(m\theta_1) &amp; -\sin(m\theta_1) &amp; \\
@@ -507,12 +507,13 @@
 &amp; &amp; &amp; &amp; \ddots
 \end{bmatrix} \begin{bmatrix}
 x_0 \\ x_1 \\ x_2 \\ x_3 \\ \vdots
-\end{bmatrix}\)</span>\)</span>
-其中，每两个维度配对，使用同一个旋转矩阵；不同维度对使用不同的频率<span class="arithmatex">\(\theta\)</span>。</p>
+\end{bmatrix}\]</div>
+<p>其中，每两个维度配对，使用同一个旋转矩阵；不同维度对使用不同的频率<span><span class="heti-spacing"> </span><span class="arithmatex">\(\theta\)</span></span>。</p>
 </li>
 <li>
 <p>频率的公式为
-<span class="arithmatex">\(<span class="arithmatex">\(\theta_i = \frac{1}{\text{base}^{2i/d}}\)</span>\)
+$$ \theta_i = \frac{1}{\text{base}^{2i/d}} 
+$$
     其中：</p>
 <ul>
 <li><span class="arithmatex">\(\text{base} = 10000\)</span>（标准）或<span><span class="heti-spacing"> </span><span class="arithmatex">\(1000000\)</span></span>（MiniMind）</li>
@@ -523,38 +524,68 @@ x_0 \\ x_1 \\ x_2 \\ x_3 \\ \vdots
 </p><div class="highlight"><pre><span></span><code><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="n">rope_base</span> <span class="o">=</span> <span class="mf">1000000.0</span>  <span class="c1"># 更大的base → 更好的长度外推能力</span>
 <a href="#__codelineno-0-2" id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="n">freqs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="o">/</span><span class="mi">1000000</span><span class="o">^</span><span class="p">(</span><span class="mi">2</span><span class="n">i</span><span class="o">/</span><span class="mi">64</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">32</span><span class="p">)]</span>
 </code></pre></div>
-代码中生成了32种不同频率<span class="arithmatex">\(\theta_0,...,\theta_{31}\)</span>
-- 高频（i=0）：<span class="arithmatex">\(\theta_0 = 1.0\)</span>，RoPE中每 <span class="arithmatex">\(2\pi\)</span> 转一圈（约 6 个 token）
-- 中频（i=15）：<span class="arithmatex">\(\theta_{15} = 0.001\)</span>，RoPE中每 6283 个 token 转一圈
-- 低频（i=31）：<span class="arithmatex">\(\theta_{31} = 0.000001\)</span>，RoPE中每 628万 个 token 转一圈
+<ul>
+<li>代码中生成了<span class="heti-skip"><span class="heti-spacing"> </span>32<span class="heti-spacing"> </span></span>种不同频率<span><span class="heti-spacing"> </span><span class="arithmatex">\(\theta_0,...,\theta_{31}\)</span></span><ul>
+<li>高频（i=0<heti-adjacent class="heti-adjacent-half">）</heti-adjacent>：<span class="arithmatex">\(\theta_0 = 1.0\)</span>，<span>RoPE<span class="heti-spacing"> </span></span>中每<span class="heti-skip"><span class="heti-spacing"> </span><span class="arithmatex">\(2\pi\)</span><span class="heti-spacing"> </span></span>转一圈（约<span class="heti-skip"><span class="heti-spacing"> </span>6<span class="heti-spacing"> </span></span>个<span><span class="heti-spacing"> </span>token</span>）</li>
+<li>中频（i=15<heti-adjacent class="heti-adjacent-half">）</heti-adjacent>：<span class="arithmatex">\(\theta_{15} = 0.001\)</span>，<span>RoPE<span class="heti-spacing"> </span></span>中每<span class="heti-skip"><span class="heti-spacing"> </span>6283<span class="heti-spacing"> </span></span>个<span class="heti-skip"><span class="heti-spacing"> </span>token<span class="heti-spacing"> </span></span>转一圈</li>
+<li>低频（i=31<heti-adjacent class="heti-adjacent-half">）</heti-adjacent>：<span class="arithmatex">\(\theta_{31} = 0.000001\)</span>，<span>RoPE<span class="heti-spacing"> </span></span>中每<span class="heti-skip"><span class="heti-spacing"> </span>628<span class="heti-spacing"> </span></span>万 个<span class="heti-skip"><span class="heti-spacing"> </span>token<span class="heti-spacing"> </span></span>转一圈</li>
+</ul>
+</li>
+</ul>
 </li>
 <li>
 <p>多种频率的作用<span><span class="heti-spacing"> </span>:</span></p>
 <ul>
-<li>频率对应的<span class="heti-skip"><span class="heti-spacing"> </span>RoPE<span class="heti-spacing"> </span></span>为<span class="heti-skip"><span class="heti-spacing"> </span>:<span class="heti-spacing"> </span></span>高频<span class="heti-skip"><span class="heti-spacing"> </span>-&gt;<span class="heti-spacing"> </span></span>局部位置<span class="heti-skip"><span class="heti-spacing"> </span>;<span class="heti-spacing"> </span></span>中频<span class="heti-skip"><span class="heti-spacing"> </span>-&gt;<span class="heti-spacing"> </span></span>中等距离<span class="heti-skip"><span class="heti-spacing"> </span>;<span class="heti-spacing"> </span></span>低频<span class="heti-skip"><span class="heti-spacing"> </span>-&gt;<span class="heti-spacing"> </span></span>全局位置</li>
+<li>
+<p>频率对应的<span class="heti-skip"><span class="heti-spacing"> </span>RoPE<span class="heti-spacing"> </span></span>为<span class="heti-skip"><span class="heti-spacing"> </span>:<span class="heti-spacing"> </span></span>高频<span class="heti-skip"><span class="heti-spacing"> </span>-&gt;<span class="heti-spacing"> </span></span>局部位置<span class="heti-skip"><span class="heti-spacing"> </span>;<span class="heti-spacing"> </span></span>中频<span class="heti-skip"><span class="heti-spacing"> </span>-&gt;<span class="heti-spacing"> </span></span>中等距离<span class="heti-skip"><span class="heti-spacing"> </span>;<span class="heti-spacing"> </span></span>低频<span class="heti-skip"><span class="heti-spacing"> </span>-&gt;<span class="heti-spacing"> </span></span>全局位置</p>
+</li>
+<li>
+<p>不使用一种频率的原因<span><span class="heti-spacing"> </span>:</span></p>
+<ul>
+<li>只用高频：长序列时<span class="heti-skip"><span class="heti-spacing"> </span>"<span class="heti-spacing"> </span></span>转了很多圈<span><span class="heti-spacing"> </span>"</span>，位置信息模糊</li>
+<li>只用低频：短序列时<span class="heti-skip"><span class="heti-spacing"> </span>"<span class="heti-spacing"> </span></span>转得太慢<span><span class="heti-spacing"> </span>"</span>，位置区分度不够，模型很难区分相邻的位置；浮点数精度不够，无法表示这么小的差别</li>
 </ul>
-<p>不使用一种频率的原因<span><span class="heti-spacing"> </span>:</span>
-- 只用高频：长序列时"转了很多圈"，位置信息模糊
-- 只用低频：短序列时"转得太慢"，位置区分度不够，模型很难区分相邻的位置；浮点数精度不够，无法表示这么小的差别</p>
-<p>使用多频率的原因<span><span class="heti-spacing"> </span>:</span>
-- 高频：区分相邻 token（如词内的字）
-- 低频：区分远距离 token（如段落之间）
-- 组合起来：可以唯一标识百万级位置
-- 相对位置信息
-核心思想: RoPE编码后的点积只依赖相对位置
-点积:
-<span class="arithmatex">\(<span class="arithmatex">\(\mathbf{q}_m \cdot \mathbf{k}_n = f(\mathbf{q}, \mathbf{k}, m-n)\)</span>\)
-其中，m、n是绝对位置，<span class="arithmatex">\(q_m\)</span>为位置m的Query，<span class="arithmatex">\(k_n\)</span>为位置n的Key。可以看出点积只与<span class="arithmatex">\(m-n\)</span>有关
-- 长度外推能力(YaRN)
-推理时处理的序列长度比训练时的序列长度都要大
-RoPE可以外推，只需要旋转更多的角度，绝对位置编码无法外推
-YaRN算法作用:
-- 动态调整旋转频率
-- 让模型更好地适应超长序列
-- RoPE的作用:
-  - 自然包含相对位置信息与绝对位置信息。绝对位置信息: 每个词编码了自己的位置，不同维度组合唯一标识位置；相对位置信息: Attention 分数只依赖相对距离
-  - 计算高效（预计算 cos/sin）
-  - 支持长度外推(YaRN)(训练短序列，推理长序列),相比绝对位置编码的主要优势</p>
+</li>
+<li>
+<p>使用多频率的原因<span><span class="heti-spacing"> </span>:</span></p>
+<ul>
+<li>高频：区分相邻<span><span class="heti-spacing"> </span>token</span>（如词内的字）</li>
+<li>低频：区分远距离<span><span class="heti-spacing"> </span>token</span>（如段落之间）</li>
+<li>组合起来：可以唯一标识百万级位置</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>相对位置信息</p>
+<ul>
+<li>核心思想<span class="heti-skip"><span class="heti-spacing"> </span>: RoPE<span class="heti-spacing"> </span></span>编码后的点积只依赖相对位置</li>
+<li>
+<p>点积<span><span class="heti-spacing"> </span>:</span></p>
+<div class="arithmatex">\[\mathbf{q}_m \cdot \mathbf{k}_n = f(\mathbf{q}, \mathbf{k}, m-n)\]</div>
+<p>其中，m、<span>n<span class="heti-spacing"> </span></span>是绝对位置，<span><span class="arithmatex">\(q_m\)</span><span class="heti-spacing"> </span></span>为位置<span class="heti-skip"><span class="heti-spacing"> </span>m<span class="heti-spacing"> </span></span>的<span><span class="heti-spacing"> </span>Query</span>，<span><span class="arithmatex">\(k_n\)</span><span class="heti-spacing"> </span></span>为位置<span class="heti-skip"><span class="heti-spacing"> </span>n<span class="heti-spacing"> </span></span>的<span><span class="heti-spacing"> </span>Key</span>。可以看出点积只与<span class="heti-skip"><span class="heti-spacing"> </span><span class="arithmatex">\(m-n\)</span><span class="heti-spacing"> </span></span>有关</p>
+</li>
+</ul>
+</li>
+<li>
+<p>长度外推能力<span><span class="heti-spacing"> </span>(YaRN)</span></p>
+<ul>
+<li>推理时处理的序列长度比训练时的序列长度都要大</li>
+<li><span>RoPE<span class="heti-spacing"> </span></span>可以外推，只需要旋转更多的角度，绝对位置编码无法外推</li>
+<li><span>YaRN<span class="heti-spacing"> </span></span>算法作用<span><span class="heti-spacing"> </span>:</span><ul>
+<li>动态调整旋转频率</li>
+<li>让模型更好地适应超长序列</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><span>RoPE<span class="heti-spacing"> </span></span>的作用<span><span class="heti-spacing"> </span>:</span></p>
+<ul>
+<li>自然包含相对位置信息与绝对位置信息。绝对位置信息<span class="heti-skip"><span class="heti-spacing"> </span>:<span class="heti-spacing"> </span></span>每个词编码了自己的位置，不同维度组合唯一标识位置；相对位置信息<span class="heti-skip"><span class="heti-spacing"> </span>: Attention<span class="heti-spacing"> </span></span>分数只依赖相对距离</li>
+<li>计算高效（预计算<span><span class="heti-spacing"> </span>cos/sin</span>）</li>
+<li>支持长度外推<span class="heti-skip"><span class="heti-spacing"> </span>(YaRN)(<span class="heti-spacing"> </span></span>训练短序列，推理长序列<span class="heti-skip"><span class="heti-spacing"> </span>),<span class="heti-spacing"> </span></span>相比绝对位置编码的主要优势</li>
+</ul>
 </li>
 <li>
 <p>代码实现<span><span class="heti-spacing"> </span>:</span>
@@ -634,95 +665,134 @@ YaRN算法作用:
 <a href="#__codelineno-1-74" id="__codelineno-1-74" name="__codelineno-1-74"></a>        <span class="k">pass</span>
 </code></pre></div>
 </li>
-<li>为什么代码中要用复数表示旋转？
-    因为复数形式更简洁、更快,而且和矩阵写法的效果是一样的
-    复数乘法天然表示 2D 旋转，
-    <span class="arithmatex">\(<span class="arithmatex">\(e^{i\theta} = \cos\theta + i\sin\theta \\
-    (a + bi) \times e^{i\theta} = (a\cos\theta - b\sin\theta) + i(a\sin\theta + b\cos\theta)\)</span>\)</span>
-    换成矩阵写法的话就是,
-    <span class="arithmatex">\(<span class="arithmatex">\(\begin{bmatrix}
-    \cos(\theta) &amp; -\sin(\theta)\\
-    \sin(\theta) &amp; \cos(\theta)\\
-    \end{bmatrix} \begin{bmatrix}
-    a \\ b \end{bmatrix}\)</span>\)</span></li>
-<li>为什么<span class="heti-skip"><span class="heti-spacing"> </span>head<span class="heti-spacing"> </span></span>中要两两配对？[..., head_dim] → [..., head_dim//2, 2]
-    因为2D 旋转需要两个坐标。每两个维度组成一对，应用同一个旋转角度，head_dim=64 → 32 对 → 32 个不同频率</li>
-<li>为什么要保持数据类型<span><span class="heti-spacing"> </span>? Q_out.type_as(Q)</span>
-    复数运算需要 float32，但模型可能用 BF16/FP16，转回原始类型保持一致</li>
+<li>
+<p>为什么代码中要用复数表示旋转？</p>
+<p>因为复数形式更简洁、更快<span class="heti-skip"><span class="heti-spacing"> </span>,<span class="heti-spacing"> </span></span>而且和矩阵写法的效果是一样的
+复数乘法天然表示 2D 旋转，</p>
+<div class="arithmatex">\[e^{i\theta} = \cos\theta + i\sin\theta \\
+(a + bi) \times e^{i\theta} = (a\cos\theta - b\sin\theta) + i(a\sin\theta + b\cos\theta)\]</div>
+<p>换成矩阵写法的话就是<span><span class="heti-spacing"> </span>,</span></p>
+<div class="arithmatex">\[\begin{bmatrix}
+\cos(\theta) &amp; -\sin(\theta)\\
+\sin(\theta) &amp; \cos(\theta)\\
+\end{bmatrix} \begin{bmatrix}
+a \\ b \end{bmatrix}\]</div>
+</li>
+<li>
+<p>为什么<span class="heti-skip"><span class="heti-spacing"> </span>head<span class="heti-spacing"> </span></span>中要两两配对？[..., head_dim] → [..., head_dim//2, 2]</p>
+<p>因为<span class="heti-skip"><span class="heti-spacing"> </span>2D<span class="heti-spacing"> </span></span>旋转需要两个坐标。每两个维度组成一对，应用同一个旋转角度，head_dim=64 → <span>32<span class="heti-spacing"> </span></span>对 → <span>32<span class="heti-spacing"> </span></span>个不同频率
+- 为什么要保持数据类型? Q_out.type_as(Q)</p>
+<p>复数运算需要<span><span class="heti-spacing"> </span>float32</span>，但模型可能用<span><span class="heti-spacing"> </span>BF16/FP16</span>，转回原始类型保持一致</p>
+</li>
 </ul>
 <h3 id="qa">Q&amp;A<a class="headerlink" href="#qa" title="Permanent link">¶</a></h3>
 <ol>
-<li>为什么<span class="heti-skip"><span class="heti-spacing"> </span>RoPE<span class="heti-spacing"> </span></span>只旋转<span class="heti-skip"><span class="heti-spacing"> </span>Q<span class="heti-spacing"> </span></span>和<span><span class="heti-spacing"> </span>K</span>，不旋转<span><span class="heti-spacing"> </span>V</span>？
-    因为位置信息只需要影响"匹配度"(Q·K)，不需要影响"内容"(V)，位置信息已经通过 Q·K 的点积融入了</li>
-<li>具体的<span class="heti-skip"><span class="heti-spacing"> </span>RoPE<span class="heti-spacing"> </span></span>实例是什么样的？
-    针对每个位置向量 <span class="arithmatex">\(\mathbf{x} = [x_0, x_1, ..., x_{d-1}]\)</span>，以前四个维度为例<ul>
-<li>纵向看<span class="heti-skip"><span class="heti-spacing"> </span>-<span class="heti-spacing"> </span></span>沿 位置 维度<span><span class="heti-spacing"> </span>:</span></li>
+<li>
+<p>为什么<span class="heti-skip"><span class="heti-spacing"> </span>RoPE<span class="heti-spacing"> </span></span>只旋转<span class="heti-skip"><span class="heti-spacing"> </span>Q<span class="heti-spacing"> </span></span>和<span><span class="heti-spacing"> </span>K</span>，不旋转<span><span class="heti-spacing"> </span>V</span>？</p>
+<p>因为位置信息只需要影响<span class="heti-skip"><span class="heti-spacing"> </span>"<span class="heti-spacing"> </span></span>匹配度<span><span class="heti-spacing"> </span>"(Q·K)</span>，不需要影响<span class="heti-skip"><span class="heti-spacing"> </span>"<span class="heti-spacing"> </span></span>内容<span><span class="heti-spacing"> </span>"(V)</span>，位置信息已经通过<span class="heti-skip"><span class="heti-spacing"> </span>Q·K<span class="heti-spacing"> </span></span>的点积融入了</p>
+</li>
+<li>
+<p>具体的<span class="heti-skip"><span class="heti-spacing"> </span>RoPE<span class="heti-spacing"> </span></span>实例是什么样的？</p>
+<p>针对每个位置向量<span><span class="heti-spacing"> </span><span class="arithmatex">\(\mathbf{x} = [x_0, x_1, ..., x_{d-1}]\)</span></span>，以前四个维度为例</p>
+<ul>
+<li>
+<p>纵向看<span class="heti-skip"><span class="heti-spacing"> </span>-<span class="heti-spacing"> </span></span>沿 位置 维度<span><span class="heti-spacing"> </span>:</span></p>
+<ul>
 <li>维度<span class="heti-skip"><span class="heti-spacing"> </span>0(<span class="arithmatex">\(x_0\)</span>,<span class="heti-spacing"> </span></span>高频<span class="heti-skip"><span class="heti-spacing"> </span>):<span class="heti-spacing"> </span></span>随位置增加，角度变化快</li>
 <li>维度<span class="heti-skip"><span class="heti-spacing"> </span>3(<span class="arithmatex">\(x_3\)</span>,<span class="heti-spacing"> </span></span>低频<span class="heti-skip"><span class="heti-spacing"> </span>):<span class="heti-spacing"> </span></span>随位置增加，角度变化相对较慢</li>
-<li>横向看<span class="heti-skip"><span class="heti-spacing"> </span>-<span class="heti-spacing"> </span></span>沿 嵌入 维度<span><span class="heti-spacing"> </span>:</span></li>
-<li>从维度<span class="heti-skip"><span class="heti-spacing"> </span>0<span class="heti-spacing"> </span></span>到维度<span class="heti-skip"><span class="heti-spacing"> </span>3:<span class="heti-spacing"> </span></span>频率递减，转动速度逐渐变慢<span class="heti-skip"><span class="heti-spacing"> </span>,<span class="heti-spacing"> </span></span>观察同一位置<span class="heti-skip"><span class="heti-spacing"> </span>(<span class="heti-spacing"> </span></span>表格同一行<span class="heti-skip"><span class="heti-spacing"> </span>),<span class="heti-spacing"> </span></span>从维度<span class="heti-skip"><span class="heti-spacing"> </span>0<span class="heti-spacing"> </span></span>到维度<span><span class="heti-spacing"> </span>3</span>，频率递减导致累计旋转圈数也递减</li>
-<li>维度<span class="heti-skip"><span class="heti-spacing"> </span>0<span class="heti-spacing"> </span></span>每<span class="heti-skip"><span class="heti-spacing"> </span>6.3<span class="heti-spacing"> </span></span>个<span class="heti-skip"><span class="heti-spacing"> </span>token<span class="heti-spacing"> </span></span>转一圈<span class="heti-skip"><span class="heti-spacing"> </span>,<span class="heti-spacing"> </span></span>维度<span class="heti-skip"><span class="heti-spacing"> </span>3<span class="heti-spacing"> </span></span>约每<span class="heti-skip"><span class="heti-spacing"> </span>23<span class="heti-spacing"> </span></span>个<span class="heti-skip"><span class="heti-spacing"> </span>token<span class="heti-spacing"> </span></span>转一圈（约<span class="heti-skip"><span class="heti-spacing"> </span>4<span class="heti-spacing"> </span></span>倍慢）</li>
-<li>不同维度组合 → 唯一标识每个位置</li>
 </ul>
 </li>
-<li>为什么不需要反向旋转？<span>/<span class="heti-spacing"> </span></span>为什么只需要向一个方向旋转就行了？
-    RoPE 的目标是区分不同位置，只要每个位置的角度不同就行，而顺时针和逆时针都能做到这一点，所以选一个方向就够了，不需要双向</li>
-<li>为什么不用一个超低频率覆盖所有位置？<ul>
-<li>浮点数精度限制<span><span class="heti-spacing"> </span>:</span>
-float32 只有 6-7 位有效数字,超低频率的相邻位置差别 &lt; 精度下限,无法在计算机中表示和区分</li>
-<li>信噪比太低<span><span class="heti-spacing"> </span>:</span>
-相邻位置的角度差太小（微弧度）,Attention 分数几乎相同,模型失去位置区分能力</li>
-<li>多频率的优势<span><span class="heti-spacing"> </span>:</span></li>
+<li>
+<p>横向看<span class="heti-skip"><span class="heti-spacing"> </span>-<span class="heti-spacing"> </span></span>沿 嵌入 维度<span><span class="heti-spacing"> </span>:</span></p>
+<ul>
+<li>从维度<span class="heti-skip"><span class="heti-spacing"> </span>0<span class="heti-spacing"> </span></span>到维度<span class="heti-skip"><span class="heti-spacing"> </span>3:<span class="heti-spacing"> </span></span>频率递减，转动速度逐渐变慢<span class="heti-skip"><span class="heti-spacing"> </span>,<span class="heti-spacing"> </span></span>观察同一位置<span class="heti-skip"><span class="heti-spacing"> </span>(<span class="heti-spacing"> </span></span>表格同一行<span class="heti-skip"><span class="heti-spacing"> </span>),<span class="heti-spacing"> </span></span>从维度<span class="heti-skip"><span class="heti-spacing"> </span>0<span class="heti-spacing"> </span></span>到维度<span><span class="heti-spacing"> </span>3</span>，频率递减导致累计旋转圈数也递减</li>
+<li>维度<span class="heti-skip"><span class="heti-spacing"> </span>0<span class="heti-spacing"> </span></span>每<span class="heti-skip"><span class="heti-spacing"> </span>6.3<span class="heti-spacing"> </span></span>个<span class="heti-skip"><span class="heti-spacing"> </span>token<span class="heti-spacing"> </span></span>转一圈<span class="heti-skip"><span class="heti-spacing"> </span>,<span class="heti-spacing"> </span></span>维度<span class="heti-skip"><span class="heti-spacing"> </span>3<span class="heti-spacing"> </span></span>约每<span class="heti-skip"><span class="heti-spacing"> </span>23<span class="heti-spacing"> </span></span>个<span class="heti-skip"><span class="heti-spacing"> </span>token<span class="heti-spacing"> </span></span>转一圈（约<span class="heti-skip"><span class="heti-spacing"> </span>4<span class="heti-spacing"> </span></span>倍慢）</li>
+</ul>
+</li>
+<li>
+<p>不同维度组合 → 唯一标识每个位置</p>
+</li>
+</ul>
+</li>
+<li>
+<p>为什么不需要反向旋转？<span>/<span class="heti-spacing"> </span></span>为什么只需要向一个方向旋转就行了？</p>
+<p><span>RoPE<span class="heti-spacing"> </span></span>的目标是区分不同位置，只要每个位置的角度不同就行，而顺时针和逆时针都能做到这一点，所以选一个方向就够了，不需要双向</p>
+</li>
+<li>
+<p>为什么不用一个超低频率覆盖所有位置？</p>
+<ul>
+<li>
+<p>浮点数精度限制<span><span class="heti-spacing"> </span>:</span></p>
+<p><span>float32<span class="heti-spacing"> </span></span>只有<span class="heti-skip"><span class="heti-spacing"> </span>6-7<span class="heti-spacing"> </span></span>位有效数字<span class="heti-skip"><span class="heti-spacing"> </span>,<span class="heti-spacing"> </span></span>超低频率的相邻位置差别<span class="heti-skip"><span class="heti-spacing"> </span>&lt;<span class="heti-spacing"> </span></span>精度下限<span class="heti-skip"><span class="heti-spacing"> </span>,<span class="heti-spacing"> </span></span>无法在计算机中表示和区分</p>
+</li>
+<li>
+<p>信噪比太低<span><span class="heti-spacing"> </span>:</span></p>
+<p>相邻位置的角度差太小（微弧度）<span>,Attention<span class="heti-spacing"> </span></span>分数几乎相同<span class="heti-skip"><span class="heti-spacing"> </span>,<span class="heti-spacing"> </span></span>模型失去位置区分能力</p>
+</li>
+<li>
+<p>多频率的优势<span><span class="heti-spacing"> </span>:</span></p>
+<ul>
 <li>高频：区分相邻位置（1, 2, 3...）</li>
 <li>低频：覆盖长距离（1000, 10000...）</li>
 <li>组合：每个位置有唯一且可区分的<span class="heti-skip"><span class="heti-spacing"> </span>"<span class="heti-spacing"> </span></span>编码<span><span class="heti-spacing"> </span>"</span></li>
 </ul>
 </li>
-<li>性能改进方法
-    内存:
-    <div class="highlight"><pre><span></span><code><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="c1"># 好：预计算并存储</span>
+</ul>
+</li>
+<li>
+<p>性能改进方法</p>
+<p>内存<span><span class="heti-spacing"> </span>:</span>
+</p><div class="highlight"><pre><span></span><code><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="c1"># 好：预计算并存储</span>
 <a href="#__codelineno-2-2" id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="bp">self</span><span class="o">.</span><span class="n">register_buffer</span><span class="p">(</span><span class="s1">'freqs_cis'</span><span class="p">,</span> <span class="n">precompute_freqs_cis</span><span class="p">(</span><span class="o">...</span><span class="p">))</span>
 <a href="#__codelineno-2-3" id="__codelineno-2-3" name="__codelineno-2-3"></a>
 <a href="#__codelineno-2-4" id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="c1"># 差：每次 forward 计算</span>
 <a href="#__codelineno-2-5" id="__codelineno-2-5" name="__codelineno-2-5"></a><span class="n">freqs_cis</span> <span class="o">=</span> <span class="n">precompute_freqs_cis</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>  <span class="c1"># 浪费计算</span>
 </code></pre></div>
-    计算:
-    复数乘法比矩阵乘法快：
-    矩阵：4 次乘法 + 2 次加法
-    复数：2 次乘法 + 2 次加法（利用 GPU 优化）</li>
+计算:
+<div class="highlight"><pre><span></span><code>复数乘法比矩阵乘法快：
+矩阵：4 次乘法 + 2 次加法
+复数：2 次乘法 + 2 次加法（利用 GPU 优化）
+</code></pre></div>
+</li>
 <li>
-<p>假设你训练了一个<span class="heti-skip"><span class="heti-spacing"> </span>RoPE<span class="heti-spacing"> </span></span>模型，max_seq_len=512。现在需要处理<span class="heti-skip"><span class="heti-spacing"> </span>2048<span class="heti-spacing"> </span></span>长度的文本，可能会遇到什么问题？如何解决？
-    可能的问题：</p>
+<p>假设你训练了一个<span class="heti-skip"><span class="heti-spacing"> </span>RoPE<span class="heti-spacing"> </span></span>模型，max_seq_len=512。现在需要处理<span class="heti-skip"><span class="heti-spacing"> </span>2048<span class="heti-spacing"> </span></span>长度的文本，可能会遇到什么问题？如何解决？</p>
+<p>可能的问题：</p>
 <ul>
 <li>性能下降：
-虽然数学上可以外推，但模型没见过这么长的序列，长距离的注意力模式可能不准确</li>
+   虽然数学上可以外推，但模型没见过这么长的序列，长距离的注意力模式可能不准确</li>
 <li>旋转角度过大：
-位置 2000 的旋转角度是训练时的 4 倍，高频维度可能"转太多圈"，信息丢失</li>
+   位置 2000 的旋转角度是训练时的 4 倍，高频维度可能"转太多圈"，信息丢失</li>
 </ul>
-<p>解决方案：
-- 使用 YaRN(推荐)：
-动态调整旋转频率,让长序列的旋转更"缓和"
-</p><div class="highlight"><pre><span></span><code><a href="#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="c1"># 在 MiniMind 中启用</span>
+<p>解决方案：</p>
+<ul>
+<li>使用<span class="heti-skip"><span class="heti-spacing"> </span>YaRN(<span class="heti-spacing"> </span></span>推荐<span><span class="heti-spacing"> </span>)</span>：
+   动态调整旋转频率,让长序列的旋转更"缓和"
+   <div class="highlight"><pre><span></span><code><a href="#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="c1"># 在 MiniMind 中启用</span>
 <a href="#__codelineno-3-2" id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="n">config</span><span class="o">.</span><span class="n">inference_rope_scaling</span> <span class="o">=</span> <span class="kc">True</span>
-</code></pre></div>
-- Position Interpolation(位置插值)：
-简单但有效,相当于"压缩"位置范围
-m(位置) * L_train(预训练最大长度) / L_infer(推理目标长度)
-<div class="highlight"><pre><span></span><code><a href="#__codelineno-4-1" id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="c1"># 将位置缩放到训练范围内</span>
+</code></pre></div></li>
+<li><span>Position Interpolation(<span class="heti-spacing"> </span></span>位置插值<span><span class="heti-spacing"> </span>)</span>：
+   简单但有效,相当于"压缩"位置范围
+   m(位置) * L_train(预训练最大长度) / L_infer(推理目标长度)
+   <div class="highlight"><pre><span></span><code><a href="#__codelineno-4-1" id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="c1"># 将位置缩放到训练范围内</span>
 <a href="#__codelineno-4-2" id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="n">pos_ids</span> <span class="o">=</span> <span class="n">pos_ids</span> <span class="o">*</span> <span class="p">(</span><span class="mi">512</span> <span class="o">/</span> <span class="mi">2048</span><span class="p">)</span>
-</code></pre></div>
-- 继续训练：
-用长序列数据微调模型,让模型适应长距离注意力
-- 训练时尽量用大的 rope_base（如 1e6）
-7. 为什么 RoPE 的点积只依赖相对位置?数学原理
-假设：
-- 位置 m 的 Query：<span class="arithmatex">\(q_m = R(m\theta) \cdot q\)</span>（旋转 mθ 角度）
-- 位置 n 的 Key：<span class="arithmatex">\(k_n = R(n\theta) \cdot k\)</span>（旋转 nθ 角度）
-<p>点积：
-<span class="arithmatex">\(<span class="arithmatex">\(q_m \cdot k_n = [R(m\theta) \cdot q] \cdot [R(n\theta) \cdot k]\)</span>\)
-由于旋转矩阵的转置等于逆旋转
-<span class="arithmatex">\(<span class="arithmatex">\(= q \cdot R(-m\theta) \cdot R(n\theta) \cdot k \\
-= q \cdot R((n-m)\theta) \cdot k\)</span>\)</span></p>
+</code></pre></div></li>
+<li>继续训练：
+   用长序列数据微调模型,让模型适应长距离注意力</li>
+<li>训练时尽量用大的<span><span class="heti-spacing"> </span>rope_base</span>（如<span><span class="heti-spacing"> </span>1e6</span>）</li>
+</ul>
+</li>
+<li>
+<p>为什么<span class="heti-skip"><span class="heti-spacing"> </span>RoPE<span class="heti-spacing"> </span></span>的点积只依赖相对位置<span class="heti-skip"><span class="heti-spacing"> </span>?<span class="heti-spacing"> </span></span>数学原理</p>
+<p>假设：</p>
+<ul>
+<li>位置<span class="heti-skip"><span class="heti-spacing"> </span>m<span class="heti-spacing"> </span></span>的<span><span class="heti-spacing"> </span>Query</span>：<span class="arithmatex">\(q_m = R(m\theta) \cdot q\)</span>（旋转<span class="heti-skip"><span class="heti-spacing"> </span>mθ<span class="heti-spacing"> </span></span>角度）</li>
+<li>位置<span class="heti-skip"><span class="heti-spacing"> </span>n<span class="heti-spacing"> </span></span>的<span><span class="heti-spacing"> </span>Key</span>：<span class="arithmatex">\(k_n = R(n\theta) \cdot k\)</span>（旋转<span class="heti-skip"><span class="heti-spacing"> </span>nθ<span class="heti-spacing"> </span></span>角度）</li>
+</ul>
+<p>点积：</p>
+<div class="arithmatex">\[q_m \cdot k_n = [R(m\theta) \cdot q] \cdot [R(n\theta) \cdot k]\]</div>
+<p>由于旋转矩阵的转置等于逆旋转</p>
+<div class="arithmatex">\[= q \cdot R(-m\theta) \cdot R(n\theta) \cdot k \\
+= q \cdot R((n-m)\theta) \cdot k\]</div>
 <p>所以点积只包含<span><span class="heti-spacing"> </span><span class="arithmatex">\((n-m)\theta\)</span></span>，即相对距离，不包含绝对位置<span class="heti-skip"><span class="heti-spacing"> </span><span class="arithmatex">\(m\)</span><span class="heti-spacing"> </span></span>或<span><span class="heti-spacing"> </span><span class="arithmatex">\(n\)</span></span></p>
 </li>
 </ol>
@@ -731,13 +801,13 @@ m(位置) * L_train(预训练最大长度) / L_infer(推理目标长度)
 <span class="md-icon" title="最后更新">
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
 </span>
-<span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime" title="2026年4月16日 15:38:54 CST">2026年4月16日 15:38:54</span>
+<span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime" title="2026年4月17日 12:36:32 CST">2026年4月17日 12:36:32</span>
 </span>
 <span class="md-source-file__fact">
 <span class="md-icon" title="创建日期">
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"></path></svg>
 </span>
-<span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime" title="2026年4月16日 15:38:54 CST">2026年4月16日 15:38:54</span>
+<span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime" title="2026年4月17日 12:36:32 CST">2026年4月17日 12:36:32</span>
 </span>
 </aside>
 <!-- Giscus -->
@@ -815,5 +885,6 @@ m(位置) * L_train(预训练最大长度) / L_infer(推理目标长度)
 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script src="../../../js/mathjax.js"></script>
 </body>
 </html>

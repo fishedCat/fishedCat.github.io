@@ -490,32 +490,38 @@
 </ul>
 </div>
 <h3 id="feedforward">改进型<span class="heti-skip"><span class="heti-spacing"> </span>FeedForward/<span class="heti-spacing"> </span></span>前馈网络<a class="headerlink" href="#feedforward" title="Permanent link"><span><span class="heti-spacing"> </span>¶</span></a></h3>
-<p><span>Attention<span class="heti-spacing"> </span></span>的局限：<span>Attention<span class="heti-spacing"> </span></span>负责<span class="heti-skip"><span class="heti-spacing"> </span>"<span class="heti-spacing"> </span></span>信息交换<span class="heti-skip"><span class="heti-spacing"> </span>",<span class="heti-spacing"> </span></span>但只是加权平均，都是线性操作<span class="heti-skip"><span class="heti-spacing"> </span>,<span class="heti-spacing"> </span></span>无法表达复杂的非线性变换
-FeedForward 是一个通用函数逼近器：
-- 扩张：映射到高维空间，增加表达空间
-- 非线性激活：创造非线性决策边界
-- 压缩：保留有用信息，回到原维度</p>
-<p>通用逼近定理：带有一个隐藏层的神经网络可以逼近任意连续函数<span class="heti-skip"><span class="heti-spacing"> </span>,<span class="heti-spacing"> </span></span>而且隐藏层越宽，逼近能力越强
-稠密模型(Dense Model)：模型结构中所有的参数和计算路径在每次前向计算中都会被激活。本文中所有FFN均属于稠密模型，稀疏模型见<a href="../MoE/">MoE</a>`</p>
+<p><span>Attention<span class="heti-spacing"> </span></span>的局限：<span>Attention<span class="heti-spacing"> </span></span>负责<span class="heti-skip"><span class="heti-spacing"> </span>"<span class="heti-spacing"> </span></span>信息交换<span class="heti-skip"><span class="heti-spacing"> </span>",<span class="heti-spacing"> </span></span>但只是加权平均，都是线性操作<span class="heti-skip"><span class="heti-spacing"> </span>,<span class="heti-spacing"> </span></span>无法表达复杂的非线性变换</p>
+<p><span>FeedForward<span class="heti-spacing"> </span></span>是一个通用函数逼近器：</p>
+<ul>
+<li>扩张：映射到高维空间，增加表达空间</li>
+<li>非线性激活：创造非线性决策边界</li>
+<li>压缩：保留有用信息，回到原维度</li>
+</ul>
+<p>通用逼近定理：带有一个隐藏层的神经网络可以逼近任意连续函数<span class="heti-skip"><span class="heti-spacing"> </span>,<span class="heti-spacing"> </span></span>而且隐藏层越宽，逼近能力越强</p>
+<p>稠密模型<span><span class="heti-spacing"> </span>(Dense Model)</span>：模型结构中所有的参数和计算路径在每次前向计算中都会被激活。本文中所有<span class="heti-skip"><span class="heti-spacing"> </span>FFN<span class="heti-spacing"> </span></span>均属于稠密模型，稀疏模型见<a href="../MoE/"><span><span class="heti-spacing"> </span>MoE</span></a><span><span class="heti-spacing"> </span>`</span></p>
 <h3 id="feedforward_1">FeedForward<a class="headerlink" href="#feedforward_1" title="Permanent link">¶</a></h3>
 <ul>
-<li>标准<span class="heti-skip"><span class="heti-spacing"> </span>FFN<span class="heti-spacing"> </span></span>结构
-<span class="arithmatex">\(<span class="arithmatex">\(\text{FFN}(x) = W_2 \cdot \text{ReLU}(W_1 \cdot x + b_1) + b_2\)</span>\)</li>
+<li>
+<p>标准<span class="heti-skip"><span class="heti-spacing"> </span>FFN<span class="heti-spacing"> </span></span>结构</p>
+<div class="arithmatex">\[\text{FFN}(x) = W_2 \cdot \text{ReLU}(W_1 \cdot x + b_1) + b_2\]</div>
+<ul>
 <li><span class="arithmatex">\(W_1\)</span>：hidden_size → intermediate_size（扩张）</li>
 <li>ReLU：激活函数</li>
-<li>
-<p><span class="arithmatex">\(W_2\)</span>：intermediate_size → hidden_size（压缩）</p>
+<li><span class="arithmatex">\(W_2\)</span>：intermediate_size → hidden_size（压缩）</li>
+</ul>
 </li>
 <li>
-<p><span>"<span class="heti-spacing"> </span></span>扩张<span class="heti-skip"><span class="heti-spacing"> </span>-<span class="heti-spacing"> </span></span>压缩<span class="heti-skip"><span class="heti-spacing"> </span>"<span class="heti-spacing"> </span></span>的作用
-    直接变换(线性组合)：只能表达线性变换，决策边界是超平面，无法分离复杂模式。只是简单的线性组合，表达能力有限
-    扩张-压缩(非线性组合)：高维空间中线性可分的概率更高，非线性激活创造复杂边界，压缩时保留判别性特征。经过高维空间，能做复杂的非线性变换
-    对于高维分割的例子:在 2D 空间中，一条直线无法分开环形分布的点,映射到 3D 空间后，一个平面就可以分开</p>
+<p><span>"<span class="heti-spacing"> </span></span>扩张<span class="heti-skip"><span class="heti-spacing"> </span>-<span class="heti-spacing"> </span></span>压缩<span class="heti-skip"><span class="heti-spacing"> </span>"<span class="heti-spacing"> </span></span>的作用</p>
+<p>直接变换<span class="heti-skip"><span class="heti-spacing"> </span>(<span class="heti-spacing"> </span></span>线性组合<span><span class="heti-spacing"> </span>)</span>：只能表达线性变换，决策边界是超平面，无法分离复杂模式。只是简单的线性组合，表达能力有限</p>
+<p>扩张<span class="heti-skip"><span class="heti-spacing"> </span>-<span class="heti-spacing"> </span></span>压缩<span class="heti-skip"><span class="heti-spacing"> </span>(<span class="heti-spacing"> </span></span>非线性组合<span><span class="heti-spacing"> </span>)</span>：高维空间中线性可分的概率更高，非线性激活创造复杂边界，压缩时保留判别性特征。经过高维空间，能做复杂的非线性变换</p>
+<p>对于高维分割的例子<span class="heti-skip"><span class="heti-spacing"> </span>:<span class="heti-spacing"> </span></span>在<span class="heti-skip"><span class="heti-spacing"> </span>2D<span class="heti-spacing"> </span></span>空间中，一条直线无法分开环形分布的点<span class="heti-skip"><span class="heti-spacing"> </span>,<span class="heti-spacing"> </span></span>映射到<span class="heti-skip"><span class="heti-spacing"> </span>3D<span class="heti-spacing"> </span></span>空间后，一个平面就可以分开</p>
 </li>
-<li><strong><span>SwiGLU<span class="heti-spacing"> </span></span>激活函数</strong></li>
 <li>
-<p>公式 
-    <span class="arithmatex">\(<span class="arithmatex">\(\text{SwiGLU}(x) = W_{\text{down}} \cdot (\text{SiLU}(W_{\text{gate}} \cdot x) \odot W_{\text{up}} \cdot x)\)</span>\)</p>
+<p><strong><span>SwiGLU<span class="heti-spacing"> </span></span>激活函数</strong></p>
+<ul>
+<li>
+<p>公式 </p>
+<div class="arithmatex">\[\text{SwiGLU}(x) = W_{\text{down}} \cdot (\text{SiLU}(W_{\text{gate}} \cdot x) \odot W_{\text{up}} \cdot x)\]</div>
 <ul>
 <li><code>gate_proj</code>：<span><span class="arithmatex">\(W_{\text{gate}} \cdot x\)</span>,<span class="heti-spacing"> </span></span>计算门控信号</li>
 <li><code>up_proj</code>：<span><span class="arithmatex">\(W_{\text{up}} \cdot x\)</span>,<span class="heti-spacing"> </span></span>计算值信号</li>
@@ -531,48 +537,68 @@ FeedForward 是一个通用函数逼近器：
 </ul>
 </li>
 <li>
-<p>门控机制<span><span class="heti-spacing"> </span>:</span>
-    注意门控是<strong>逐元素相乘</strong><span>,<span class="heti-spacing"> </span></span>不改变维度
-    gate ≈ 0：关闭，up 的信息被抑制
-    gate ≈ 1：打开，up 的信息完全通过
-    0 &lt; gate &lt; 1：部分通过</p>
-<p></p><div class="highlight"><pre><span></span><code><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="n">gate</span> <span class="o">=</span> <span class="n">SiLU</span><span class="p">(</span><span class="n">gate_proj</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>  <span class="c1"># [batch, seq, intermediate]</span>
+<p>门控机制<span><span class="heti-spacing"> </span>:</span></p>
+<p>注意门控是<strong>逐元素相乘</strong><span>,<span class="heti-spacing"> </span></span>不改变维度</p>
+<ul>
+<li>gate ≈ 0：关闭，<span>up<span class="heti-spacing"> </span></span>的信息被抑制</li>
+<li>gate ≈ 1：打开，<span>up<span class="heti-spacing"> </span></span>的信息完全通过</li>
+<li>0 &lt; gate &lt; 1：部分通过</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="n">gate</span> <span class="o">=</span> <span class="n">SiLU</span><span class="p">(</span><span class="n">gate_proj</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>  <span class="c1"># [batch, seq, intermediate]</span>
 <a href="#__codelineno-0-2" id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="n">up</span> <span class="o">=</span> <span class="n">up_proj</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>            <span class="c1"># [batch, seq, intermediate]</span>
 <a href="#__codelineno-0-3" id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="n">hidden</span> <span class="o">=</span> <span class="n">gate</span> <span class="o">*</span> <span class="n">up</span>         <span class="c1"># 逐元素相乘（门控）</span>
 <a href="#__codelineno-0-4" id="__codelineno-0-4" name="__codelineno-0-4"></a><span class="n">output</span> <span class="o">=</span> <span class="n">down_proj</span><span class="p">(</span><span class="n">hidden</span><span class="p">)</span>
 </code></pre></div>
-  - 为什么用门控？
-可以动态控制信息流，选择性地传递信息。gate 决定"让多少信息通过"，比单纯的激活函数更灵活
-  - 为什么 SwiLU 比 ReLU 更好？
-因为门控机制提供更丰富的非线性，梯度更平滑
-ReLU 的局限：硬截断：负值直接变 0；梯度不连续；Dead ReLU 问题（神经元永久失活）
-SwiGLU 的优势：平滑的激活函数（SiLU）；门控机制增加表达能力；梯度更稳定，训练更容易；实验证明在 LLM 上效果更好
+<ul>
+<li>
+<p>为什么用门控？</p>
+<p>可以动态控制信息流，选择性地传递信息。<span>gate<span class="heti-spacing"> </span></span>决定<span class="heti-skip"><span class="heti-spacing"> </span>"<span class="heti-spacing"> </span></span>让多少信息通过<span><span class="heti-spacing"> </span>"</span>，比单纯的激活函数更灵活</p>
+</li>
+<li>
+<p>为什么<span class="heti-skip"><span class="heti-spacing"> </span>SwiLU<span class="heti-spacing"> </span></span>比<span class="heti-skip"><span class="heti-spacing"> </span>ReLU<span class="heti-spacing"> </span></span>更好？</p>
+<p>因为门控机制提供更丰富的非线性，梯度更平滑</p>
+<p><span>ReLU<span class="heti-spacing"> </span></span>的局限：硬截断：负值直接变<span><span class="heti-spacing"> </span>0</span>；梯度不连续；<span>Dead ReLU<span class="heti-spacing"> </span></span>问题（神经元永久失活）</p>
+<p><span>SwiGLU<span class="heti-spacing"> </span></span>的优势：平滑的激活函数（SiLU<heti-adjacent class="heti-adjacent-half">）</heti-adjacent>；门控机制增加表达能力；梯度更稳定，训练更容易；实验证明在<span class="heti-skip"><span class="heti-spacing"> </span>LLM<span class="heti-spacing"> </span></span>上效果更好</p>
+</li>
+</ul>
 </li>
 <li>
 <p>SiLU（Swish）激活函数</p>
 <ul>
-<li>公式
-<span class="arithmatex">\(<span class="arithmatex">\(\text{SiLU}(x) = x \cdot \sigma(x) = \frac{x}{1 + e^{-x}}\)</span>\)</li>
-<li>优势：</li>
+<li>公式</li>
+</ul>
+<div class="arithmatex">\[\text{SiLU}(x) = x \cdot \sigma(x) = \frac{x}{1 + e^{-x}}\]</div>
+<ul>
+<li>
+<p>优势：</p>
+<ul>
 <li>平滑：处处可导，梯度稳定</li>
 <li>非单调：小于<span class="heti-skip"><span class="heti-spacing"> </span>0<span class="heti-spacing"> </span></span>的部分不完全为<span><span class="heti-spacing"> </span>0</span></li>
 <li>自门控：输入乘以自己的<span><span class="heti-spacing"> </span>sigmoid</span></li>
-<li>为什么<span class="heti-skip"><span class="heti-spacing"> </span>SiLU<span class="heti-spacing"> </span></span>比<span class="heti-skip"><span class="heti-spacing"> </span>ReLU<span class="heti-spacing"> </span></span>更好？</li>
+</ul>
+</li>
+<li>
+<p>为什么<span class="heti-skip"><span class="heti-spacing"> </span>SiLU<span class="heti-spacing"> </span></span>比<span class="heti-skip"><span class="heti-spacing"> </span>ReLU<span class="heti-spacing"> </span></span>更好？</p>
+<ul>
 <li>梯度更平滑，训练更稳定</li>
 <li>不完全<span class="heti-skip"><span class="heti-spacing"> </span>"<span class="heti-spacing"> </span></span>杀死<span class="heti-skip"><span class="heti-spacing"> </span>"<span class="heti-spacing"> </span></span>负数，负数部分不完全为<span><span class="heti-spacing"> </span>0</span></li>
-<li>在<span class="heti-skip"><span class="heti-spacing"> </span>LLM<span class="heti-spacing"> </span></span>中实验效果更好
+<li>在<span class="heti-skip"><span class="heti-spacing"> </span>LLM<span class="heti-spacing"> </span></span>中实验效果更好</li>
+</ul>
+</li>
+</ul>
 <div class="highlight"><pre><span></span><code><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a>ReLU(x)  = max(0, x)
 <a href="#__codelineno-1-2" id="__codelineno-1-2" name="__codelineno-1-2"></a>SiLU(x)  = x * sigmoid(x)
 <a href="#__codelineno-1-3" id="__codelineno-1-3" name="__codelineno-1-3"></a>
 <a href="#__codelineno-1-4" id="__codelineno-1-4" name="__codelineno-1-4"></a>x = -1:
 <a href="#__codelineno-1-5" id="__codelineno-1-5" name="__codelineno-1-5"></a>ReLU(-1) = 0
 <a href="#__codelineno-1-6" id="__codelineno-1-6" name="__codelineno-1-6"></a>SiLU(-1) ≈ -0.27  # 保留部分负数信息
-</code></pre></div></li>
-</ul>
+</code></pre></div>
 </li>
 <li>
-<p><span>GLU<span class="heti-spacing"> </span></span>变体对比
-LLM最常用：SwiGLU（Llama、MiniMind）或 GeGLU（GPT-J）</p>
+<p><span>GLU<span class="heti-spacing"> </span></span>变体对比</p>
+<p><span>LLM<span class="heti-spacing"> </span></span>最常用：SwiGLU（Llama、MiniMind）或<span><span class="heti-spacing"> </span>GeGLU</span>（GPT-J）</p>
 <table>
 <thead>
 <tr>
@@ -602,59 +628,73 @@ LLM最常用：SwiGLU（Llama、MiniMind）或 GeGLU（GPT-J）</p>
 <td><span class="arithmatex">\(\text{SiLU}(W_1 x) \odot W_2 x\)</span></td>
 <td><span>SiLU<span class="heti-spacing"> </span></span>门控</td>
 </tr>
+</tbody>
+</table>
+</li>
+<li>
+<p><span>FeedForward<span class="heti-spacing"> </span></span>与<span><span class="heti-spacing"> </span>Attention</span></p>
+<table>
+<thead>
 <tr>
-<td><span>- FeedForward<span class="heti-spacing"> </span></span>与<span><span class="heti-spacing"> </span>Attention</span></td>
-<td></td>
-<td></td>
+<th>组件</th>
+<th>操作</th>
+<th>类比</th>
+<th>主要区别</th>
 </tr>
-<tr>
-<td>组件</td>
-<td>操作</td>
-<td>类比</td>
-</tr>
-<tr>
-<td>------</td>
-<td>------</td>
-<td>------</td>
-</tr>
+</thead>
+<tbody>
 <tr>
 <td><strong>Attention</strong></td>
 <td>全局信息交换</td>
 <td>开会讨论，听取他人意见</td>
+<td>有<span class="heti-skip"><span class="heti-spacing"> </span>seq × seq<span class="heti-spacing"> </span></span>的交互矩阵</td>
 </tr>
 <tr>
 <td><strong>FeedForward</strong></td>
 <td>局部特征变换</td>
 <td>各自思考，消化信息</td>
+<td>每个位置完全独立处理</td>
 </tr>
 </tbody>
 </table>
 <ul>
-<li><span>FFN<span class="heti-spacing"> </span></span>独立处理的说明<span><span class="heti-spacing"> </span>:</span>
-    每个词独立处理，即没有词与词的交互。每个词的向量单独经过FFN计算得到输出</li>
-<li>独立处理的作用<span><span class="heti-spacing"> </span>:</span>
-Attention 已经做了信息融合,FeedForward 负责"深度思考"。分开处理可以减少计算复杂度</li>
-<li>参数量分析</li>
-<li>标准<span><span class="heti-spacing"> </span>FFN:</span>
+<li>
+<p><span>FFN<span class="heti-spacing"> </span></span>独立处理的说明<span><span class="heti-spacing"> </span>:</span></p>
+<p>每个词独立处理，即没有词与词的交互。每个词的向量单独经过<span class="heti-skip"><span class="heti-spacing"> </span>FFN<span class="heti-spacing"> </span></span>计算得到输出</p>
+</li>
+<li>
+<p>独立处理的作用<span><span class="heti-spacing"> </span>:</span></p>
+<p><span>Attention<span class="heti-spacing"> </span></span>已经做了信息融合<span class="heti-skip"><span class="heti-spacing"> </span>,FeedForward<span class="heti-spacing"> </span></span>负责<span class="heti-skip"><span class="heti-spacing"> </span>"<span class="heti-spacing"> </span></span>深度思考<span><span class="heti-spacing"> </span>"</span>。分开处理可以减少计算复杂度</p>
+</li>
+</ul>
+</li>
+<li>
+<p>参数量分析</p>
+<ul>
+<li>
+<p>标准<span><span class="heti-spacing"> </span>FFN:</span></p>
 <div class="highlight"><pre><span></span><code><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a>W1: hidden_size × intermediate_size
 <a href="#__codelineno-2-2" id="__codelineno-2-2" name="__codelineno-2-2"></a>W2: intermediate_size × hidden_size
 <a href="#__codelineno-2-3" id="__codelineno-2-3" name="__codelineno-2-3"></a>total = 2 × hidden_size × intermediate_size
 <a href="#__codelineno-2-4" id="__codelineno-2-4" name="__codelineno-2-4"></a>    = 2 × 512 × 2048 = 2M 参数
-</code></pre></div></li>
-<li>SwiGLU:
-<div class="highlight"><pre><span></span><code><a href="#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a>gate_proj: hidden_size × intermediate_size
+</code></pre></div>
+</li>
+<li>
+<p>SwiGLU:
+    </p><div class="highlight"><pre><span></span><code><a href="#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a>gate_proj: hidden_size × intermediate_size
 <a href="#__codelineno-3-2" id="__codelineno-3-2" name="__codelineno-3-2"></a>up_proj:   hidden_size × intermediate_size
 <a href="#__codelineno-3-3" id="__codelineno-3-3" name="__codelineno-3-3"></a>down_proj: intermediate_size × hidden_size
 <a href="#__codelineno-3-4" id="__codelineno-3-4" name="__codelineno-3-4"></a>total = 3 × hidden_size × intermediate_size
 <a href="#__codelineno-3-5" id="__codelineno-3-5" name="__codelineno-3-5"></a>    = 3 × 512 × (2048 × 2/3)  # 通常缩小 intermediate
 <a href="#__codelineno-3-6" id="__codelineno-3-6" name="__codelineno-3-6"></a>    ≈ 2M 参数
-</code></pre></div></li>
-</ul>
+</code></pre></div>
 </li>
 </ul>
-<p><strong>注意</strong>：<span>SwiGLU<span class="heti-spacing"> </span></span>为了保持参数量，通常将<span class="heti-skip"><span class="heti-spacing"> </span>intermediate_size(FFN<span class="heti-spacing"> </span></span>中隐藏层维度大小<span class="heti-skip"><span class="heti-spacing"> </span>)<span class="heti-spacing"> </span></span>缩小到 ⅔。
-- 代码实现:
-</p><div class="highlight"><pre><span></span><code><a href="#__codelineno-4-1" id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="c1"># MiniMind 的 FeedForward 配置</span>
+<p><strong>注意</strong>：<span>SwiGLU<span class="heti-spacing"> </span></span>为了保持参数量，通常将<span class="heti-skip"><span class="heti-spacing"> </span>intermediate_size(FFN<span class="heti-spacing"> </span></span>中隐藏层维度大小<span class="heti-skip"><span class="heti-spacing"> </span>)<span class="heti-spacing"> </span></span>缩小到 ⅔。</p>
+</li>
+<li>
+<p>代码实现<span><span class="heti-spacing"> </span>:</span></p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-4-1" id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="c1"># MiniMind 的 FeedForward 配置</span>
 <a href="#__codelineno-4-2" id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="n">hidden_size</span> <span class="o">=</span> <span class="mi">512</span>
 <a href="#__codelineno-4-3" id="__codelineno-4-3" name="__codelineno-4-3"></a><span class="n">intermediate_size</span> <span class="o">=</span> <span class="mi">2048</span>  <span class="c1"># 4x 扩张（或调整以匹配 SwiGLU）</span>
 <a href="#__codelineno-4-4" id="__codelineno-4-4" name="__codelineno-4-4"></a>
@@ -676,29 +716,46 @@ Attention 已经做了信息融合,FeedForward 负责"深度思考"。分开处�
 <a href="#__codelineno-4-20" id="__codelineno-4-20" name="__codelineno-4-20"></a>            <span class="n">F</span><span class="o">.</span><span class="n">silu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gate_proj</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">up_proj</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 <a href="#__codelineno-4-21" id="__codelineno-4-21" name="__codelineno-4-21"></a>        <span class="p">)</span>
 </code></pre></div>
+</li>
+</ul>
 <h3 id="qa">Q&amp;A<a class="headerlink" href="#qa" title="Permanent link">¶</a></h3>
 <ol>
-<li><span>SwiGLU<span class="heti-spacing"> </span></span>为什么用三个投影矩阵，而不是两个？
-   - 门控机制：动态控制信息流
-   - 更强表达能力：两条路径提供不同视角
-   - 实验效果更好：在各种 LLM 基准上表现更优</li>
-<li>为什么不用偏置？
-   - 大模型中偏置效果不明显
-   - 减少参数量
-   - 与 RMSNorm 配合更好，已经有归一化</li>
-<li><span>intermediate_size<span class="heti-spacing"> </span></span>的选择
-    MiniMind中 intermediate_size = 4 * hidden_size
-    如果用 SwiGLU，有些实现会调整：intermediate_size = int(hidden_size * 4 * 2 / 3)，以保持总参数量与标准 FFN 相同
-    Llama中 intermediate_size = 2.7 × hidden_size（调整后），或直接用 4x ，但接受更多参数</li>
-<li>一些改进措施
-   - 融合操作
-    <div class="highlight"><pre><span></span><code><a href="#__codelineno-5-1" id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="c1"># 实际可以融合 gate_proj 和 up_proj</span>
+<li>
+<p><span>SwiGLU<span class="heti-spacing"> </span></span>为什么用三个投影矩阵，而不是两个？</p>
+<ul>
+<li>门控机制：动态控制信息流</li>
+<li>更强表达能力：两条路径提供不同视角</li>
+<li>实验效果更好：在各种<span class="heti-skip"><span class="heti-spacing"> </span>LLM<span class="heti-spacing"> </span></span>基准上表现更优</li>
+</ul>
+</li>
+<li>
+<p>为什么不用偏置？</p>
+<ul>
+<li>大模型中偏置效果不明显</li>
+<li>减少参数量</li>
+<li>与<span class="heti-skip"><span class="heti-spacing"> </span>RMSNorm<span class="heti-spacing"> </span></span>配合更好，已经有归一化</li>
+</ul>
+</li>
+<li>
+<p><span>intermediate_size<span class="heti-spacing"> </span></span>的选择</p>
+<p><span>MiniMind<span class="heti-spacing"> </span></span>中<span><span class="heti-spacing"> </span>intermediate_size = 4 * hidden_size</span></p>
+<p>如果用<span><span class="heti-spacing"> </span>SwiGLU</span>，有些实现会调整：intermediate_size = int(hidden_size * 4 * 2 / 3)，以保持总参数量与标准<span class="heti-skip"><span class="heti-spacing"> </span>FFN<span class="heti-spacing"> </span></span>相同</p>
+<p><span>Llama<span class="heti-spacing"> </span></span>中<span><span class="heti-spacing"> </span>intermediate_size = 2.7 × hidden_size</span>（调整后<heti-adjacent class="heti-adjacent-half">）</heti-adjacent>，或直接用<span><span class="heti-spacing"> </span>4x</span> ，但接受更多参数</p>
+</li>
+<li>
+<p>一些改进措施</p>
+<ul>
+<li>融合操作</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-5-1" id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="c1"># 实际可以融合 gate_proj 和 up_proj</span>
 <a href="#__codelineno-5-2" id="__codelineno-5-2" name="__codelineno-5-2"></a><span class="c1"># 减少内存读写，提高效率</span>
 <a href="#__codelineno-5-3" id="__codelineno-5-3" name="__codelineno-5-3"></a><span class="n">gate_up</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">gate_proj</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">up_proj</span><span class="p">(</span><span class="n">x</span><span class="p">)],</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
 <a href="#__codelineno-5-4" id="__codelineno-5-4" name="__codelineno-5-4"></a><span class="n">gate</span><span class="p">,</span> <span class="n">up</span> <span class="o">=</span> <span class="n">gate_up</span><span class="o">.</span><span class="n">chunk</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
 <a href="#__codelineno-5-5" id="__codelineno-5-5" name="__codelineno-5-5"></a><span class="n">hidden</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">silu</span><span class="p">(</span><span class="n">gate</span><span class="p">)</span> <span class="o">*</span> <span class="n">up</span>
-</code></pre></div><ul>
-<li>计算量分析
+</code></pre></div>
+<ul>
+<li>计算量分析</li>
+</ul>
 <div class="highlight"><pre><span></span><code><a href="#__codelineno-6-1" id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="c1"># FeedForward 的 FLOPs</span>
 <a href="#__codelineno-6-2" id="__codelineno-6-2" name="__codelineno-6-2"></a><span class="c1"># 假设 batch=1, seq=512, hidden=512, intermediate=2048</span>
 <a href="#__codelineno-6-3" id="__codelineno-6-3" name="__codelineno-6-3"></a>
@@ -709,8 +766,10 @@ Attention 已经做了信息融合,FeedForward 负责"深度思考"。分开处�
 <a href="#__codelineno-6-8" id="__codelineno-6-8" name="__codelineno-6-8"></a>
 <a href="#__codelineno-6-9" id="__codelineno-6-9" name="__codelineno-6-9"></a><span class="c1"># 总计: ≈ 1.6G FLOPs per block</span>
 </code></pre></div>
-Attention: ≈ 1G FLOPs（seq=512）；FeedForward: ≈ 1.6G FLOPs。FeedForward 占主导（约 60%）</li>
-<li>内存使用
+<p>Attention: ≈ 1G FLOPs（seq=512<heti-adjacent class="heti-adjacent-half">）</heti-adjacent>；FeedForward: ≈ 1.6G FLOPs。<span>FeedForward<span class="heti-spacing"> </span></span>占主导（约<span><span class="heti-spacing"> </span>60%</span>）</p>
+<ul>
+<li>内存使用</li>
+</ul>
 <div class="highlight"><pre><span></span><code><a href="#__codelineno-7-1" id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="c1"># 中间激活内存</span>
 <a href="#__codelineno-7-2" id="__codelineno-7-2" name="__codelineno-7-2"></a><span class="c1"># gate: batch × seq × intermediate = batch × 512 × 2048 floats</span>
 <a href="#__codelineno-7-3" id="__codelineno-7-3" name="__codelineno-7-3"></a><span class="c1"># up:   batch × seq × intermediate = batch × 512 × 2048 floats</span>
@@ -718,24 +777,31 @@ Attention: ≈ 1G FLOPs（seq=512）；FeedForward: ≈ 1.6G FLOPs。FeedForward
 <a href="#__codelineno-7-5" id="__codelineno-7-5" name="__codelineno-7-5"></a><span class="c1"># 总激活内存 ≈ 2 × batch × 512 × 2048 × 4 bytes</span>
 <a href="#__codelineno-7-6" id="__codelineno-7-6" name="__codelineno-7-6"></a><span class="c1">#            = batch × 8 MB</span>
 </code></pre></div>
-改进: 使用 checkpointing：不保存中间激活，重新计算。混合精度：用 BF16/FP16</li>
-</ul>
+<p>改进<span class="heti-skip"><span class="heti-spacing"> </span>:<span class="heti-spacing"> </span></span>使用<span><span class="heti-spacing"> </span>checkpointing</span>：不保存中间激活，重新计算。混合精度：用<span><span class="heti-spacing"> </span>BF16/FP16</span></p>
 </li>
 <li>
-<p>如果你发现<span class="heti-skip"><span class="heti-spacing"> </span>FeedForward<span class="heti-spacing"> </span></span>的输出总是接近<span><span class="heti-spacing"> </span>0</span>，可能是什么问题？如何调试？
-    可能的原因：</p>
+<p>如果你发现<span class="heti-skip"><span class="heti-spacing"> </span>FeedForward<span class="heti-spacing"> </span></span>的输出总是接近<span><span class="heti-spacing"> </span>0</span>，可能是什么问题？如何调试？</p>
+<p>可能的原因：</p>
 <ul>
-<li>权重初始化问题：
-权重初始化太小，导致输出值太小</li>
-<li>门控信号问题：
-gate_proj 的输出总是负数，SiLU(负数) ≈ 0，导致 gate * up ≈ 0</li>
-<li>梯度消失：
-深层网络中梯度传不回来，权重没有更新</li>
-<li>数值精度问题：
-使用了太低的精度（如 FP16），小数值被截断为 0</li>
+<li>
+<p>权重初始化问题：</p>
+<p>权重初始化太小，导致输出值太小</p>
+</li>
+<li>
+<p>门控信号问题：</p>
+<p><span>gate_proj<span class="heti-spacing"> </span></span>的输出总是负数，<span>SiLU(<span class="heti-spacing"> </span></span>负数<span><span class="heti-spacing"> </span>)</span> ≈ 0，导致<span><span class="heti-spacing"> </span>gate * up</span> ≈ 0</p>
+</li>
+<li>
+<p>梯度消失：</p>
+<p>深层网络中梯度传不回来，权重没有更新</p>
+</li>
+<li>
+<p>数值精度问题：</p>
+<p>使用了太低的精度（如<span><span class="heti-spacing"> </span>FP16</span><heti-adjacent class="heti-adjacent-half">）</heti-adjacent>，小数值被截断为<span><span class="heti-spacing"> </span>0</span></p>
+</li>
 </ul>
-<p>调试方法：
-</p><div class="highlight"><pre><span></span><code><a href="#__codelineno-8-1" id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="c1"># 1. 检查中间值</span>
+<p>调试方法：</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-8-1" id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="c1"># 1. 检查中间值</span>
 <a href="#__codelineno-8-2" id="__codelineno-8-2" name="__codelineno-8-2"></a><span class="n">gate</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gate_proj</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 <a href="#__codelineno-8-3" id="__codelineno-8-3" name="__codelineno-8-3"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"gate mean: </span><span class="si">{</span><span class="n">gate</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">}</span><span class="s2">, std: </span><span class="si">{</span><span class="n">gate</span><span class="o">.</span><span class="n">std</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 <a href="#__codelineno-8-4" id="__codelineno-8-4" name="__codelineno-8-4"></a>
@@ -758,23 +824,43 @@ gate_proj 的输出总是负数，SiLU(负数) ≈ 0，导致 gate * up ≈ 0</l
 <a href="#__codelineno-8-21" id="__codelineno-8-21" name="__codelineno-8-21"></a>    <span class="k">if</span> <span class="n">param</span><span class="o">.</span><span class="n">grad</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
 <a href="#__codelineno-8-22" id="__codelineno-8-22" name="__codelineno-8-22"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> grad: </span><span class="si">{</span><span class="n">param</span><span class="o">.</span><span class="n">grad</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </code></pre></div>
-解决方案：
-- 调整初始化：
+<p>解决方案：</p>
+<ul>
+<li>
+<p>调整初始化：</p>
 <div class="highlight"><pre><span></span><code><a href="#__codelineno-9-1" id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="n">nn</span><span class="o">.</span><span class="n">init</span><span class="o">.</span><span class="n">xavier_uniform_</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gate_proj</span><span class="o">.</span><span class="n">weight</span><span class="p">)</span>
 </code></pre></div>
-- 检查 RMSNorm：
-确保输入已经归一化，避免数值范围过大或过小
-- 使用混合精度：
-关键计算用 FP32，其他部分用 BF16
-6. 为什么 FeedForward 要在每个位置独立处理，而不是像 Attention 一样进行全局交互？
-- <strong>分工</strong>：
-Attention 已经做了"信息融合"，FeedForward 负责"深度处理"，避免重复功能
-- 计算效率：
-全局交互：O(n²d)；独立处理：O(nd²)。当 n &gt; d 时，独立处理更高效。n-seq_len，d-hidden_dim
-- 参数复用：
-全局交互需要位置相关的参数，独立处理的参数可以复用
-- 实验验证：
-论文证明这种分工设计效果很好。混合设计（如全 FFN 或全 Attention）效果更差
+</li>
+<li>
+<p>检查<span><span class="heti-spacing"> </span>RMSNorm</span>：</p>
+<p>确保输入已经归一化，避免数值范围过大或过小</p>
+</li>
+<li>
+<p>使用混合精度：</p>
+<p>关键计算用<span><span class="heti-spacing"> </span>FP32</span>，其他部分用<span><span class="heti-spacing"> </span>BF16</span></p>
+</li>
+</ul>
+</li>
+<li>
+<p>为什么<span class="heti-skip"><span class="heti-spacing"> </span>FeedForward<span class="heti-spacing"> </span></span>要在每个位置独立处理，而不是像<span class="heti-skip"><span class="heti-spacing"> </span>Attention<span class="heti-spacing"> </span></span>一样进行全局交互？</p>
+<ul>
+<li>
+<p><strong>分工</strong>：</p>
+<p><span>Attention<span class="heti-spacing"> </span></span>已经做了<span class="heti-skip"><span class="heti-spacing"> </span>"<span class="heti-spacing"> </span></span>信息融合<span><span class="heti-spacing"> </span>"</span>，<span>FeedForward<span class="heti-spacing"> </span></span>负责<span class="heti-skip"><span class="heti-spacing"> </span>"<span class="heti-spacing"> </span></span>深度处理<span><span class="heti-spacing"> </span>"</span>，避免重复功能</p>
+</li>
+<li>
+<p>计算效率：</p>
+<p>全局交互：O(n²d)；独立处理：O(nd²)。当<span class="heti-skip"><span class="heti-spacing"> </span>n &gt; d<span class="heti-spacing"> </span></span>时，独立处理更高效。n-seq_len，d-hidden_dim</p>
+</li>
+<li>
+<p>参数复用：</p>
+<p>全局交互需要位置相关的参数，独立处理的参数可以复用</p>
+</li>
+<li>
+<p>实验验证：</p>
+<p>论文证明这种分工设计效果很好。混合设计（如全<span class="heti-skip"><span class="heti-spacing"> </span>FFN<span class="heti-spacing"> </span></span>或全<span><span class="heti-spacing"> </span>Attention</span>）效果更差</p>
+</li>
+</ul>
 </li>
 </ol>
 <aside class="md-source-file">
@@ -782,13 +868,13 @@ Attention 已经做了"信息融合"，FeedForward 负责"深度处理"，避免
 <span class="md-icon" title="最后更新">
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
 </span>
-<span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime" title="2026年4月16日 15:38:54 CST">2026年4月16日 15:38:54</span>
+<span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime" title="2026年4月17日 12:36:32 CST">2026年4月17日 12:36:32</span>
 </span>
 <span class="md-source-file__fact">
 <span class="md-icon" title="创建日期">
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"></path></svg>
 </span>
-<span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime" title="2026年4月16日 15:38:54 CST">2026年4月16日 15:38:54</span>
+<span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime" title="2026年4月17日 12:36:32 CST">2026年4月17日 12:36:32</span>
 </span>
 </aside>
 <!-- Giscus -->
@@ -866,5 +952,6 @@ Attention 已经做了"信息融合"，FeedForward 负责"深度处理"，避免
 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script src="../../../js/mathjax.js"></script>
 </body>
 </html>
