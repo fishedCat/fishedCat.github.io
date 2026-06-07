@@ -234,9 +234,6 @@
     
   </span>
 </a>
-<label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
-<span class="md-nav__icon md-icon"></span>
-</label>
 </div>
 <nav aria-expanded="false" aria-labelledby="__nav_2_label" class="md-nav" data-md-level="1">
 <label class="md-nav__title" for="__nav_2">
@@ -244,14 +241,6 @@
             Papers
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../../Paper/AlexNet/">
-<span class="md-ellipsis">
-    AlexNet
-    
-  </span>
-</a>
-</li>
 </ul>
 </nav>
 </li>
@@ -282,39 +271,13 @@
   </span>
 </a>
 </li>
-<li class="md-nav__item md-nav__item--nested">
-<input class="md-nav__toggle md-toggle" id="__nav_3_3" type="checkbox"/>
-<label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
-<span class="md-ellipsis">
-    科研方法
-    
-  </span>
-<span class="md-nav__icon md-icon"></span>
-</label>
-<nav aria-expanded="false" aria-labelledby="__nav_3_3_label" class="md-nav" data-md-level="2">
-<label class="md-nav__title" for="__nav_3_3">
-<span class="md-nav__icon md-icon"></span>
-            科研方法
-          </label>
-<ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="../../../Summary/research/">
+<a class="md-nav__link" href="../../../Summary/marxism/">
 <span class="md-ellipsis">
-    来源说明
+    马克思主义基本原理
     
   </span>
 </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../../Summary/research1/">
-<span class="md-ellipsis">
-    科研方法一
-    
-  </span>
-</a>
-</li>
-</ul>
-</nav>
 </li>
 </ul>
 </nav>
@@ -338,22 +301,6 @@
             从深度学习到大模型
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../numpy/">
-<span class="md-ellipsis">
-    numpy总结
-    
-  </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../PyTorch/">
-<span class="md-ellipsis">
-    PyTorch学习
-    
-  </span>
-</a>
-</li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../MiniMind/Norm/">
 <span class="md-ellipsis">
@@ -390,6 +337,30 @@
 <a class="md-nav__link" href="../../MiniMind/MoE/">
 <span class="md-ellipsis">
     混合专家MoE
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../Basis/multiprocess/">
+<span class="md-ellipsis">
+    多进程并行
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../Basis/set/">
+<span class="md-ellipsis">
+    集合
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../Basis/re/">
+<span class="md-ellipsis">
+    正则表达式
     
   </span>
 </a>
@@ -448,7 +419,7 @@
 <article class="md-content__inner md-typeset">
 <h1 id="-tokenization">大语言模型基础<span><span class="heti-spacing"> </span>- Tokenization</span><a class="headerlink" href="#-tokenization" title="Permanent link"><span><span class="heti-spacing"> </span>¶</span></a></h1>
 <div style="margin-top: -30px; font-size: 0.75em; opacity: 0.7;">
-<p><span class="twemoji"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10h-2a8 8 0 0 1-8 8 8 8 0 0 1-8-8 8 8 0 0 1 8-8zm6.78 1a.7.7 0 0 0-.48.2l-1.22 1.21 2.5 2.5L20.8 5.7c.26-.26.26-.7 0-.95L19.25 3.2c-.13-.13-.3-.2-.47-.2m-2.41 2.12L9 12.5V15h2.5l7.37-7.38z"></path></svg></span> 约<span class="heti-skip"><span class="heti-spacing"> </span>1968<span class="heti-spacing"> </span></span>个字 <span class="twemoji"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 20c4.42 0 8-3.58 8-8s-3.58-8-8-8-8 3.58-8 8 3.58 8 8 8m0-18c5.5 0 10 4.5 10 10s-4.5 10-10 10C6.47 22 2 17.5 2 12S6.5 2 12 2m.5 11H11V7h1.5v4.26l3.7-2.13.75 1.3z"></path></svg></span> 预计阅读时间<span class="heti-skip"><span class="heti-spacing"> </span>7<span class="heti-spacing"> </span></span>分钟</p>
+<p><span class="twemoji"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10h-2a8 8 0 0 1-8 8 8 8 0 0 1-8-8 8 8 0 0 1 8-8zm6.78 1a.7.7 0 0 0-.48.2l-1.22 1.21 2.5 2.5L20.8 5.7c.26-.26.26-.7 0-.95L19.25 3.2c-.13-.13-.3-.2-.47-.2m-2.41 2.12L9 12.5V15h2.5l7.37-7.38z"></path></svg></span> 约<span class="heti-skip"><span class="heti-spacing"> </span>2065<span class="heti-spacing"> </span></span>个字 <span class="twemoji"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 20c4.42 0 8-3.58 8-8s-3.58-8-8-8-8 3.58-8 8 3.58 8 8 8m0-18c5.5 0 10 4.5 10 10s-4.5 10-10 10C6.47 22 2 17.5 2 12S6.5 2 12 2m.5 11H11V7h1.5v4.26l3.7-2.13.75 1.3z"></path></svg></span> 预计阅读时间<span class="heti-skip"><span class="heti-spacing"> </span>7<span class="heti-spacing"> </span></span>分钟</p>
 </div>
 <h3 id="tokenization">分词<span><span class="heti-spacing"> </span>Tokenization</span><a class="headerlink" href="#tokenization" title="Permanent link"><span><span class="heti-spacing"> </span>¶</span></a></h3>
 <p>核心思想<span class="heti-skip"><span class="heti-spacing"> </span>:<span class="heti-spacing"> </span></span>将一个通常表示为<span class="heti-skip"><span class="heti-spacing"> </span>Unicode<span class="heti-spacing"> </span></span>字符串的原始文本<span class="heti-skip"><span class="heti-spacing"> </span>(<span class="heti-spacing"> </span></span>还有语言、图像等其他形式<span class="heti-skip"><span class="heti-spacing"> </span>)<span class="heti-spacing"> </span></span>分割成基本单位词元<span><span class="heti-spacing"> </span>(token)</span>，并将其转化为一组整数的过程，其中每个整数代表一个<span><span class="heti-spacing"> </span>token</span>
@@ -462,7 +433,7 @@ Tokenizer将文本拆分为独立的词，对于英语这种将空格或标点�
     - 语义清晰，词汇含义清除
     - 模型效果好，能提供丰富的语义信息</p>
 <div class="highlight"><pre><span></span><code>缺点:
-  - 词典规模极大。对于中文这种缺乏天然分隔符，需要依赖分词算法，词汇表容易出现 长尾 现象，导致词汇表极大
+  - 词典规模极大。对于中文这种缺乏天然分隔符，需要依赖分词算法，词汇表容易出现 长尾 现象，导致词汇表极大(几乎无上限)
   - 未登录词(OOV)问题。新词、专有名词等不在词典中的词语难以处理，需要额外的机制识别处理
 </code></pre></div>
 <ol start="2">
@@ -507,14 +478,18 @@ Unicode字符串转换为字节，一个字符可以对应多个字节
 - 训练流程:</p>
 <ul>
 <li>构建初始词汇表。将训练数据分为英文字母、中文字符等等</li>
-<li>统计子词单元对<span class="heti-skip"><span class="heti-spacing"> </span>(bigram,<span class="heti-spacing"> </span></span>两个连续的子词<span class="heti-skip"><span class="heti-spacing"> </span>)<span class="heti-spacing"> </span></span>频率</li>
-<li>合并频率最高的子词对，并更新词汇表和<span><span class="heti-spacing"> </span>merge rule</span></li>
+<li>统计子词单元对<span class="heti-skip"><span class="heti-spacing"> </span>(bigram,<span class="heti-spacing"> </span></span>两个连续的子词<span class="heti-skip"><span class="heti-spacing"> </span>)<span class="heti-spacing"> </span></span>频率，注意按当前轮的<span class="heti-skip"><span class="heti-spacing"> </span>token<span class="heti-spacing"> </span></span>序列统计，前几轮已经合并的<span class="heti-skip"><span class="heti-spacing"> </span>token<span class="heti-spacing"> </span></span>都将当成单个<span class="heti-skip"><span class="heti-spacing"> </span>token<span class="heti-spacing"> </span></span>参与下一轮统计</li>
+<li>合并频率最高的子词对，并更新词汇表和<span><span class="heti-spacing"> </span>merge rule</span>。如果出现频率一样，会倾向于更靠左先出现的子词对</li>
 <li>重复合并过程<span><span class="heti-spacing"> </span>2</span>、<span>3<span class="heti-spacing"> </span></span>步，直到达到预定的词汇表大小、合并次数 或者 不再有 有意义的合并<span class="heti-skip"><span class="heti-spacing"> </span>(<span class="heti-spacing"> </span></span>进一步合并不会显著提高词汇表收益<span><span class="heti-spacing"> </span>)</span></li>
 <li>得到词汇表，用最终的<span class="heti-skip"><span class="heti-spacing"> </span>merge rule<span class="heti-spacing"> </span></span>对文本进行分词</li>
 <li>使用流程<span><span class="heti-spacing"> </span>:</span></li>
+<li>字符串转为<span class="heti-skip"><span class="heti-spacing"> </span>unicode<span class="heti-spacing"> </span></span>字节</li>
 <li><strong>使用<span class="heti-skip"><span class="heti-spacing"> </span>merge rule<span class="heti-spacing"> </span></span>进行分词而非词表</strong></li>
 <li><span>BPE<span class="heti-spacing"> </span></span>遍历<span class="heti-skip"><span class="heti-spacing"> </span>merge rule<span class="heti-spacing"> </span></span>进行全局匹配，而不是遍历位置对规则进行匹配。</li>
 <li>示例<span class="heti-skip"><span class="heti-spacing"> </span>:<span class="heti-spacing"> </span></span>我<span class="heti-skip"><span class="heti-spacing"> </span>/<span class="heti-spacing"> </span></span>是<span class="heti-skip"><span class="heti-spacing"> </span>/<span class="heti-spacing"> </span></span>他<span class="heti-skip"><span class="heti-spacing"> </span>/<span class="heti-spacing"> </span></span>的<span class="heti-skip"><span class="heti-spacing"> </span>/<span class="heti-spacing"> </span></span>他<span class="heti-skip"><span class="heti-spacing"> </span>/<span class="heti-spacing"> </span></span>是<span class="heti-skip"><span class="heti-spacing"> </span>/<span class="heti-spacing"> </span></span>我<span class="heti-skip"><span class="heti-spacing"> </span>/<span class="heti-spacing"> </span></span>的<span class="heti-skip"><span class="heti-spacing"> </span>-&gt;<span class="heti-spacing"> </span></span>我是<span class="heti-skip"><span class="heti-spacing"> </span>/<span class="heti-spacing"> </span></span>他<span class="heti-skip"><span class="heti-spacing"> </span>/<span class="heti-spacing"> </span></span>的<span class="heti-skip"><span class="heti-spacing"> </span>/<span class="heti-spacing"> </span></span>他是<span class="heti-skip"><span class="heti-spacing"> </span>/<span class="heti-spacing"> </span></span>我<span class="heti-skip"><span class="heti-spacing"> </span>/<span class="heti-spacing"> </span></span>的<span class="heti-skip"><span class="heti-spacing"> </span>-&gt;<span class="heti-spacing"> </span></span>我是他<span class="heti-skip"><span class="heti-spacing"> </span>/<span class="heti-spacing"> </span></span>的<span class="heti-skip"><span class="heti-spacing"> </span>/<span class="heti-spacing"> </span></span>他是我<span class="heti-skip"><span class="heti-spacing"> </span>/<span class="heti-spacing"> </span></span>的</li>
+<li>解码流程<span><span class="heti-spacing"> </span>:</span></li>
+<li>查词表将<span class="heti-skip"><span class="heti-spacing"> </span>token<span class="heti-spacing"> </span></span>还原为字节串</li>
+<li>所有字节串拼起来，按<span class="heti-skip"><span class="heti-spacing"> </span>unicode<span class="heti-spacing"> </span></span>解码</li>
 </ul>
 </li>
 <li>
@@ -547,9 +522,9 @@ BPE和WordPiece的选词目标都是贪心的，即某个词在数据中的频�
    - 训练目标:找一个词表vocab，该词表在语料库上的(最优)切分的指标是所有词表里最优的
    - 最优的指标: 找一个vocab使训练数据中每一个句子的PPL之和最小
     假设句子<span class="arithmatex">\(s\)</span>被切分成<span class="arithmatex">\(x_1,x_2,\cdots,x_k\)</span>
-    <span class="arithmatex">\(<span class="arithmatex">\(Argmin_{vocab} \sum_{s \in Corpus} Min_{(x_1,x_2,\cdots,x_k)\in Scgment(s,vocab)} UnigramPPL(s)\)</span>\)
+    $<span class="arithmatex">\(Argmin_{vocab} \sum_{s \in Corpus} Min_{(x_1,x_2,\cdots,x_k)\in Scgment(s,vocab)} UnigramPPL(s)\)</span>$
    - UnigramPPL(Perplexity)定义:
-    <span class="arithmatex">\(<span class="arithmatex">\(UnigramPPL(x) = -log(P(s)) = -log(\pi_{x_i}P(x_i)) = \sum_{x_i}-log(P(x_i))\)</span>\)
+    $<span class="arithmatex">\(UnigramPPL(x) = -log(P(s)) = -log(\pi_{x_i}P(x_i)) = \sum_{x_i}-log(P(x_i))\)</span>$
 训练流程:
    - 将所有ngram作为vocab，统计ngram频度(n预先指定)
    - 将频度转化为-logP(ngram)</li>
@@ -577,13 +552,13 @@ BPE和WordPiece的选词目标都是贪心的，即某个词在数据中的频�
 <span class="md-icon" title="最后更新">
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
 </span>
-<span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime" title="2026年4月17日 12:40:54 CST">2026年4月17日 12:40:54</span>
+<span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime" title="2026年6月7日 16:41:01 CST">2026年6月7日 16:41:01</span>
 </span>
 <span class="md-source-file__fact">
 <span class="md-icon" title="创建日期">
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"></path></svg>
 </span>
-<span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime" title="2026年4月17日 12:40:54 CST">2026年4月17日 12:40:54</span>
+<span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime" title="2026年6月7日 16:41:01 CST">2026年6月7日 16:41:01</span>
 </span>
 </aside>
 <!-- Giscus -->

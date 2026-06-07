@@ -7,7 +7,7 @@
 <link href="https://fishedCat.github.io/DL2LLM/MiniMind/YaRN/" rel="canonical"/>
 <link href="../../../log.ico" rel="icon"/>
 <meta content="mkdocs-1.6.1, mkdocs-material-9.6.23" name="generator"/>
-<title>YaRN - 摸鱼喵的小站</title>
+<title>MiniMind学习笔记 - 摸鱼喵的小站</title>
 <link href="../../../assets/stylesheets/main.84d31ad4.min.css" rel="stylesheet"/>
 <link href="../../../assets/stylesheets/palette.06af60db.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
@@ -30,6 +30,9 @@
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
+<a class="md-skip" href="#minimind">
+          跳转至
+        </a>
 </div>
 <div data-md-component="announce">
 </div>
@@ -51,7 +54,7 @@
 <div class="md-header__topic" data-md-component="header-topic">
 <span class="md-ellipsis">
             
-              YaRN
+              MiniMind学习笔记
             
           </span>
 </div>
@@ -231,9 +234,6 @@
     
   </span>
 </a>
-<label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
-<span class="md-nav__icon md-icon"></span>
-</label>
 </div>
 <nav aria-expanded="false" aria-labelledby="__nav_2_label" class="md-nav" data-md-level="1">
 <label class="md-nav__title" for="__nav_2">
@@ -241,14 +241,6 @@
             Papers
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../../Paper/AlexNet/">
-<span class="md-ellipsis">
-    AlexNet
-    
-  </span>
-</a>
-</li>
 </ul>
 </nav>
 </li>
@@ -279,39 +271,13 @@
   </span>
 </a>
 </li>
-<li class="md-nav__item md-nav__item--nested">
-<input class="md-nav__toggle md-toggle" id="__nav_3_3" type="checkbox"/>
-<label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
-<span class="md-ellipsis">
-    科研方法
-    
-  </span>
-<span class="md-nav__icon md-icon"></span>
-</label>
-<nav aria-expanded="false" aria-labelledby="__nav_3_3_label" class="md-nav" data-md-level="2">
-<label class="md-nav__title" for="__nav_3_3">
-<span class="md-nav__icon md-icon"></span>
-            科研方法
-          </label>
-<ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="../../../Summary/research/">
+<a class="md-nav__link" href="../../../Summary/marxism/">
 <span class="md-ellipsis">
-    来源说明
+    马克思主义基本原理
     
   </span>
 </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../../Summary/research1/">
-<span class="md-ellipsis">
-    科研方法一
-    
-  </span>
-</a>
-</li>
-</ul>
-</nav>
 </li>
 </ul>
 </nav>
@@ -335,22 +301,6 @@
             从深度学习到大模型
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../numpy/">
-<span class="md-ellipsis">
-    numpy总结
-    
-  </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../PyTorch/">
-<span class="md-ellipsis">
-    PyTorch学习
-    
-  </span>
-</a>
-</li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="../Norm/">
 <span class="md-ellipsis">
@@ -391,6 +341,30 @@
   </span>
 </a>
 </li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../Basis/multiprocess/">
+<span class="md-ellipsis">
+    多进程并行
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../Basis/set/">
+<span class="md-ellipsis">
+    集合
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../Basis/re/">
+<span class="md-ellipsis">
+    正则表达式
+    
+  </span>
+</a>
+</li>
 </ul>
 </nav>
 </li>
@@ -403,28 +377,278 @@
 <div class="md-sidebar__scrollwrap">
 <div class="md-sidebar__inner">
 <nav aria-label="目录" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_1">
+<span class="md-ellipsis">
+      长度外推
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_2">
+<span class="md-ellipsis">
+      外推技术
+    </span>
+</a>
+</li>
+</ul>
 </nav>
 </div>
 </div>
 </div>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<h1>YaRN</h1>
+<h1 id="minimind"><span>MiniMind<span class="heti-spacing"> </span></span>学习笔记<a class="headerlink" href="#minimind" title="Permanent link"><span><span class="heti-spacing"> </span>¶</span></a></h1>
 <div style="margin-top: -30px; font-size: 0.75em; opacity: 0.7;">
-<p><span class="twemoji"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10h-2a8 8 0 0 1-8 8 8 8 0 0 1-8-8 8 8 0 0 1 8-8zm6.78 1a.7.7 0 0 0-.48.2l-1.22 1.21 2.5 2.5L20.8 5.7c.26-.26.26-.7 0-.95L19.25 3.2c-.13-.13-.3-.2-.47-.2m-2.41 2.12L9 12.5V15h2.5l7.37-7.38z"></path></svg></span> 约<span class="heti-skip"><span class="heti-spacing"> </span>0<span class="heti-spacing"> </span></span>个字 <span class="twemoji"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 20c4.42 0 8-3.58 8-8s-3.58-8-8-8-8 3.58-8 8 3.58 8 8 8m0-18c5.5 0 10 4.5 10 10s-4.5 10-10 10C6.47 22 2 17.5 2 12S6.5 2 12 2m.5 11H11V7h1.5v4.26l3.7-2.13.75 1.3z"></path></svg></span> 预计阅读时间不到<span class="heti-skip"><span class="heti-spacing"> </span>1<span class="heti-spacing"> </span></span>分钟</p>
+<p><span class="twemoji"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10h-2a8 8 0 0 1-8 8 8 8 0 0 1-8-8 8 8 0 0 1 8-8zm6.78 1a.7.7 0 0 0-.48.2l-1.22 1.21 2.5 2.5L20.8 5.7c.26-.26.26-.7 0-.95L19.25 3.2c-.13-.13-.3-.2-.47-.2m-2.41 2.12L9 12.5V15h2.5l7.37-7.38z"></path></svg></span> 约<span class="heti-skip"><span class="heti-spacing"> </span>589<span class="heti-spacing"> </span></span>个字 <span class="twemoji"><svg viewbox="0 0 576 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M360.8 1.2c-17-4.9-34.7 5-39.6 22l-128 448c-4.9 17 5 34.7 22 39.6s34.7-5 39.6-22l128-448c4.9-17-5-34.7-22-39.6m64.6 136.1c-12.5 12.5-12.5 32.8 0 45.3l73.4 73.4-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l96-96c12.5-12.5 12.5-32.8 0-45.3l-96-96c-12.5-12.5-32.8-12.5-45.3 0zm-274.7 0c-12.5-12.5-32.8-12.5-45.3 0l-96 96c-12.5 12.5-12.5 32.8 0 45.3l96 96c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256l73.3-73.4c12.5-12.5 12.5-32.8 0-45.3z"></path></svg></span> <span>24<span class="heti-spacing"> </span></span>行代码 <span class="twemoji"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 20c4.42 0 8-3.58 8-8s-3.58-8-8-8-8 3.58-8 8 3.58 8 8 8m0-18c5.5 0 10 4.5 10 10s-4.5 10-10 10C6.47 22 2 17.5 2 12S6.5 2 12 2m.5 11H11V7h1.5v4.26l3.7-2.13.75 1.3z"></path></svg></span> 预计阅读时间<span class="heti-skip"><span class="heti-spacing"> </span>2<span class="heti-spacing"> </span></span>分钟</p>
 </div>
+<div class="admonition abstract">
+<p class="admonition-title">Abstract</p>
+<p><span>MiniMind<span class="heti-spacing"> </span></span>学习资料来源：</p>
+<ul>
+<li>Blog: Olynx -- 《<span>Minimind<span class="heti-spacing"> </span></span>手动实操<span class="heti-skip"><span class="heti-spacing"> </span>1: RoPE<span class="heti-spacing"> </span></span>长度外推全解析》</li>
+</ul>
+</div>
+<h3 id="_1">长度外推<a class="headerlink" href="#_1" title="Permanent link"><span><span class="heti-spacing"> </span>¶</span></a></h3>
+<p>针对问题<span class="heti-skip"><span class="heti-spacing"> </span>:<span class="heti-spacing"> </span></span>突破训练长度限制<span><span class="heti-spacing"> </span>(Length Extrapolation)</span>，支持更长文本</p>
+<p>本文的长度外推技术都基于<a href="../PositionEnc/"><span><span class="heti-spacing"> </span>RoPE</span></a></p>
+<p><strong>外推问题<span><span class="heti-spacing"> </span>:</span></strong></p>
+<p>当<span class="heti-skip"><span class="heti-spacing"> </span><span class="arithmatex">\(m &gt; L_{train}\)</span><span class="heti-spacing"> </span></span>时，<span><span class="arithmatex">\(\cos(m \theta_i)\)</span><span class="heti-spacing"> </span></span>会出现训练时从未见过的数值分布，导致注意力机制崩塌<span class="heti-skip"><span class="heti-spacing"> </span>(PPL<span class="heti-spacing"> </span></span>爆炸<span><span class="heti-spacing"> </span>)</span></p>
+<p><span>RoPE<span class="heti-spacing"> </span></span>中，<span>Query<span class="heti-spacing"> </span></span>或<span class="heti-skip"><span class="heti-spacing"> </span>Key<span class="heti-spacing"> </span></span>向量的第<span class="heti-skip"><span class="heti-spacing"> </span>i<span class="heti-spacing"> </span></span>组分量<span><span class="heti-spacing"> </span>(<span class="arithmatex">\(i \in [0, \frac{d}{2})\)</span>)</span>，位置为<span><span class="heti-spacing"> </span>m</span>，基础频率为<span><span class="heti-spacing"> </span><span class="arithmatex">\(\theta_i\)</span></span>，训练最大长度为<span><span class="heti-spacing"> </span><span class="arithmatex">\(L_{train}\)</span></span>，推理<span class="heti-skip"><span class="heti-spacing"> </span>/<span class="heti-spacing"> </span></span>目标最大长度为<span><span class="heti-spacing"> </span><span class="arithmatex">\(L_{new}\)</span></span> </p>
+<p>PPL(Perplexity)：困惑度，是衡量语言模型预测能力的指标。<span>PPL<span class="heti-spacing"> </span></span>越低，模型预测下一个词的能力越强。数学上，<span>PPL<span class="heti-spacing"> </span></span>是交叉熵损失的指数形式，公式<span><span class="heti-spacing"> </span>:</span></p>
+<div class="arithmatex">\[PPL = \exp(-\frac{1}{N} \sum_{i=1}^{N} \log P(w_i | w_{&lt;i}))
+\]</div>
+<p>其中<span class="heti-skip"><span class="heti-spacing"> </span><span class="arithmatex">\(N\)</span><span class="heti-spacing"> </span></span>是词的数量，<span><span class="arithmatex">\(P(w_i | w_{&lt;i})\)</span><span class="heti-spacing"> </span></span>是模型预测第<span class="heti-skip"><span class="heti-spacing"> </span><span class="arithmatex">\(i\)</span><span class="heti-spacing"> </span></span>个词的概率。<span>PPL<span class="heti-spacing"> </span></span>可以理解为模型在预测时的平均分支数，<span>PPL<span class="heti-spacing"> </span></span>越高，模型越不确定</p>
+<h3 id="_2">外推技术<a class="headerlink" href="#_2" title="Permanent link"><span><span class="heti-spacing"> </span>¶</span></a></h3>
+<ul>
+<li>
+<p>PI(Position Interpolation，线性插值<span><span class="heti-spacing"> </span>)</span></p>
+<ul>
+<li>核心思想<span class="heti-skip"><span class="heti-spacing"> </span>:<span class="heti-spacing"> </span></span>将新的长位置<span class="heti-skip"><span class="heti-spacing"> </span><span class="arithmatex">\(L_{new}\)</span><span class="heti-spacing"> </span></span>调整到<span class="heti-skip"><span class="heti-spacing"> </span><span class="arithmatex">\([0, L_{train}]\)</span><span class="heti-spacing"> </span></span>内</li>
+<li>
+<p>公式<span><span class="heti-spacing"> </span>:</span></p>
+<div class="arithmatex">\[m^{\prime} = \frac{m}{s}\]</div>
+<div class="arithmatex">\[Angle = \frac{m}{s} \theta_i\]</div>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="n">scale</span> <span class="o">=</span> <span class="n">L_new</span> <span class="o">/</span> <span class="n">L_train</span>  <span class="c1"># 例如 4096-&gt;8192, scale=2</span>
+<a href="#__codelineno-0-2" id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="n">t</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">L_new</span><span class="p">)</span>
+<a href="#__codelineno-0-3" id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="n">t</span> <span class="o">=</span> <span class="n">t</span> <span class="o">/</span> <span class="n">scale</span>  <span class="c1"># 将 0~8191 压缩回 0~4095.5</span>
+<a href="#__codelineno-0-4" id="__codelineno-0-4" name="__codelineno-0-4"></a><span class="n">freqs</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">inv_freq</span><span class="p">)</span>
+</code></pre></div>
+<ul>
+<li>
+<p>优点<span class="heti-skip"><span class="heti-spacing"> </span>:<span class="heti-spacing"> </span></span>极其简单，微调几百步就能让模型适应长文本</p>
+</li>
+<li>
+<p>缺点<span><span class="heti-spacing"> </span>:</span></p>
+<ul>
+<li>高频分辨率丢失</li>
+</ul>
+<p>对于高频部分<span class="heti-skip"><span class="heti-spacing"> </span>(i<span class="heti-spacing"> </span></span>小<span><span class="heti-spacing"> </span>)</span>，相邻<span class="heti-skip"><span class="heti-spacing"> </span>token<span class="heti-spacing"> </span></span>的旋转角差值变小了，模型无法精确区分相邻的词，分辨率<span class="heti-skip"><span class="heti-spacing"> </span>(Resolution)<span class="heti-spacing"> </span></span>降低</p>
+</li>
+</ul>
+</li>
+<li>
+<p>NTK-Aware Interpolation</p>
+<ul>
+<li>
+<p>核心思想<span class="heti-skip"><span class="heti-spacing"> </span>:<span class="heti-spacing"> </span></span>根据<span class="heti-skip"><span class="heti-spacing"> </span>Neural Tangent Kernel(NTK)<span class="heti-spacing"> </span></span>理论，高频特征学习快，低频特征学习慢。不改变位置<span><span class="heti-spacing"> </span>m</span>，可以保持分辨率；而改变“基数”b，可以让高频部分保持不变<span class="heti-skip"><span class="heti-spacing"> </span>(<span class="heti-spacing"> </span></span>不插值<span><span class="heti-spacing"> </span>)</span>，只对低频部分进行插值</p>
+</li>
+<li>
+<p>数学原理<span class="heti-skip"><span class="heti-spacing"> </span>:<span class="heti-spacing"> </span></span>找一个新的基数<span><span class="heti-spacing"> </span><span class="arithmatex">\(b^{\prime}\)</span></span>，使最低频<span class="heti-skip"><span class="heti-spacing"> </span>(<span class="arithmatex">\(i=d/2-1\)</span>)<span class="heti-spacing"> </span></span>的效果等同于<span class="heti-skip"><span class="heti-spacing"> </span>PI<span class="heti-spacing"> </span></span>插值，高频变化最小</p>
+</li>
+</ul>
+<div class="arithmatex">\[ 
+    PI: \frac{m}{s} \cdot b^{-2i/d} \\
+    NTK-Aware: m \cdot (b^{\prime})^{-2i/d}
+\]</div>
+<p>由于要在最低频相等，近似可得</p>
+<div class="arithmatex">\[b^{\prime} = b \cdot s\]</div>
+<p>考虑到实际的所有维度，实际修正为</p>
+<div class="arithmatex">\[b^{\prime} = b \cdot s^{\frac{d}{d-2}}\]</div>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="c1"># 不用修改位置m，只修改频率的base</span>
+<a href="#__codelineno-1-2" id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="n">alpha</span> <span class="o">=</span> <span class="n">L_new</span> <span class="o">/</span> <span class="n">L_train</span>
+<a href="#__codelineno-1-3" id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="c1"># 计算新的频率</span>
+<a href="#__codelineno-1-4" id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="n">new_base</span> <span class="o">=</span> <span class="mi">10000</span> <span class="o">*</span> <span class="p">(</span><span class="n">alpha</span> <span class="o">**</span> <span class="p">(</span><span class="n">dim</span> <span class="o">/</span> <span class="p">(</span><span class="n">dim</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)))</span>
+<a href="#__codelineno-1-5" id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="n">inv_freq</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="n">new_base</span> <span class="o">**</span> <span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">dim</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="n">dim</span><span class="p">))</span>
+<a href="#__codelineno-1-6" id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="c1"># 生成 cos/sin 表</span>
+</code></pre></div>
+<ul>
+<li>优点<span class="heti-skip"><span class="heti-spacing"> </span>:<span class="heti-spacing"> </span></span>解决了<span class="heti-skip"><span class="heti-spacing"> </span>PI<span class="heti-spacing"> </span></span>在高频部分分辨率丢失的问题，无需微调也能获得比<span class="heti-skip"><span class="heti-spacing"> </span>PI<span class="heti-spacing"> </span></span>更好的<span><span class="heti-spacing"> </span>PPL</span>，微调后效果更佳</li>
+</ul>
+</li>
+<li>
+<p>Dynamic NTK Interpolation</p>
+<ul>
+<li>
+<p>核心思想<span class="heti-skip"><span class="heti-spacing"> </span>:<span class="heti-spacing"> </span></span>前两种方法的<span class="heti-skip"><span class="heti-spacing"> </span><span class="arithmatex">\(s\)</span><span class="heti-spacing"> </span></span>是固定的，推理的最大长度和实际长度相差较大时<span class="heti-skip"><span class="heti-spacing"> </span>(<span class="heti-spacing"> </span></span>实际长度仍在训练最大长度内<span><span class="heti-spacing"> </span>)</span>，模型也会进行压缩，性能下降。而<span class="heti-skip"><span class="heti-spacing"> </span>Dynamic NTK<span class="heti-spacing"> </span></span>根据当前的序列长度动态计算<span><span class="heti-spacing"> </span><span class="arithmatex">\(S\)</span></span></p>
+</li>
+<li>
+<p>计算流程<span><span class="heti-spacing"> </span>:</span></p>
+<ul>
+<li>每一步推理或者每隔一段计算，获取当前序列长度<span><span class="heti-spacing"> </span><span class="arithmatex">\(L_{curr}\)</span></span></li>
+<li>如果<span><span class="heti-spacing"> </span><span class="arithmatex">\(L_{curr} \leq L_{train}\)</span></span>，获取原始<span><span class="heti-spacing"> </span>RoPE(scale=1)</span></li>
+<li>如果<span><span class="heti-spacing"> </span><span class="arithmatex">\(L_{curr} &gt; L_{train}\)</span></span>，计算<span><span class="heti-spacing"> </span>scale</span>，<span class="arithmatex">\(s=L_{curr} / L_{train}\)</span></li>
+<li>使用<span class="heti-skip"><span class="heti-spacing"> </span>NTK-Aware<span class="heti-spacing"> </span></span>重新计算<span class="heti-skip"><span class="heti-spacing"> </span><span class="arithmatex">\(b^{\prime}\)</span><span class="heti-spacing"> </span></span>和频率表</li>
+</ul>
+</li>
+<li>
+<p>关于实现<span><span class="heti-spacing"> </span>:</span></p>
+<ul>
+<li><span>RoPE<span class="heti-spacing"> </span></span>是静态的，通常在<span class="heti-skip"><span class="heti-spacing"> </span>Attention<span class="heti-spacing"> </span></span>前完成，如果要动态计算，<span>KV Cache<span class="heti-spacing"> </span></span>的<span class="heti-skip"><span class="heti-spacing"> </span>K<span class="heti-spacing"> </span></span>向量是基于旧的<span class="heti-skip"><span class="heti-spacing"> </span><span class="arithmatex">\(s\)</span><span class="heti-spacing"> </span></span>选择的，<span><span class="arithmatex">\(s\)</span><span class="heti-spacing"> </span></span>变化后也应该变化</li>
+<li>实际上，为了性能考虑，<span>Dynamic NTK<span class="heti-spacing"> </span></span>通常不重算<span><span class="heti-spacing"> </span>KV Cache</span>，会有一定的误差，但模型可以容忍这种渐变。或者也可以采用不旋转存<span><span class="heti-spacing"> </span>KV</span>，取出时旋转的方法，但是计算量增大</li>
+</ul>
+</li>
+<li>
+<p>优点<span class="heti-skip"><span class="heti-spacing"> </span>:<span class="heti-spacing"> </span></span>在短文本上保持原始性能，随着长度增加平滑过渡到外推模式</p>
+</li>
+</ul>
+</li>
+<li>
+<p><span>NTK-by-parts Interpolation/<span class="heti-spacing"> </span></span>分段<span><span class="heti-spacing"> </span>NTK</span></p>
+<ul>
+<li>
+<p>核心思想<span class="heti-skip"><span class="heti-spacing"> </span>: NTK-Aware<span class="heti-spacing"> </span></span>对高频部分仍有影响，<span>NTK-by-parts<span class="heti-spacing"> </span></span>提出波长<span><span class="heti-spacing"> </span>(Wavelength</span>，<span class="arithmatex">\(\lambda = 2\pi / \theta_i\)</span>)</p>
+<ul>
+<li>如果波长很短，远小于训练长度，表示高频，局部信息，不进行插值，保持原始<span><span class="heti-spacing"> </span>RoPE</span></li>
+<li>如果波长很长，大于训练长度，表示低频，长距离信息，必须插值</li>
+<li>中间部分，接近于训练长度，过渡？？？</li>
+</ul>
+</li>
+<li>
+<p>数学原理<span><span class="heti-spacing"> </span>:</span></p>
+<p>波长<span><span class="heti-spacing"> </span><span class="arithmatex">\(\lambda_i = 2\pi \cdot b^{2i/d}\)</span></span>，两个阈值<span><span class="heti-spacing"> </span><span class="arithmatex">\(\alpha,\beta\)</span></span>，对于每个维度<span><span class="heti-spacing"> </span>i</span></p>
+<ul>
+<li><span class="arithmatex">\(\lambda_i / L_{train} &lt; \alpha\)</span>，不插值</li>
+<li><span class="arithmatex">\(\lambda_i / L_{train} &gt; \beta\)</span>，全量插值</li>
+<li><span class="arithmatex">\(\alpha &lt; \lambda_i / L_{train} &lt; \beta\)</span>，线性混合</li>
+</ul>
+<p>直接对<span class="heti-skip"><span class="heti-spacing"> </span><span class="arithmatex">\(m\)</span><span class="heti-spacing"> </span></span>混合比较麻烦，通常改变频率<span><span class="heti-spacing"> </span><span class="arithmatex">\(\theta_i\)</span></span></p>
+<div class="arithmatex">\[\theta_i^{\prime} = (1-\gamma_i)\theta_i + \gamma_i \cdot \frac{\theta_i}{s}
+\]</div>
+<p>其中<span class="heti-skip"><span class="heti-spacing"> </span><span class="arithmatex">\(\gamma_i\)</span><span class="heti-spacing"> </span></span>为根据波长计算得到的<span class="heti-skip"><span class="heti-spacing"> </span><span class="arithmatex">\(ramp\)</span><span class="heti-spacing"> </span></span>函数，范围在<span class="heti-skip"><span class="heti-spacing"> </span>0<span class="heti-spacing"> </span></span>到<span class="heti-skip"><span class="heti-spacing"> </span>1<span class="heti-spacing"> </span></span>之间</p>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="c1"># 计算每个维度的波长，为每个维度i计算一个缩放因子</span>
+<a href="#__codelineno-2-2" id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="n">wavelen</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="n">inv_freq</span>
+<a href="#__codelineno-2-3" id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="c1"># 这种方法不改 base，而是直接改 freq</span>
+<a href="#__codelineno-2-4" id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="c1"># 对 wavelen 小的不变，大的除以 scale</span>
+</code></pre></div>
+</li>
+<li>
+<p><strong>YaRN</strong>(Yet another RoPE extension)</p>
+<ul>
+<li>
+<p>核心思想<span class="heti-skip"><span class="heti-spacing"> </span>:<span class="heti-spacing"> </span></span>结合<span class="heti-skip"><span class="heti-spacing"> </span>NTK-by-parts<span class="heti-spacing"> </span></span>的分段思想，并解决了一个隐藏问题：熵<span class="heti-skip"><span class="heti-spacing"> </span>(Entropy)<span class="heti-spacing"> </span></span>的变化。将所有<span class="heti-skip"><span class="heti-spacing"> </span>token<span class="heti-spacing"> </span></span>的<span class="heti-skip"><span class="heti-spacing"> </span>RoPE<span class="heti-spacing"> </span></span>距离拉开<span class="heti-skip"><span class="heti-spacing"> </span>(<span class="heti-spacing"> </span></span>或压缩<span class="heti-skip"><span class="heti-spacing"> </span>)<span class="heti-spacing"> </span></span>时，<span>Attention<span class="heti-spacing"> </span></span>矩阵中的点积数值分布会发生变化<span class="heti-skip"><span class="heti-spacing"> </span>(<span class="heti-spacing"> </span></span>通常变得更“平”或更“尖”)，导致<span class="heti-skip"><span class="heti-spacing"> </span>Softmax<span class="heti-spacing"> </span></span>后的分布熵变大，模型困惑度增加。 <span>YaRN<span class="heti-spacing"> </span></span>引入<span class="heti-skip"><span class="heti-spacing"> </span>temperature scaling<span class="heti-spacing"> </span></span>来修正注意力分布</p>
+</li>
+<li>
+<p>数学原理<span><span class="heti-spacing"> </span>:</span></p>
+<ul>
+<li>NTK-by-parts<ul>
+<li>使用分段策略，高频不旋转，低频旋转，中间插值</li>
+<li>不修改<span><span class="heti-spacing"> </span>base</span>，直接修改频率<span><span class="heti-spacing"> </span><span class="arithmatex">\(\theta\)</span></span></li>
+</ul>
+</li>
+<li>
+<p><span>Length Scaling(<span class="heti-spacing"> </span></span>注意力修正<span><span class="heti-spacing"> </span>)</span></p>
+<ul>
+<li>计算<span class="heti-skip"><span class="heti-spacing"> </span>Attention Score<span class="heti-spacing"> </span></span>时乘上因子<span><span class="heti-spacing"> </span><span class="arithmatex">\(\sqrt{t}\)</span></span>，或者在<span class="heti-skip"><span class="heti-spacing"> </span>RoPE<span class="heti-spacing"> </span></span>后，<span>Q/K<span class="heti-spacing"> </span></span>乘上<span><span class="heti-spacing"> </span><span class="arithmatex">\(\sqrt{\sqrt{t}}\)</span></span></li>
+</ul>
+<div class="arithmatex">\[ \sqrt{t} \approxeq 0.1 \ln(s) + 1
+\]</div>
+<ul>
+<li>不加这个修正，长文本外推时，注意力分布会因为上下文变长而变得过于“平坦”，模型不知道该关注谁</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="c1"># Get_Rotary_Embedding: 生成修改后的 cos/sin 表（基于分段逻辑）</span>
+<a href="#__codelineno-3-2" id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="c1"># Model Forward: 在应用 FlashAttention 之前或之后，对 Logits 进行 scaling，或者直接对 RoPE 后的 output 进行 scaling</span>
+<a href="#__codelineno-3-3" id="__codelineno-3-3" name="__codelineno-3-3"></a>
+<a href="#__codelineno-3-4" id="__codelineno-3-4" name="__codelineno-3-4"></a><span class="c1"># 1. 计算 ramp function (ramp) 基于波长</span>
+<a href="#__codelineno-3-5" id="__codelineno-3-5" name="__codelineno-3-5"></a><span class="c1"># 2. inv_freq_new = inv_freq * (1 - ramp) + (inv_freq / scale) * ramp</span>
+<a href="#__codelineno-3-6" id="__codelineno-3-6" name="__codelineno-3-6"></a><span class="c1"># 3. 还有一个 scale factor</span>
+<a href="#__codelineno-3-7" id="__codelineno-3-7" name="__codelineno-3-7"></a><span class="n">sqrt_t</span> <span class="o">=</span> <span class="mf">0.1</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">scale</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+<a href="#__codelineno-3-8" id="__codelineno-3-8" name="__codelineno-3-8"></a><span class="c1"># 在应用 RoPE 后，将 q, k 乘以 sqrt(sqrt_t) (或者在 attention socre 乘 1/t)</span>
+<a href="#__codelineno-3-9" id="__codelineno-3-9" name="__codelineno-3-9"></a><span class="n">q</span> <span class="o">=</span> <span class="n">apply_rope</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">inv_freq_new</span><span class="p">)</span> <span class="o">*</span> <span class="n">t_correction</span>
+<a href="#__codelineno-3-10" id="__codelineno-3-10" name="__codelineno-3-10"></a><span class="n">k</span> <span class="o">=</span> <span class="n">apply_rope</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">inv_freq_new</span><span class="p">)</span> <span class="o">*</span> <span class="n">t_correction</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>核心思想</th>
+<th><span>m(<span class="heti-spacing"> </span></span>位置<span><span class="heti-spacing"> </span>)</span></th>
+<th><span><span class="arithmatex">\(\theta\)</span>(<span class="heti-spacing"> </span></span>频率<span class="heti-skip"><span class="heti-spacing"> </span>/<span class="heti-spacing"> </span></span>基数<span><span class="heti-spacing"> </span>)</span></th>
+<th>x</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>RoPE</strong></td>
+<td>旋转表示位置</td>
+<td>不变</td>
+<td>b=10000</td>
+<td>不变</td>
+</tr>
+<tr>
+<td><strong>PI</strong></td>
+<td>线性压缩位置</td>
+<td>m -&gt; m/s</td>
+<td>不变</td>
+<td>不变</td>
+</tr>
+<tr>
+<td><strong>NTK-Aware</strong></td>
+<td>拉伸基数</td>
+<td>不变</td>
+<td><span class="arithmatex">\(b-&gt;b\cdot s^{\frac{d}{d-2}}\)</span></td>
+<td>不变</td>
+</tr>
+<tr>
+<td><strong>Dynamic NTK</strong></td>
+<td>动态拉伸</td>
+<td>不变</td>
+<td><span>b<span class="heti-spacing"> </span></span>动态变化</td>
+<td>不变</td>
+</tr>
+<tr>
+<td><strong>NTK-by-parts</strong></td>
+<td>分频段处理</td>
+<td>混合</td>
+<td>高频不变，低频插值</td>
+<td>不变</td>
+</tr>
+<tr>
+<td><strong>YaRN</strong></td>
+<td>分段<span class="heti-skip"><span class="heti-spacing"> </span>+<span class="heti-spacing"> </span></span>修改熵</td>
+<td>混合</td>
+<td>高频不变，低频插值</td>
+<td>乘上<span><span class="heti-spacing"> </span><span class="arithmatex">\(\sqrt{t}\)</span></span></td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
 <aside class="md-source-file">
 <span class="md-source-file__fact">
 <span class="md-icon" title="最后更新">
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
 </span>
-<span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime" title="2026年4月17日 12:40:54 CST">2026年4月17日 12:40:54</span>
+<span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime" title="2026年6月7日 16:41:01 CST">2026年6月7日 16:41:01</span>
 </span>
 <span class="md-source-file__fact">
 <span class="md-icon" title="创建日期">
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"></path></svg>
 </span>
-<span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime" title="2026年4月17日 12:40:54 CST">2026年4月17日 12:40:54</span>
+<span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime" title="2026年6月7日 16:41:01 CST">2026年6月7日 16:41:01</span>
 </span>
 </aside>
 <!-- Giscus -->
