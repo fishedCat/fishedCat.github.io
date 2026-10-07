@@ -4,10 +4,12 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <meta content="摸鱼喵的博客" name="description"/>
-<link href="https://fishedCat.github.io/Summary/research3/" rel="canonical"/>
+<link href="https://fishedCat.github.io/DL2LLM/PytorchDocs2.3/" rel="canonical"/>
+<link href="../PytorchDocs2.2/" rel="prev"/>
+<link href="../PytorchDocs3/" rel="next"/>
 <link href="../../log.ico" rel="icon"/>
 <meta content="mkdocs-1.6.1, mkdocs-material-9.6.23" name="generator"/>
-<title>科研实操建议 - 摸鱼喵的小站</title>
+<title>hook - 摸鱼喵的小站</title>
 <link href="../../assets/stylesheets/main.84d31ad4.min.css" rel="stylesheet"/>
 <link href="../../assets/stylesheets/palette.06af60db.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
@@ -30,7 +32,7 @@
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
-<a class="md-skip" href="#_1">
+<a class="md-skip" href="#pytorch-hook">
           跳转至
         </a>
 </div>
@@ -54,7 +56,7 @@
 <div class="md-header__topic" data-md-component="header-topic">
 <span class="md-ellipsis">
             
-              科研实操建议
+              hook
             
           </span>
 </div>
@@ -129,7 +131,7 @@
         </a>
 </li>
 <li class="md-tabs__item">
-<a class="md-tabs__link" href="../">
+<a class="md-tabs__link" href="../../Summary/">
           
   
   
@@ -139,8 +141,8 @@
 
         </a>
 </li>
-<li class="md-tabs__item">
-<a class="md-tabs__link" href="../../DL2LLM/">
+<li class="md-tabs__item md-tabs__item--active">
+<a class="md-tabs__link" href="../">
           
   
   
@@ -217,7 +219,7 @@
 <li class="md-nav__item md-nav__item--nested">
 <input class="md-nav__toggle md-toggle" id="__nav_2" type="checkbox"/>
 <div class="md-nav__link md-nav__container">
-<a class="md-nav__link" href="../">
+<a class="md-nav__link" href="../../Summary/">
 <span class="md-ellipsis">
     理论总结
     
@@ -234,7 +236,7 @@
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="../papereading/">
+<a class="md-nav__link" href="../../Summary/papereading/">
 <span class="md-ellipsis">
     论文阅读方法
     
@@ -242,7 +244,7 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="../marxism/">
+<a class="md-nav__link" href="../../Summary/marxism/">
 <span class="md-ellipsis">
     马克思主义基本原理
     
@@ -252,27 +254,27 @@
 </ul>
 </nav>
 </li>
-<li class="md-nav__item md-nav__item--nested">
-<input class="md-nav__toggle md-toggle" id="__nav_3" type="checkbox"/>
+<li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_3" type="checkbox"/>
 <div class="md-nav__link md-nav__container">
-<a class="md-nav__link" href="../../DL2LLM/">
+<a class="md-nav__link" href="../">
 <span class="md-ellipsis">
     从深度学习到大模型
     
   </span>
 </a>
-<label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+<label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
 <span class="md-nav__icon md-icon"></span>
 </label>
 </div>
-<nav aria-expanded="false" aria-labelledby="__nav_3_label" class="md-nav" data-md-level="1">
+<nav aria-expanded="true" aria-labelledby="__nav_3_label" class="md-nav" data-md-level="1">
 <label class="md-nav__title" for="__nav_3">
 <span class="md-nav__icon md-icon"></span>
             从深度学习到大模型
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item md-nav__item--nested">
-<input class="md-nav__toggle md-toggle" id="__nav_3_2" type="checkbox"/>
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_3_2" type="checkbox"/>
 <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
 <span class="md-ellipsis">
     PyTorch学习
@@ -280,22 +282,22 @@
   </span>
 <span class="md-nav__icon md-icon"></span>
 </label>
-<nav aria-expanded="false" aria-labelledby="__nav_3_2_label" class="md-nav" data-md-level="2">
+<nav aria-expanded="true" aria-labelledby="__nav_3_2_label" class="md-nav" data-md-level="2">
 <label class="md-nav__title" for="__nav_3_2">
 <span class="md-nav__icon md-icon"></span>
             PyTorch学习
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="../../DL2LLM/PytorchDocs1/">
+<a class="md-nav__link" href="../PytorchDocs1/">
 <span class="md-ellipsis">
     概述
     
   </span>
 </a>
 </li>
-<li class="md-nav__item md-nav__item--nested">
-<input class="md-nav__toggle md-toggle" id="__nav_3_2_2" type="checkbox"/>
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_3_2_2" type="checkbox"/>
 <label class="md-nav__link" for="__nav_3_2_2" id="__nav_3_2_2_label" tabindex="0">
 <span class="md-ellipsis">
     torch.nn
@@ -303,14 +305,14 @@
   </span>
 <span class="md-nav__icon md-icon"></span>
 </label>
-<nav aria-expanded="false" aria-labelledby="__nav_3_2_2_label" class="md-nav" data-md-level="3">
+<nav aria-expanded="true" aria-labelledby="__nav_3_2_2_label" class="md-nav" data-md-level="3">
 <label class="md-nav__title" for="__nav_3_2_2">
 <span class="md-nav__icon md-icon"></span>
             torch.nn
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="../../DL2LLM/PytorchDocs2/">
+<a class="md-nav__link" href="../PytorchDocs2/">
 <span class="md-ellipsis">
     概述
     
@@ -318,7 +320,7 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="../../DL2LLM/PytorchDocs2.1/">
+<a class="md-nav__link" href="../PytorchDocs2.1/">
 <span class="md-ellipsis">
     神经网络
     
@@ -326,26 +328,49 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="../../DL2LLM/PytorchDocs2.2/">
+<a class="md-nav__link" href="../PytorchDocs2.2/">
 <span class="md-ellipsis">
     损失和优化器
     
   </span>
 </a>
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../DL2LLM/PytorchDocs2.3/">
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+<span class="md-ellipsis">
+    hook
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<a class="md-nav__link md-nav__link--active" href="./">
 <span class="md-ellipsis">
     hook
     
   </span>
 </a>
+<nav aria-label="目录" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#hook">
+<span class="md-ellipsis">
+      hook
+    </span>
+</a>
+</li>
+</ul>
+</nav>
 </li>
 </ul>
 </nav>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="../../DL2LLM/PytorchDocs3/">
+<a class="md-nav__link" href="../PytorchDocs3/">
 <span class="md-ellipsis">
     torch.utils
     
@@ -371,7 +396,7 @@
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="../../DL2LLM/MiniMind/Norm/">
+<a class="md-nav__link" href="../MiniMind/Norm/">
 <span class="md-ellipsis">
     归一化Norm
     
@@ -379,7 +404,7 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="../../DL2LLM/MiniMind/PositionEnc/">
+<a class="md-nav__link" href="../MiniMind/PositionEnc/">
 <span class="md-ellipsis">
     位置编码RoPE
     
@@ -387,7 +412,7 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="../../DL2LLM/MiniMind/YaRN/">
+<a class="md-nav__link" href="../MiniMind/YaRN/">
 <span class="md-ellipsis">
     YaRN
     
@@ -395,7 +420,7 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="../../DL2LLM/MiniMind/FeedForward/">
+<a class="md-nav__link" href="../MiniMind/FeedForward/">
 <span class="md-ellipsis">
     前馈网络FFN
     
@@ -403,7 +428,7 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="../../DL2LLM/MiniMind/Attention/">
+<a class="md-nav__link" href="../MiniMind/Attention/">
 <span class="md-ellipsis">
     注意力机制
     
@@ -411,7 +436,7 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="../../DL2LLM/MiniMind/FlashAttention/">
+<a class="md-nav__link" href="../MiniMind/FlashAttention/">
 <span class="md-ellipsis">
     FlashAttention
     
@@ -419,7 +444,7 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="../../DL2LLM/MiniMind/KV-Cache/">
+<a class="md-nav__link" href="../MiniMind/KV-Cache/">
 <span class="md-ellipsis">
     KV-Cache
     
@@ -427,7 +452,7 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="../../DL2LLM/MiniMind/MoE/">
+<a class="md-nav__link" href="../MiniMind/MoE/">
 <span class="md-ellipsis">
     混合专家MoE
     
@@ -563,16 +588,9 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#_2">
+<a class="md-nav__link" href="#hook">
 <span class="md-ellipsis">
-      定基准模型
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#_3">
-<span class="md-ellipsis">
-      定模块
+      hook
     </span>
 </a>
 </li>
@@ -583,46 +601,160 @@
 </div>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<h1 id="_1">科研实操建议<a class="headerlink" href="#_1" title="Permanent link"><span><span class="heti-spacing"> </span>¶</span></a></h1>
+<h1 id="pytorch-hook"><span>Pytorch<span class="heti-spacing"> </span></span>文档<span class="heti-skip"><span class="heti-spacing"> </span>- hook<span class="heti-spacing"> </span></span>接口<a class="headerlink" href="#pytorch-hook" title="Permanent link"><span><span class="heti-spacing"> </span>¶</span></a></h1>
 <div style="margin-top: -30px; font-size: 0.75em; opacity: 0.7;">
-<p><span class="twemoji"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10h-2a8 8 0 0 1-8 8 8 8 0 0 1-8-8 8 8 0 0 1 8-8zm6.78 1a.7.7 0 0 0-.48.2l-1.22 1.21 2.5 2.5L20.8 5.7c.26-.26.26-.7 0-.95L19.25 3.2c-.13-.13-.3-.2-.47-.2m-2.41 2.12L9 12.5V15h2.5l7.37-7.38z"></path></svg></span> 约<span class="heti-skip"><span class="heti-spacing"> </span>659<span class="heti-spacing"> </span></span>个字 <span class="twemoji"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 20c4.42 0 8-3.58 8-8s-3.58-8-8-8-8 3.58-8 8 3.58 8 8 8m0-18c5.5 0 10 4.5 10 10s-4.5 10-10 10C6.47 22 2 17.5 2 12S6.5 2 12 2m.5 11H11V7h1.5v4.26l3.7-2.13.75 1.3z"></path></svg></span> 预计阅读时间<span class="heti-skip"><span class="heti-spacing"> </span>2<span class="heti-spacing"> </span></span>分钟</p>
+<p><span class="twemoji"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10h-2a8 8 0 0 1-8 8 8 8 0 0 1-8-8 8 8 0 0 1 8-8zm6.78 1a.7.7 0 0 0-.48.2l-1.22 1.21 2.5 2.5L20.8 5.7c.26-.26.26-.7 0-.95L19.25 3.2c-.13-.13-.3-.2-.47-.2m-2.41 2.12L9 12.5V15h2.5l7.37-7.38z"></path></svg></span> 约<span class="heti-skip"><span class="heti-spacing"> </span>1581<span class="heti-spacing"> </span></span>个字 <span class="twemoji"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 20c4.42 0 8-3.58 8-8s-3.58-8-8-8-8 3.58-8 8 3.58 8 8 8m0-18c5.5 0 10 4.5 10 10s-4.5 10-10 10C6.47 22 2 17.5 2 12S6.5 2 12 2m.5 11H11V7h1.5v4.26l3.7-2.13.75 1.3z"></path></svg></span> 预计阅读时间<span class="heti-skip"><span class="heti-spacing"> </span>5<span class="heti-spacing"> </span></span>分钟</p>
 </div>
 <div class="admonition abstract">
 <p class="admonition-title">Abstract</p>
-<p>此文包括：</p>
+<p>学习资料来源：</p>
 <ul>
-<li><span>Bilibili:<span class="heti-spacing"> </span></span>水论文的程序猿<span class="heti-skip"><span class="heti-spacing"> </span>-<span class="heti-spacing"> </span></span>水导<span><span class="heti-spacing"> </span>--</span>《学术入门全集：水出论文》</li>
+<li><span>pytorch<span class="heti-spacing"> </span></span>镜像站<span><span class="heti-spacing"> </span>:</span><a href="https://docs.pytorch.ac.cn/docs/2.13/generated/torch.nn.Module.html"><span><span class="heti-spacing"> </span>https://docs.pytorch.ac.cn/docs/2.13/generated/torch.nn.Module.html</span></a></li>
+<li><a href="https://hyiuyou.github.io/2024/09/02/PyTorch-hook-%E5%AD%A6%E4%B9%A0/index.html">https://hyiuyou.github.io/2024/09/02/PyTorch-hook-%E5%AD%A6%E4%B9%A0/index.html</a></li>
 </ul>
 </div>
-<h3 id="_2">定基准模型<a class="headerlink" href="#_2" title="Permanent link"><span><span class="heti-spacing"> </span>¶</span></a></h3>
-<p>首先找目标论文<span class="heti-skip"><span class="heti-spacing"> </span>(<span class="heti-spacing"> </span></span>最好研一搞定<span><span class="heti-spacing"> </span>)</span>
-论文1 = A(基准模型) + b + c
-我们的论文可以是 A + d + e
-如果有论文1代码：
-- 基准模型 = A(不太建议，还得把b、c去掉)
-- 基准模型 = 论文1 &gt; A (不太建议)
-- 基准模型 = A + b; A + c; A +b+c -d(某行代码，某个更小的模块)  (建议)
-也就是说，基准模型可以是进行过任何对我们有利的改造过的，不一定要求是别人发表过的
-写作的时候写：在去掉d的基础上怎么怎么样，或者不写……</p>
-<p><strong>什么是目标论文</strong>
-目标论文 = 近两年开源代码的论文
-顶刊顶会一般默认开源，摘要的最后一句话，一般找顶刊顶会的就行了
-拿到开源代码，复现大概15-30天(给的代码不一定能复现)，有继承的话可能1天搞定</p>
-<p>复现：能做到基于原文数据集跑通<span><span class="heti-spacing"> </span>baseline</span>，跑的指标结果差不多就行
-检验复现到位的检验：是否能清楚知道模型每一层的输入输出、数据维度的流动
-有代码的选哪一篇进行复现：一个是经典模型，毕竟是你做后面所有研究的基础，一个是看完论文后觉得对做创新有帮助、想知道它代码上是怎么实现的，这种也可以看一下代码。大部分都不用复现的那么完整，选你想看的部分就好了</p>
-<h3 id="_3">定模块<a class="headerlink" href="#_3" title="Permanent link"><span><span class="heti-spacing"> </span>¶</span></a></h3>
-<p>模块也要从目标论文里找，模块的目标论文近<span class="heti-skip"><span class="heti-spacing"> </span>5-10<span class="heti-spacing"> </span></span>年都可以，尽量要热门，好编故事
-模块的难点在于如何缝
-看到消融实验，也就是测试一个一个模块
-论文1 = A + b + c + d
-论文2 = B + e + f + g
-你的论文 = A + e + f (排列组合) 
-性能差了就换模块，直到性能变得差不多就行了</p>
-<p>对于已知的问题，用现成的模块解决问题，放在我们的基准模型。编个故事，写成改进
-<strong>高级模块</strong>
-- 发现问题，用现成的模块/创造模块去解决问题
-- 大领域内通用模块(所有领域通用)，比如：注意力机制、蒸馏学习、对比学习、扩散模型，一加上去随便编故事。也就是把这个领域内的模块用来解决那个领域的问题</p>
+<h2 id="hook">hook<a class="headerlink" href="#hook" title="Permanent link">¶</a></h2>
+<ul>
+<li><span>Hook/<span class="heti-spacing"> </span></span>钩子<span><span class="heti-spacing"> </span>:</span> </li>
+</ul>
+<p>程序运行时预留的可扩展接口，可以在特定时机“钩住”程序的流程，插入自定义逻辑，监控和分析模型的内部行为</p>
+<p>可以利用<span><span class="heti-spacing"> </span>hook</span>，在不改变网络输入输出的结构的前提下，方便地获取、改变网络中间层变量的值和梯度</p>
+<ul>
+<li>
+<p><span>Pytorch<span class="heti-spacing"> </span></span>中的<span><span class="heti-spacing"> </span>hook</span></p>
+<ul>
+<li>
+<p><span>PyTorch<span class="heti-spacing"> </span></span>为每个张量或<span class="heti-skip"><span class="heti-spacing"> </span>nn.Module<span class="heti-spacing"> </span></span>对象注册<span><span class="heti-spacing"> </span>hook</span></p>
+</li>
+<li>
+<p><span>hook<span class="heti-spacing"> </span></span>由对象的前向或反向传播触发，每个<span class="heti-skip"><span class="heti-spacing"> </span>hook<span class="heti-spacing"> </span></span>都可以修改输入、输出或内部模块参数</p>
+</li>
+<li>
+<p>每个<span class="heti-skip"><span class="heti-spacing"> </span>hook<span class="heti-spacing"> </span></span>都可以修改输入、输出或内部模块参数</p>
+</li>
+</ul>
+</li>
+<li>
+<p><span>hook<span class="heti-spacing"> </span></span>类型<span class="heti-skip"><span class="heti-spacing"> </span>(<span class="heti-spacing"> </span></span>函数均省略部分参数<span><span class="heti-spacing"> </span>)</span>：</p>
+<ul>
+<li>
+<p>Tensor hook:</p>
+<ul>
+<li>
+<p><code>tensor.register_hook(hook_fn)</code></p>
+<ul>
+<li>注册一个反向传播<span class="heti-skip"><span class="heti-spacing"> </span>hook<span class="heti-spacing"> </span></span>函数，<code>hook_fn(grad) -&gt; Tensor or None</code></li>
+<li>每次计算关于张量的梯度时，<code>hook_fn</code>函数都会被调用</li>
+<li><span>hook<span class="heti-spacing"> </span></span>不应修改其参数，但可以选择返回一个新的梯度，该梯度将代替<span class="heti-skip"><span class="heti-spacing"> </span>grad<span class="heti-spacing"> </span></span>使用</li>
+<li><code>register_hook</code>返回值是句柄<span><span class="heti-spacing"> </span>/</span><code>handle</code>，可以使用<code>handle.remove()</code>删除<span><span class="heti-spacing"> </span>hook</span></li>
+</ul>
+</li>
+<li>
+<p><code>tensor.register_post_accumulate_grad_hook(hook_fn)</code></p>
+<ul>
+<li>注册一个在梯度累积后运行的反向<span class="heti-skip"><span class="heti-spacing"> </span>hook<span class="heti-spacing"> </span></span>函数<span><span class="heti-spacing"> </span>,</span><code>hook_fn(param: Tensor) -&gt; None</code></li>
+<li><span>hook<span class="heti-spacing"> </span></span>将在张量的所有梯度累积后被调用，这意味着该张量上的<code>.grad</code>字段已更新。注意累积后梯度<span class="heti-skip"><span class="heti-spacing"> </span>hook<span class="heti-spacing"> </span></span>仅适用于叶张量</li>
+<li><span>hook<span class="heti-spacing"> </span></span>作用于需要梯度的张量，而不是作用于梯度本身，即可以原地修改并访问其张量参数，包括其<code>.grad</code>字段</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Module hook:</p>
+<ul>
+<li>
+<p><code>register_forward_pre_hook(hook_fn, *, with_kwargs=False)</code></p>
+<ul>
+<li>注册<span class="heti-skip"><span class="heti-spacing"> </span>module<span class="heti-spacing"> </span></span>的前向传播之前的<span class="heti-skip"><span class="heti-spacing"> </span>hook<span class="heti-spacing"> </span></span>函数，每次<code>forward</code>前调用</li>
+<li><span>hook<span class="heti-spacing"> </span></span>可以修改输入。用户可以返回一个元组或单个修改后的值，函数将把值包装成一个元组</li>
+<li><code>with_kwargs</code>为<code>false</code>或未指定，则输入仅包含传递给模块的位置参数。关键字参数不会传递给钩子，而只会传递给<span><span class="heti-spacing"> </span>forward</span>。<code>hook_fn(module, args) -&gt; None or modified input</code></li>
+<li><code>with_kwargs</code>为<code>true</code>，则前向预钩子将接收传递给<code>forward</code>函数的<span><span class="heti-spacing"> </span>kwargs</span>。如果钩子修改了输入，则应该返回<code>args</code>和<code>kwargs</code>。<code>hook_fn(module, args, kwargs) -&gt; None or a tuple of modified input and kwargs</code></li>
+</ul>
+</li>
+<li>
+<p><code>register_forward_hook(hook_fn, *, with_kwargs=False)</code></p>
+<ul>
+<li>注册<span class="heti-skip"><span class="heti-spacing"> </span>module<span class="heti-spacing"> </span></span>前向传播的<span class="heti-skip"><span class="heti-spacing"> </span>hook<span class="heti-spacing"> </span></span>函数，每次<code>forward</code>计算出输出后调用<span><span class="heti-spacing"> </span>hook</span></li>
+<li><span>hook<span class="heti-spacing"> </span></span>可以修改输出。它可以原地修改输入，但不会对<span class="heti-skip"><span class="heti-spacing"> </span>forward<span class="heti-spacing"> </span></span>产生影响</li>
+<li><code>with_kwargs</code>为<code>False</code>或未指定时，输入参数仅包含传递给模块的位置参数。关键字参数不会传递给<span><span class="heti-spacing"> </span>hook</span>，仅传递给<span class="heti-skip"><span class="heti-spacing"> </span>forward<span class="heti-spacing"> </span></span>函数。<code>hook_fn(module, args, output) -&gt; None or modified output</code></li>
+<li><code>with_kwargs</code>为<code>True</code>，则前向钩子将接收传递给<code>forward</code>函数的<code>kwargs</code>，并需要返回可能已修改的输出。<code>hook_fn(module, args, kwargs, output) -&gt; None or modified output</code></li>
+</ul>
+</li>
+<li>
+<p><code>register_full_backward_pre_hook(hook_fn)</code></p>
+<ul>
+<li>在模块上注册一个反向预钩子，每次计算模块的梯度前调用此钩子。<code>hook_fn(module, grad_output) -&gt; tuple[Tensor, ...], Tensor or None</code></li>
+<li><code>grad_output</code> 是一个元组。钩子不应修改其参数，但可以选择返回一个新的输出梯度，该梯度将取代 <code>grad_output</code> 用于后续计算。对于所有非<span class="heti-skip"><span class="heti-spacing"> </span>Tensor<span class="heti-spacing"> </span></span>参数，<code>grad_output</code> 中的条目将为 <code>None</code></li>
+<li>注意：<strong>使用反向传播预钩子时不允许原地修改输入或输出，否则将引发错误</strong></li>
+</ul>
+</li>
+<li>
+<p><code>register_full_backward_hook(hook_fn)</code></p>
+<ul>
+<li>在模块上注册一个反向传播钩子，每次计算模块的梯度后调用<span><span class="heti-spacing"> </span>hook</span>。<code>hook_fn(module, grad_input, grad_output) -&gt; tuple(Tensor) or None</code></li>
+<li><code>grad_input</code> 和 <code>grad_output</code> 分别是包含关于输入和输出梯度的元组。钩子不应修改其参数，但它可以选择返回一个关于输入的新梯度，该梯度将在随后的计算中代替 <code>grad_input</code> 使用。</li>
+<li><code>grad_input</code> 将仅对应作为位置参数给出的输入，所有关键字参数<span class="heti-skip"><span class="heti-spacing"> </span>(kwarg)<span class="heti-spacing"> </span></span>均被忽略，对于所有非<span class="heti-skip"><span class="heti-spacing"> </span>Tensor<span class="heti-spacing"> </span></span>参数，<code>grad_input</code> 和 <code>grad_output</code> 中的条目将为 <code>None</code></li>
+<li>注意：<strong>使用反向传播钩子时不允许原地修改输入或输出，否则将引发错误</strong></li>
+<li>触发<span class="heti-skip"><span class="heti-spacing"> </span>hook<span class="heti-spacing"> </span></span>的规则<span><span class="heti-spacing"> </span>:</span><ul>
+<li>通常，钩子在计算相对于模块输入的梯度时触发。</li>
+<li>如果模块输入都不需要梯度，则在计算相对于模块输出的梯度时触发钩子。</li>
+<li>如果模块输出都不需要梯度，则钩子将不触发。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>全局<span><span class="heti-spacing"> </span>Module hook:</span></p>
+<ul>
+<li>
+<p><code>nn.modules.module.register_module_forward_pre_hook(hook_fn)</code></p>
+<ul>
+<li>为所有模块注册一个通用的前向传播前置<span class="heti-skip"><span class="heti-spacing"> </span>hook(forward pre-hook),<span class="heti-spacing"> </span></span>将在每次调用<code>forward()</code>前被触发<span><span class="heti-spacing"> </span>,</span><code>hook_fn(module, input) -&gt; None or modified input</code></li>
+<li>由于会向<span class="heti-skip"><span class="heti-spacing"> </span>nn.module<span class="heti-spacing"> </span></span>模块添加全局状态，仅用于调试<span class="heti-skip"><span class="heti-spacing"> </span>/<span class="heti-spacing"> </span></span>剖析目的</li>
+<li>输入参数仅包含传递给模块的位置参数。关键字参数不会传递给<span><span class="heti-spacing"> </span>hook</span>，仅传递给<span class="heti-skip"><span class="heti-spacing"> </span>forward<span class="heti-spacing"> </span></span>函数</li>
+<li><span>hook<span class="heti-spacing"> </span></span>可以修改输入。用户可以在<span class="heti-skip"><span class="heti-spacing"> </span>hook<span class="heti-spacing"> </span></span>中返回一个元组或单个修改后的值。如果返回的是单个值，我们将该值封装为元组</li>
+<li>执行优先级高于使用<code>register_forward_pre_hook</code>注册的特定模块钩子</li>
+</ul>
+</li>
+<li>
+<p><code>nn.modules.module.register_module_forward_hook(hook_fn)</code></p>
+<ul>
+<li>为所有模块注册一个全局前向传播钩子<span><span class="heti-spacing"> </span>(forward hook)</span>，每次<code>forward()</code>计算出输出后调用钩子函数<span><span class="heti-spacing"> </span>,</span><code>hook(module, input, output) -&gt; None or modified output</code></li>
+<li>会向<span class="heti-skip"><span class="heti-spacing"> </span>nn.module<span class="heti-spacing"> </span></span>模块添加全局状态，仅用于调试<span class="heti-skip"><span class="heti-spacing"> </span>/<span class="heti-spacing"> </span></span>剖析目的</li>
+<li>输入仅包含传递给模块的位置参数。关键字参数不会传递给钩子，而仅传递给<span><span class="heti-spacing"> </span>forward</span></li>
+<li>可以选择返回一个新值来修改模块的输出，该返回值将替换<span class="heti-skip"><span class="heti-spacing"> </span>forward<span class="heti-spacing"> </span></span>函数 产生的输出</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><span>StateDict hook(<span class="heti-spacing"> </span></span>了解即可<span><span class="heti-spacing"> </span>):</span> </p>
+<ul>
+<li>
+<p><code>register_load_state_dict_pre_hook(hook)</code></p>
+<ul>
+<li>注册一个预钩子，用于在模块的 <code>load_state_dict()</code> 被调用之前运行。</li>
+</ul>
+</li>
+<li>
+<p><code>register_load_state_dict_post_hook(hook)</code></p>
+<ul>
+<li>注册一个后钩子，用于在模块的 <code>load_state_dict()</code> 被调用后运行</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>注释：在<code>Module.hook</code>中的函数有个特别的 <code>*</code> 参数，其含义为：</p>
+<ul>
+<li><code>*</code> 本身不接收任何值，不会产生变量。在 <code>*</code> 后面的所有形参<strong>只能用关键字传参，不能用位置参数传入</strong>，<code>*</code> 前面的 <code>hook</code>，既可以位置传，也可以关键字传</li>
+</ul>
+</li>
+</ul>
 <aside class="md-source-file">
 <span class="md-source-file__fact">
 <span class="md-icon" title="最后更新">
