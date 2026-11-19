@@ -13,3 +13,12 @@
     - newpage:
         text: MiniMind学习笔记第一部分
         href: /DL2LLM/index.md
+  - "2026-10-7":
+    - newpage:
+        text: python、pytorch笔记系列开始
+        href: /DL2LLM/index.md
+  - "2026-11-1":
+    - newpage:
+        text: RL笔记系列开始
+        href: /RL/index.md
+  

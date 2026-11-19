@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html class="no-js" lang="zh">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="摸鱼喵的博客" name="description"/>
+<link href="https://fishedCat.github.io/RL/rl_rlhf/" rel="canonical"/>
+<link href="../../log.ico" rel="icon"/>
+<meta content="mkdocs-1.6.1, mkdocs-material-9.6.23" name="generator"/>
+<title>强化学习 - RLHF - 摸鱼喵的小站</title>
+<link href="../../assets/stylesheets/main.84d31ad4.min.css" rel="stylesheet"/>
+<link href="../../assets/stylesheets/palette.06af60db.min.css" rel="stylesheet"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css?family=LXGW+WenKai+Screen:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
+<style>:root{--md-text-font:"LXGW WenKai Screen";--md-code-font:"JetBrains Mono"}</style>
+<link href="../../css/timeline.css" rel="stylesheet"/>
+<link href="../../css/heti.css" rel="stylesheet"/>
+<link href="https://gcore.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css" rel="stylesheet"/>
+<link href="https://gcore.jsdelivr.net/npm/lxgw-wenkai-screen-webfont@1.1.0/style.css" rel="stylesheet"/>
+<link href="https://gcore.jsdelivr.net/npm/lxgw-wenkai-webfont@1.1.0/style.css" rel="stylesheet"/>
+<link href="../../css/custom.css" rel="stylesheet"/>
+<link href="../../css/card.css" rel="stylesheet"/>
+<link href="../../css/tasklist.css" rel="stylesheet"/>
+<link href="../../css/flink.css" rel="stylesheet"/>
+<link href="../../css/more_changelog.css" rel="stylesheet"/>
+<script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+</head>
+<body data-md-color-accent="brown" data-md-color-primary="brown" data-md-color-scheme="default" dir="ltr">
+<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
+<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
+<label class="md-overlay" for="__drawer"></label>
+<div data-md-component="skip">
+<a class="md-skip" href="#-rlhf">
+          跳转至
+        </a>
+</div>
+<div data-md-component="announce">
+</div>
+<header class="md-header" data-md-component="header">
+<nav aria-label="页眉" class="md-header__inner md-grid">
+<a aria-label="摸鱼喵的小站" class="md-header__button md-logo" data-md-component="logo" href="../.." title="摸鱼喵的小站">
+<img alt="logo" src="../../log.ico"/>
+</a>
+<label class="md-header__button md-icon" for="__drawer">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+</label>
+<div class="md-header__title" data-md-component="header-title">
+<div class="md-header__ellipsis">
+<div class="md-header__topic">
+<span class="md-ellipsis">
+            摸鱼喵的小站
+          </span>
+</div>
+<div class="md-header__topic" data-md-component="header-topic">
+<span class="md-ellipsis">
+            
+              强化学习 - RLHF
+            
+          </span>
+</div>
+</div>
+</div>
+<form class="md-header__option" data-md-component="palette">
+<input aria-label="Switch to dark mode" class="md-option" data-md-color-accent="brown" data-md-color-media="(prefers-color-scheme: light)" data-md-color-primary="brown" data-md-color-scheme="default" id="__palette_0" name="__palette" type="radio"/>
+<label class="md-header__button md-icon" for="__palette_1" hidden="" title="Switch to dark mode">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"></path></svg>
+</label>
+<input aria-label="Switch to light mode" class="md-option" data-md-color-accent="indigo" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-primary="indigo" data-md-color-scheme="default" id="__palette_1" name="__palette" type="radio"/>
+<label class="md-header__button md-icon" for="__palette_0" hidden="" title="Switch to light mode">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"></path></svg>
+</label>
+</form>
+<script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+<label class="md-header__button md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+</label>
+<div class="md-search" data-md-component="search" role="dialog">
+<label class="md-search__overlay" for="__search"></label>
+<div class="md-search__inner" role="search">
+<form class="md-search__form" name="search">
+<input aria-label="搜索" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" name="query" placeholder="搜索" required="" spellcheck="false" type="text"/>
+<label class="md-search__icon md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+</label>
+<nav aria-label="查找" class="md-search__options">
+<button aria-label="清空当前内容" class="md-search__icon md-icon" tabindex="-1" title="清空当前内容" type="reset">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+</button>
+</nav>
+</form>
+<div class="md-search__output">
+<div class="md-search__scrollwrap" data-md-scrollfix="" tabindex="0">
+<div class="md-search-result" data-md-component="search-result">
+<div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+<ol class="md-search-result__list" role="presentation"></ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="md-header__source">
+<a class="md-source" data-md-component="source" href="https://github.com/fishedCat.github.io/" title="前往仓库">
+<div class="md-source__icon md-icon">
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"></path></svg>
+</div>
+<div class="md-source__repository">
+    fishedCat.github.io
+  </div>
+</a>
+</div>
+</nav>
+</header>
+<div class="md-container" data-md-component="container">
+<nav aria-label="标签" class="md-tabs" data-md-component="tabs">
+<div class="md-grid">
+<ul class="md-tabs__list">
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../..">
+          
+  
+  
+    
+  
+  Home
+
+        </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../Summary/">
+          
+  
+  
+    
+  
+  理论总结
+
+        </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../DL2LLM/">
+          
+  
+  
+    
+  
+  从深度学习到大模型
+
+        </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../">
+          
+  
+  
+    
+  
+  强化学习
+
+        </a>
+</li>
+</ul>
+</div>
+</nav>
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="导航栏" class="md-nav md-nav--primary md-nav--lifted" data-md-level="0">
+<label class="md-nav__title" for="__drawer">
+<a aria-label="摸鱼喵的小站" class="md-nav__button md-logo" data-md-component="logo" href="../.." title="摸鱼喵的小站">
+<img alt="logo" src="../../log.ico"/>
+</a>
+    摸鱼喵的小站
+  </label>
+<div class="md-nav__source">
+<a class="md-source" data-md-component="source" href="https://github.com/fishedCat.github.io/" title="前往仓库">
+<div class="md-source__icon md-icon">
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"></path></svg>
+</div>
+<div class="md-source__repository">
+    fishedCat.github.io
+  </div>
+</a>
+</div>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_1" type="checkbox"/>
+<div class="md-nav__link md-nav__container">
+<a class="md-nav__link" href="../..">
+<span class="md-ellipsis">
+    Home
+    
+  </span>
+</a>
+<label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+<span class="md-nav__icon md-icon"></span>
+</label>
+</div>
+<nav aria-expanded="false" aria-labelledby="__nav_1_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_1">
+<span class="md-nav__icon md-icon"></span>
+            Home
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../changelog/">
+<span class="md-ellipsis">
+    更新记录
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../link/">
+<span class="md-ellipsis">
+    友链
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2" type="checkbox"/>
+<div class="md-nav__link md-nav__container">
+<a class="md-nav__link" href="../../Summary/">
+<span class="md-ellipsis">
+    理论总结
+    
+  </span>
+</a>
+<label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+<span class="md-nav__icon md-icon"></span>
+</label>
+</div>
+<nav aria-expanded="false" aria-labelledby="__nav_2_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_2">
+<span class="md-nav__icon md-icon"></span>
+            理论总结
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../Summary/papereading/">
+<span class="md-ellipsis">
+    论文阅读方法
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../Summary/marxism/">
+<span class="md-ellipsis">
+    马克思主义基本原理
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3" type="checkbox"/>
+<div class="md-nav__link md-nav__container">
+<a class="md-nav__link" href="../../DL2LLM/">
+<span class="md-ellipsis">
+    从深度学习到大模型
+    
+  </span>
+</a>
+<label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+<span class="md-nav__icon md-icon"></span>
+</label>
+</div>
+<nav aria-expanded="false" aria-labelledby="__nav_3_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_3">
+<span class="md-nav__icon md-icon"></span>
+            从深度学习到大模型
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_2" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+<span class="md-ellipsis">
+    PyTorch学习
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_2_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_2">
+<span class="md-nav__icon md-icon"></span>
+            PyTorch学习
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../DL2LLM/PytorchDocs1/">
+<span class="md-ellipsis">
+    概述
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_2_2" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_2_2" id="__nav_3_2_2_label" tabindex="0">
+<span class="md-ellipsis">
+    torch.nn
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_2_2_label" class="md-nav" data-md-level="3">
+<label class="md-nav__title" for="__nav_3_2_2">
+<span class="md-nav__icon md-icon"></span>
+            torch.nn
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../DL2LLM/PytorchDocs2/">
+<span class="md-ellipsis">
+    概述
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../DL2LLM/PytorchDocs2.1/">
+<span class="md-ellipsis">
+    神经网络
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../DL2LLM/PytorchDocs2.2/">
+<span class="md-ellipsis">
+    损失和优化器
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../DL2LLM/PytorchDocs2.3/">
+<span class="md-ellipsis">
+    hook
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../DL2LLM/PytorchDocs3/">
+<span class="md-ellipsis">
+    torch.utils
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_3" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+<span class="md-ellipsis">
+    LLM学习
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_3_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_3">
+<span class="md-nav__icon md-icon"></span>
+            LLM学习
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../DL2LLM/MiniMind/Norm/">
+<span class="md-ellipsis">
+    归一化Norm
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../DL2LLM/MiniMind/PositionEnc/">
+<span class="md-ellipsis">
+    位置编码RoPE
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../DL2LLM/MiniMind/YaRN/">
+<span class="md-ellipsis">
+    YaRN
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../DL2LLM/MiniMind/FeedForward/">
+<span class="md-ellipsis">
+    前馈网络FFN
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../DL2LLM/MiniMind/Attention/">
+<span class="md-ellipsis">
+    注意力机制
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../DL2LLM/MiniMind/FlashAttention/">
+<span class="md-ellipsis">
+    FlashAttention
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../DL2LLM/MiniMind/KV-Cache/">
+<span class="md-ellipsis">
+    KV-Cache
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../DL2LLM/MiniMind/MoE/">
+<span class="md-ellipsis">
+    混合专家MoE
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_4" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+<span class="md-ellipsis">
+    Python学习
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_4_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_4">
+<span class="md-nav__icon md-icon"></span>
+            Python学习
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../Basis/jichu/">
+<span class="md-ellipsis">
+    基础
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_4_2" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_4_2" id="__nav_3_4_2_label" tabindex="0">
+<span class="md-ellipsis">
+    数据结构
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_4_2_label" class="md-nav" data-md-level="3">
+<label class="md-nav__title" for="__nav_3_4_2">
+<span class="md-nav__icon md-icon"></span>
+            数据结构
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../Basis/string/">
+<span class="md-ellipsis">
+    字符串
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../Basis/list/">
+<span class="md-ellipsis">
+    列表
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../Basis/tuple/">
+<span class="md-ellipsis">
+    元组
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../Basis/set/">
+<span class="md-ellipsis">
+    集合
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../Basis/dict/">
+<span class="md-ellipsis">
+    字典
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../Basis/class/">
+<span class="md-ellipsis">
+    面向对象
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../Basis/multiprocess/">
+<span class="md-ellipsis">
+    多进程并行
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../Basis/re/">
+<span class="md-ellipsis">
+    正则表达式
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_4" type="checkbox"/>
+<div class="md-nav__link md-nav__container">
+<a class="md-nav__link" href="../">
+<span class="md-ellipsis">
+    强化学习
+    
+  </span>
+</a>
+<label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+<span class="md-nav__icon md-icon"></span>
+</label>
+</div>
+<nav aria-expanded="false" aria-labelledby="__nav_4_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_4">
+<span class="md-nav__icon md-icon"></span>
+            强化学习
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../basic/">
+<span class="md-ellipsis">
+    基础概念
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../rl_dp/">
+<span class="md-ellipsis">
+    基于动态规划的算法
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../rl_mc_td/">
+<span class="md-ellipsis">
+    蒙特卡洛和时序差分
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../rl_sarsa_ql/">
+<span class="md-ellipsis">
+    SARSA和Q-learning
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../rl_dqn/">
+<span class="md-ellipsis">
+    深度强化学习DQN
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../rl_policy/">
+<span class="md-ellipsis">
+    策略梯度方法
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../rl_trpo_ppo/">
+<span class="md-ellipsis">
+    TRPO和PPO
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../rl_PPO_imple/">
+<span class="md-ellipsis">
+    PPO实现
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="目录" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_1">
+<span class="md-ellipsis">
+      前置回顾
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#1-rlhf-instructgpt">
+<span class="md-ellipsis">
+      1. RLHF 整体流程（InstructGPT原版三步）
+    </span>
+</a>
+<nav aria-label="1. RLHF 整体流程（InstructGPT原版三步）" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#11-stage1sft-supervised-fine-tuning">
+<span class="md-ellipsis">
+      1.1 Stage1：SFT 监督微调（Supervised Fine-Tuning）
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#12-stage2rm-reward-model">
+<span class="md-ellipsis">
+      1.2 Stage2：RM 奖励模型训练（Reward Model）
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#13-stage3ppo-rl">
+<span class="md-ellipsis">
+      1.3 Stage3：PPO 强化学习对齐（核心RL阶段）
+    </span>
+</a>
+<nav aria-label="1.3 Stage3：PPO 强化学习对齐（核心RL阶段）" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#131-rlhf">
+<span class="md-ellipsis">
+      1.3.1 RLHF 里的四个核心模型
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#132-tokenrlhf">
+<span class="md-ellipsis">
+      1.3.2 Token级奖励构造（RLHF最关键）
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#133-ppo-clip">
+<span class="md-ellipsis">
+      1.3.3 PPO-Clip 目标
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#ppo-ptx">
+<span class="md-ellipsis">
+      PPO-PTX 混合目标（解决对齐税）
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#rlhf-ppo">
+<span class="md-ellipsis">
+      RLHF-PPO 完整流水线步骤
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#2-rlhf">
+<span class="md-ellipsis">
+      2. RLHF里几个关键概念
+    </span>
+</a>
+<nav aria-label="2. RLHF里几个关键概念" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#21-reward-hacking">
+<span class="md-ellipsis">
+      2.1 奖励黑客 Reward Hacking
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#22-alignment-tax">
+<span class="md-ellipsis">
+      2.2 对齐税 Alignment Tax
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#23-llmmdp">
+<span class="md-ellipsis">
+      2.3 为什么生成式LLM是长序列MDP
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#24-ppo-vs-rlhf-ppo">
+<span class="md-ellipsis">
+      2.4 普通PPO vs RLHF-PPO
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#3-rlhf">
+<span class="md-ellipsis">
+      3. RLHF 的优缺点
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#4-rlhf-dpo">
+<span class="md-ellipsis">
+      4. RLHF 后续演进（前沿方向，引出下一章DPO）
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#5-rlhf">
+<span class="md-ellipsis">
+      5. RLHF 整体公式汇总
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#4-ppo-llm-rlhf">
+<span class="md-ellipsis">
+      4. PPO 在 LLM RLHF 中的映射
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h1 id="-rlhf">强化学习<span><span class="heti-spacing"> </span>- RLHF</span><a class="headerlink" href="#-rlhf" title="Permanent link"><span><span class="heti-spacing"> </span>¶</span></a></h1>
+<div style="margin-top: -30px; font-size: 0.75em; opacity: 0.7;">
+<p><span class="twemoji"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10h-2a8 8 0 0 1-8 8 8 8 0 0 1-8-8 8 8 0 0 1 8-8zm6.78 1a.7.7 0 0 0-.48.2l-1.22 1.21 2.5 2.5L20.8 5.7c.26-.26.26-.7 0-.95L19.25 3.2c-.13-.13-.3-.2-.47-.2m-2.41 2.12L9 12.5V15h2.5l7.37-7.38z"></path></svg></span> 约<span class="heti-skip"><span class="heti-spacing"> </span>2691<span class="heti-spacing"> </span></span>个字 <span class="twemoji"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 20c4.42 0 8-3.58 8-8s-3.58-8-8-8-8 3.58-8 8 3.58 8 8 8m0-18c5.5 0 10 4.5 10 10s-4.5 10-10 10C6.47 22 2 17.5 2 12S6.5 2 12 2m.5 11H11V7h1.5v4.26l3.7-2.13.75 1.3z"></path></svg></span> 预计阅读时间<span class="heti-skip"><span class="heti-spacing"> </span>9<span class="heti-spacing"> </span></span>分钟</p>
+</div>
+<blockquote>
+<p>本篇为强化学习系列第<span class="heti-skip"><span class="heti-spacing"> </span>8<span class="heti-spacing"> </span></span>篇：<span>LLM<span class="heti-spacing"> </span></span>强化学习前沿——<span>RLHF(<span class="heti-spacing"> </span></span>基于人类反馈的强化学习<span><span class="heti-spacing"> </span>)</span>
+承接上一篇：PPO 已经给出了稳定的策略梯度框架，适合大模型微调；但普通RL需要环境奖励，而大语言模型没有天然奖励函数。RLHF 的核心思路：先用人类偏好训练奖励模型，再以奖励模型作为环境，用PPO微调大模型，让模型输出对齐人类偏好。</p>
+</blockquote>
+<h2 id="_1">前置回顾<a class="headerlink" href="#_1" title="Permanent link"><span><span class="heti-spacing"> </span>¶</span></a></h2>
+<ul>
+<li><span>PPO<span class="heti-spacing"> </span></span>是近似<span class="heti-skip"><span class="heti-spacing"> </span>on-policy<span class="heti-spacing"> </span></span>的策略梯度算法，依靠<span class="heti-skip"><span class="heti-spacing"> </span>clip<span class="heti-spacing"> </span></span>约束重要性权重，避免策略漂移，一阶优化、工程友好，是<span class="heti-skip"><span class="heti-spacing"> </span>RLHF<span class="heti-spacing"> </span></span>的基础算法</li>
+<li>普通强化学习：状态<span><span class="heti-spacing"> </span><span class="arithmatex">\(s\)</span></span>、动作<span><span class="heti-spacing"> </span><span class="arithmatex">\(a\)</span></span>、环境给出标量奖励<span><span class="heti-spacing"> </span><span class="arithmatex">\(r\)</span></span>；</li>
+<li><span>LLM<span class="heti-spacing"> </span></span>场景的特殊性：</li>
+<li>状态<span><span class="heti-spacing"> </span><span class="arithmatex">\(s\)</span></span>：<span>prompt +<span class="heti-spacing"> </span></span>已经生成的上下文<span><span class="heti-spacing"> </span><span class="arithmatex">\(y_{&lt;t}\)</span></span></li>
+<li>动作<span><span class="heti-spacing"> </span><span class="arithmatex">\(a\)</span></span>：下一个生成<span><span class="heti-spacing"> </span>token <span class="arithmatex">\(y_t\)</span></span></li>
+<li><strong>没有环境自动给出的奖励</strong>，人类只能对比两个回答，给出偏好（<span>A<span class="heti-spacing"> </span></span>更好<span class="heti-skip"><span class="heti-spacing"> </span>/ B<span class="heti-spacing"> </span></span>更好<heti-adjacent class="heti-adjacent-half">）</heti-adjacent>，很难直接打分</li>
+<li>动作空间巨大：词表上万，序列生成是长序列决策，原始奖励只在序列末尾稀疏给出</li>
+<li><span>RLHF<span class="heti-spacing"> </span></span>三步走：<strong><span>SFT<span class="heti-spacing"> </span></span>监督微调 → <span>RM<span class="heti-spacing"> </span></span>奖励模型训练 → <span>PPO<span class="heti-spacing"> </span></span>强化学习对齐</strong></li>
+<li>前置关键：PPO-ptx，在<span class="heti-skip"><span class="heti-spacing"> </span>RL<span class="heti-spacing"> </span></span>阶段加入预训练<span><span class="heti-spacing"> </span>loss</span>，防止模型“遗忘基础能力”，也就是<strong>模型坍缩<span class="heti-skip"><span class="heti-spacing"> </span>/<span class="heti-spacing"> </span></span>对齐税</strong></li>
+</ul>
+<blockquote>
+<p><span>RLHF<span class="heti-spacing"> </span></span>不是一个单独算法，是一套流水线：用人类偏好构造奖励，把大语言模型变成强化学习里的策略<span><span class="heti-spacing"> </span><span class="arithmatex">\(\pi_\theta\)</span></span>，用<span class="heti-skip"><span class="heti-spacing"> </span>PPO<span class="heti-spacing"> </span></span>做策略优化。
+PPO之所以成为LLM对齐的主力，是因为它的Clip目标可以<strong>逐<span><span class="heti-spacing"> </span>token</span></strong>地施加信任区域，而不需要对整个序列概率做复杂约束。</p>
+</blockquote>
+<hr/>
+<h2 id="1-rlhf-instructgpt"><span>1. RLHF<span class="heti-spacing"> </span></span>整体流程（<span>InstructGPT<span class="heti-spacing"> </span></span>原版三步）<a class="headerlink" href="#1-rlhf-instructgpt" title="Permanent link">¶</a></h2>
+<h3 id="11-stage1sft-supervised-fine-tuning">1.1 Stage1：<span>SFT<span class="heti-spacing"> </span></span>监督微调（Supervised Fine-Tuning）<a class="headerlink" href="#11-stage1sft-supervised-fine-tuning" title="Permanent link">¶</a></h3>
+<p>目标：把基座模型从“补全文本”改成<strong>遵循指令</strong>的模型，教会模型看懂<span><span class="heti-spacing"> </span>prompt</span>、输出规范回答。</p>
+<ul>
+<li>数据：人工标注的 <code>(prompt, 高质量回答)</code> 指令对</li>
+<li>训练方式：标准语言建模（自回归<heti-adjacent class="heti-adjacent-half">）</heti-adjacent>，最大化标注回答的对数似然
+$$
+\mathcal{L}<em t="t">{\text{SFT}} = -\sum</em>)
+$$}\log\pi_{\text{SFT}}(a_t|\text{prompt},a_{1:t-1</li>
+<li>输出：<span>SFT<span class="heti-spacing"> </span></span>模型<span><span class="heti-spacing"> </span><span class="arithmatex">\(\pi^{\text{SFT}}\)</span></span>，这是后续<span><span class="heti-spacing"> </span>RM</span>、<span>PPO<span class="heti-spacing"> </span></span>的起点，同时作为<span class="heti-skip"><span class="heti-spacing"> </span>RL<span class="heti-spacing"> </span></span>阶段的参考模型<span class="heti-skip"><span class="heti-spacing"> </span><span class="arithmatex">\(\pi_{\text{ref}}\)</span><span class="heti-spacing"> </span></span>冻结使用</li>
+<li>局限：
+  1. 高质量标注成本极高，标注量有限
+  2. 只能学到标注样本的风格，无法覆盖所有人类偏好
+  3. 监督学习只能拟合标注，不能泛化到“更符合人类喜好”的未见过的回答</li>
+</ul>
+<blockquote>
+<p><span>SFT<span class="heti-spacing"> </span></span>是保底底座：没有<span><span class="heti-spacing"> </span>SFT</span>，直接做<span><span class="heti-spacing"> </span>RL</span>，模型不知道怎么生成通顺、符合指令的文本，<span>RL<span class="heti-spacing"> </span></span>很容易跑到无意义输出。</p>
+</blockquote>
+<h3 id="12-stage2rm-reward-model">1.2 Stage2：<span>RM<span class="heti-spacing"> </span></span>奖励模型训练（Reward Model）<a class="headerlink" href="#12-stage2rm-reward-model" title="Permanent link">¶</a></h3>
+<p>目标：从<strong>成对人类偏好</strong>学习一个打分函数<span><span class="heti-spacing"> </span><span class="arithmatex">\(R(x,y)\)</span></span>，输入<span class="heti-skip"><span class="heti-spacing"> </span>prompt+<span class="heti-spacing"> </span></span>完整回答，输出一个标量奖励，替代人类实时打分。</p>
+<ul>
+<li>数据构造：同一个<span><span class="heti-spacing"> </span>prompt</span>，给<span class="heti-skip"><span class="heti-spacing"> </span>SFT<span class="heti-spacing"> </span></span>模型生成多个候选回答，交给标注员对比排序
+  输入：<span class="arithmatex">\(x=\text{prompt}\)</span>，两个回答 <span class="arithmatex">\(y_w\)</span>（差回答）、<span class="arithmatex">\(y_l\)</span>（好回答）
+  标注：<span class="arithmatex">\(y_l \succ y_w\)</span>（人类偏好y_l）</li>
+<li>模型结构：一般复用<span class="heti-skip"><span class="heti-spacing"> </span>SFT<span class="heti-spacing"> </span></span>模型主干，最后一层加一个单独输出头，输出标量奖励<span><span class="heti-spacing"> </span><span class="arithmatex">\(r=R_\psi(x,y)\)</span></span></li>
+<li>损失函数（排序损失，pairwise loss）
+$$
+\mathcal{L}<em>{\text{RM}} = -\log\sigma\big(R</em>\psi(x,y_l)-R_\psi(x,y_w)\big)
+$$
+<span class="arithmatex">\(\sigma\)</span> 是sigmoid函数：希望偏好回答的奖励显著高于不偏好的回答。</li>
+<li>要点：</li>
+<li><span>RM<span class="heti-spacing"> </span></span>只学习相对偏好，<strong>不需要绝对分数</strong>，只需要区分好坏</li>
+<li>训练完成后，<span>RM<span class="heti-spacing"> </span></span>固定不动，作为<span class="heti-skip"><span class="heti-spacing"> </span>PPO<span class="heti-spacing"> </span></span>阶段的“静态奖励打分器”</li>
+<li><span>RM<span class="heti-spacing"> </span></span>输出是<strong>全局序列奖励</strong>：一个完整回答结束才输出一个标量，不是每个<span class="heti-skip"><span class="heti-spacing"> </span>token<span class="heti-spacing"> </span></span>单独奖励</li>
+<li><span>RM<span class="heti-spacing"> </span></span>的缺陷：<span>RM<span class="heti-spacing"> </span></span>会有奖励黑客（reward hacking<heti-adjacent class="heti-adjacent-half">）</heti-adjacent>，模型学会欺骗<span><span class="heti-spacing"> </span>RM</span>，拿到高分但人类不喜欢</li>
+</ul>
+<blockquote>
+<p>一句话：人类不会给每个回答直接打分，只会对比；奖励模型就是把成对偏好，变成一个可微分、可给<span class="heti-skip"><span class="heti-spacing"> </span>RL<span class="heti-spacing"> </span></span>用的奖励函数。</p>
+</blockquote>
+<h3 id="13-stage3ppo-rl">1.3 Stage3：<span>PPO<span class="heti-spacing"> </span></span>强化学习对齐（核心<span class="heti-skip"><span class="heti-spacing"> </span>RL<span class="heti-spacing"> </span></span>阶段）<a class="headerlink" href="#13-stage3ppo-rl" title="Permanent link">¶</a></h3>
+<p>目标：以<span class="heti-skip"><span class="heti-spacing"> </span>SFT<span class="heti-spacing"> </span></span>模型为初始策略，以<span class="heti-skip"><span class="heti-spacing"> </span>RM<span class="heti-spacing"> </span></span>为奖励，用<span class="heti-skip"><span class="heti-spacing"> </span>PPO<span class="heti-spacing"> </span></span>微调策略模型，最大化人类偏好奖励，同时约束模型不要离参考模型太远。</p>
+<h4 id="131-rlhf"><span>1.3.1 RLHF<span class="heti-spacing"> </span></span>里的四个核心模型<a class="headerlink" href="#131-rlhf" title="Permanent link"><span><span class="heti-spacing"> </span>¶</span></a></h4>
+<table>
+<thead>
+<tr>
+<th>角色</th>
+<th>符号</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Actor（策略）</strong></td>
+<td><span class="arithmatex">\(\pi_\theta(y_t\mid x,y_{&lt;t})\)</span></td>
+<td>被训练的语言模型，执行<span class="heti-skip"><span class="heti-spacing"> </span>token<span class="heti-spacing"> </span></span>生成，是我们要优化的目标</td>
+</tr>
+<tr>
+<td><strong>Critic（价值）</strong></td>
+<td><span class="arithmatex">\(V_\phi(x,y_{\le t})\)</span></td>
+<td>通常和<span class="heti-skip"><span class="heti-spacing"> </span>Actor<span class="heti-spacing"> </span></span>共享主干，加标量输出头；估计每个生成前缀<span class="heti-skip"><span class="heti-spacing"> </span><span class="arithmatex">\(x,y_{\le t}\)</span><span class="heti-spacing"> </span></span>的期望回报，用于<span class="heti-skip"><span class="heti-spacing"> </span>GAE<span class="heti-spacing"> </span></span>优势计算</td>
+</tr>
+<tr>
+<td><strong>Reference（参考基线）</strong></td>
+<td><span class="arithmatex">\(\pi_{\text{ref}}\)</span></td>
+<td><span>SFT<span class="heti-spacing"> </span></span>模型的冻结副本，全程不更新；用于<span class="heti-skip"><span class="heti-spacing"> </span>KL<span class="heti-spacing"> </span></span>锚定，约束策略不要偏离原始分布</td>
+</tr>
+<tr>
+<td><strong>Reward Model</strong></td>
+<td><span class="arithmatex">\(R_\psi(x,y)\)</span></td>
+<td>冻结，对完整回答<span class="heti-skip"><span class="heti-spacing"> </span><span class="arithmatex">\(y\)</span><span class="heti-spacing"> </span></span>输出一个标量偏好奖励，仅在序列末尾生效</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>注意区分：<span><span class="arithmatex">\(\pi_{\theta_{\text{old}}}\)</span><span class="heti-spacing"> </span></span>是本次<span class="heti-skip"><span class="heti-spacing"> </span>rollout<span class="heti-spacing"> </span></span>采样时冻结的<span class="heti-skip"><span class="heti-spacing"> </span>Actor<span class="heti-spacing"> </span></span>版本（<span>PPO<span class="heti-spacing"> </span></span>经典旧策略<heti-adjacent class="heti-adjacent-half">）</heti-adjacent>；<span><span class="arithmatex">\(\pi_{\text{ref}}\)</span><span class="heti-spacing"> </span></span>是固定<span><span class="heti-spacing"> </span>SFT</span>，二者不是同一个东西。</p>
+</blockquote>
+<h4 id="132-tokenrlhf"><span>1.3.2 Token<span class="heti-spacing"> </span></span>级奖励构造（<span>RLHF<span class="heti-spacing"> </span></span>最关键）<a class="headerlink" href="#132-tokenrlhf" title="Permanent link">¶</a></h4>
+<p>奖励模型只在序列最后一步给出稀疏标量奖励；我们在每一个生成<span class="heti-skip"><span class="heti-spacing"> </span>token<span class="heti-spacing"> </span></span>上，加入对参考模型的<span class="heti-skip"><span class="heti-spacing"> </span>KL<span class="heti-spacing"> </span></span>惩罚，把稀疏奖励转化为稠密逐<span class="heti-skip"><span class="heti-spacing"> </span>token<span class="heti-spacing"> </span></span>奖励：</p>
+<div class="arithmatex">\[
+r_t
+=
+-\beta \log \frac{\pi_\theta(y_t\mid x,y_{&lt;t})}{\pi_{\text{ref}}(y_t\mid x,y_{&lt;t})}
++
+\mathbb{1}[t=T]\cdot R_\psi(x,y)
+\]</div>
+<ul>
+<li><span class="arithmatex">\(\mathbb{1}[t=T]\)</span>：指示函数，只有序列结束时刻<span class="heti-skip"><span class="heti-spacing"> </span><span class="arithmatex">\(t=T\)</span><span class="heti-spacing"> </span></span>才加上<span class="heti-skip"><span class="heti-spacing"> </span>RM<span class="heti-spacing"> </span></span>的偏好奖励；其余时刻只有<span class="heti-skip"><span class="heti-spacing"> </span>KL<span class="heti-spacing"> </span></span>惩罚项</li>
+<li>含义：<strong>每一步都有稠密的<span class="heti-skip"><span class="heti-spacing"> </span>KL<span class="heti-spacing"> </span></span>塑形信号，任务偏好奖励只在终止位置稀疏出现</strong></li>
+<li>在这一串<span class="heti-skip"><span class="heti-spacing"> </span>token<span class="heti-spacing"> </span></span>级奖励序列上，运行<span><span class="heti-spacing"> </span>GAE</span>，计算逐<span class="heti-skip"><span class="heti-spacing"> </span>token<span class="heti-spacing"> </span></span>优势<span><span class="heti-spacing"> </span><span class="arithmatex">\(\hat A_t\)</span></span>，送入<span class="heti-skip"><span class="heti-spacing"> </span>PPO-Clip<span class="heti-spacing"> </span></span>目标</li>
+</ul>
+<p><span>PPO<span class="heti-spacing"> </span></span>的<span class="heti-skip"><span class="heti-spacing"> </span>token<span class="heti-spacing"> </span></span>级重要性比率：
+$$
+r_t(\theta)
+=
+\frac{\pi_\theta(y_t\mid x,y_{&lt;t})}{\pi_{\theta_{\text{old}}}(y_t\mid x,y_{&lt;t})}
+$$</p>
+<blockquote>
+<p><span>KL<span class="heti-spacing"> </span></span>惩罚在<span class="heti-skip"><span class="heti-spacing"> </span>RLHF<span class="heti-spacing"> </span></span>中承担双重角色：
+1. 作为信任域约束，限制新策略和SFT参考模型之间分布偏移；
+2. 抑制奖励黑客（reward hacking）：没有KL锚定，策略很容易找到奖励模型的漏洞，生成RM高分但人类不认可的低质量文本。</p>
+</blockquote>
+<h4 id="133-ppo-clip"><span>1.3.3 PPO-Clip<span class="heti-spacing"> </span></span>目标<a class="headerlink" href="#133-ppo-clip" title="Permanent link"><span><span class="heti-spacing"> </span>¶</span></a></h4>
+<p>$$
+J^{\text{PPO}}(\theta) = \mathbb{E}<em _theta__text_old="\theta_{\text{old">{(x,y)\sim\pi</em>(r_t(\theta),1-\epsilon,1+\epsilon)\hat A_t\right)\right]
+$$
+}}}} \left[\min\left(r_t(\theta)\hat A_t,\; \text{clip<span class="arithmatex">\(\hat A_t\)</span> 由GAE基于上面的token级奖励序列估计，和普通PPO形式一致，但奖励来源完全不同。</p>
+<h4 id="ppo-ptx"><span>PPO-PTX<span class="heti-spacing"> </span></span>混合目标（解决对齐税）<a class="headerlink" href="#ppo-ptx" title="Permanent link">¶</a></h4>
+<p>只优化<span class="heti-skip"><span class="heti-spacing"> </span>PPO<span class="heti-spacing"> </span></span>奖励，模型容易丢失原始语言能力、世界知识、编码能力（对齐税<span class="heti-skip"><span class="heti-spacing"> </span>/<span class="heti-spacing"> </span></span>模型退化<heti-adjacent class="heti-adjacent-half">）</heti-adjacent>。
+InstructGPT引入预训练正则项：在PPO目标上叠加预训练数据的语言建模损失
+$$
+J_{\text{total}} = J_{\text{PPO}} + \lambda_{\text{ptx}} J_{\text{pretrain}}
+$$
+<span class="arithmatex">\(J_{\text{pretrain}}\)</span>：在一部分无标注预训练文本上，最大化原始基座的对数似然；<span class="arithmatex">\(\lambda_{\text{ptx}}\)</span> 控制强度。</p>
+<blockquote>
+<p>这个就是上一篇提到的<span><span class="heti-spacing"> </span>PPO-ptx</span>，是早期<span class="heti-skip"><span class="heti-spacing"> </span>RLHF<span class="heti-spacing"> </span></span>必不可少的组件。</p>
+</blockquote>
+<h4 id="rlhf-ppo"><span>RLHF-PPO<span class="heti-spacing"> </span></span>完整流水线步骤<a class="headerlink" href="#rlhf-ppo" title="Permanent link"><span><span class="heti-spacing"> </span>¶</span></a></h4>
+<ol>
+<li>采样阶段：冻结旧策略<span><span class="heti-spacing"> </span><span class="arithmatex">\(\pi_{\theta_{\text{old}}}\)</span></span>，输入一批<span><span class="heti-spacing"> </span>prompt</span>，自回归生成回答，收集<span><span class="heti-spacing"> </span>rollout</span></li>
+<li>打分：<span>RM<span class="heti-spacing"> </span></span>给出序列末尾原始奖励，按上面公式计算每个<span class="heti-skip"><span class="heti-spacing"> </span>token<span class="heti-spacing"> </span></span>位置带<span class="heti-skip"><span class="heti-spacing"> </span>KL<span class="heti-spacing"> </span></span>惩罚的稠密奖励<span><span class="heti-spacing"> </span><span class="arithmatex">\(r_t\)</span></span></li>
+<li>计算<span class="heti-skip"><span class="heti-spacing"> </span>GAE<span class="heti-spacing"> </span></span>优势<span><span class="heti-spacing"> </span><span class="arithmatex">\(\hat A_t\)</span></span></li>
+<li>在这批<span class="heti-skip"><span class="heti-spacing"> </span>rollout<span class="heti-spacing"> </span></span>上跑多个<span class="heti-skip"><span class="heti-spacing"> </span>epoch<span class="heti-spacing"> </span></span>的<span class="heti-skip"><span class="heti-spacing"> </span>PPO<span class="heti-spacing"> </span></span>更新（<span>clip<span class="heti-spacing"> </span></span>目标<span class="heti-skip"><span class="heti-spacing"> </span>+ value loss +<span class="heti-spacing"> </span></span>可选熵奖励<span><span class="heti-spacing"> </span>+ ptx loss</span>）</li>
+<li>更新<span class="heti-skip"><span class="heti-spacing"> </span>Actor<span class="heti-spacing"> </span></span>参数，更新完成后，把<span class="heti-skip"><span class="heti-spacing"> </span><span class="arithmatex">\(\pi_{\theta_{\text{old}}}\)</span><span class="heti-spacing"> </span></span>设置为当前新策略，进入下一轮<span><span class="heti-spacing"> </span>rollout</span></li>
+</ol>
+<hr/>
+<h2 id="2-rlhf"><span>2. RLHF<span class="heti-spacing"> </span></span>里几个关键概念<a class="headerlink" href="#2-rlhf" title="Permanent link"><span><span class="heti-spacing"> </span>¶</span></a></h2>
+<h3 id="21-reward-hacking"><span>2.1<span class="heti-spacing"> </span></span>奖励黑客<span><span class="heti-spacing"> </span>Reward Hacking</span><a class="headerlink" href="#21-reward-hacking" title="Permanent link"><span><span class="heti-spacing"> </span>¶</span></a></h3>
+<p><span>RM<span class="heti-spacing"> </span></span>是一个拟合人类偏好的近似模型，不是完美人类。<span>LLM<span class="heti-spacing"> </span></span>会找到<span class="heti-skip"><span class="heti-spacing"> </span>RM<span class="heti-spacing"> </span></span>的漏洞，生成<strong><span>RM<span class="heti-spacing"> </span></span>高分、但人类不认可</strong>的回答：
+- 例子：重复关键词、过度礼貌、空洞废话，专门哄RM打分高
+- 缓解手段：
+  - 逐token KL约束（最基础）
+  - 更小的PPO <span class="arithmatex">\(\epsilon\)</span>（大模型RLHF一般0.1）
+  - 更好、更多样的偏好数据
+  - 后续算法：RLAIF、DPO（直接抛弃RM，避开奖励黑客）</p>
+<h3 id="22-alignment-tax"><span>2.2<span class="heti-spacing"> </span></span>对齐税<span><span class="heti-spacing"> </span>Alignment Tax</span><a class="headerlink" href="#22-alignment-tax" title="Permanent link"><span><span class="heti-spacing"> </span>¶</span></a></h3>
+<p>经过<span class="heti-skip"><span class="heti-spacing"> </span>RLHF<span class="heti-spacing"> </span></span>之后，模型在对话、遵循指令上更好，但在推理、代码、知识问答上性能下降，这个性能损失叫对齐税。
+原因：PPO只优化人类偏好奖励，会偏离基座学到的原始分布。
+缓解：PTX loss、控制KL系数不要太大、更好的对齐算法。</p>
+<h3 id="23-llmmdp"><span>2.3<span class="heti-spacing"> </span></span>为什么生成式<span class="heti-skip"><span class="heti-spacing"> </span>LLM<span class="heti-spacing"> </span></span>是长序列<span><span class="heti-spacing"> </span>MDP</span><a class="headerlink" href="#23-llmmdp" title="Permanent link"><span><span class="heti-spacing"> </span>¶</span></a></h3>
+<ul>
+<li><span>MDP<span class="heti-spacing"> </span></span>状态：<span>prompt +<span class="heti-spacing"> </span></span>已经生成的<span class="heti-skip"><span class="heti-spacing"> </span>token<span class="heti-spacing"> </span></span>上下文<span><span class="heti-spacing"> </span><span class="arithmatex">\(y_{&lt;t}\)</span></span></li>
+<li>动作：下一个<span><span class="heti-spacing"> </span>token <span class="arithmatex">\(y_t\)</span></span></li>
+<li>每一步动作之后，状态转移（把新<span class="heti-skip"><span class="heti-spacing"> </span>token<span class="heti-spacing"> </span></span>拼进上下文）</li>
+<li>原始偏好奖励只在序列结束才拿到（稀疏奖励）
+→ 所以必须GAE，把末尾的终局奖励回溯分配到前面每个token，估计每个位置的优势，这是RLHF训练稳定的核心。</li>
+</ul>
+<h3 id="24-ppo-vs-rlhf-ppo"><span>2.4<span class="heti-spacing"> </span></span>普通<span><span class="heti-spacing"> </span>PPO vs RLHF-PPO</span><a class="headerlink" href="#24-ppo-vs-rlhf-ppo" title="Permanent link"><span><span class="heti-spacing"> </span>¶</span></a></h3>
+<ul>
+<li>普通<span><span class="heti-spacing"> </span>PPO</span>：环境实时返回每一步奖励，环境是固定模拟器；约束主要来自<span><span class="heti-spacing"> </span>clip</span></li>
+<li>RLHF-PPO：<strong>没有外部环境</strong>，奖励来自固定神经网络<span><span class="heti-spacing"> </span>RM</span>；奖励天然稀疏，靠<span class="heti-skip"><span class="heti-spacing"> </span>KL<span class="heti-spacing"> </span></span>惩罚构造稠密<span class="heti-skip"><span class="heti-spacing"> </span>token<span class="heti-spacing"> </span></span>奖励；存在两层约束：PPO clip（约束<span class="heti-skip"><span class="heti-spacing"> </span><span class="arithmatex">\(\pi_\theta\)</span><span class="heti-spacing"> </span></span>和<span><span class="heti-spacing"> </span><span class="arithmatex">\(\pi_{\theta_{\text{old}}}\)</span></span>）<span>+ KL<span class="heti-spacing"> </span></span>锚定（约束<span class="heti-skip"><span class="heti-spacing"> </span><span class="arithmatex">\(\pi_\theta\)</span><span class="heti-spacing"> </span></span>和冻结<span class="heti-skip"><span class="heti-spacing"> </span>SFT<span class="heti-spacing"> </span></span>参考<span><span class="heti-spacing"> </span><span class="arithmatex">\(\pi_{\text{ref}}\)</span></span><heti-adjacent class="heti-adjacent-half">）</heti-adjacent>；通常加上<span class="heti-skip"><span class="heti-spacing"> </span>ptx<span class="heti-spacing"> </span></span>正则</li>
+</ul>
+<blockquote>
+<p>数学内核一样，但是<span class="heti-skip"><span class="heti-spacing"> </span>MDP<span class="heti-spacing"> </span></span>结构、奖励来源、约束目标完全不一样。</p>
+</blockquote>
+<h2 id="3-rlhf"><span>3. RLHF<span class="heti-spacing"> </span></span>的优缺点<a class="headerlink" href="#3-rlhf" title="Permanent link"><span><span class="heti-spacing"> </span>¶</span></a></h2>
+<p>✅ 优点
+1. 可以从偏好学习，不需要给每个样本写精确奖励函数，适配人类主观评价
+2. 基于PPO，工程成熟，是第一代大模型对齐范式（InstructGPT、GPT-3.5早期对齐都用这套）
+3. 逐token KL + clip双重约束，对齐之后模型更贴合人类意图，减少有害输出、拒绝越界请求</p>
+<p>❌ 缺点
+1. 流水线长，三阶段训练，成本极高：SFT、RM、PPO三套训练
+2. 奖励黑客问题，RM带来偏见、漏洞
+3. PPO训练不稳定，超参敏感（KL系数、epsilon、GAE lambda、ptx权重很难调）
+4. 样本效率低，rollout生成代价巨大
+5. 存在对齐税，容易损害原始能力</p>
+<h2 id="4-rlhf-dpo"><span>4. RLHF<span class="heti-spacing"> </span></span>后续演进（前沿方向，引出下一章<span><span class="heti-spacing"> </span>DPO</span>）<a class="headerlink" href="#4-rlhf-dpo" title="Permanent link">¶</a></h2>
+<p><span>RLHF<span class="heti-spacing"> </span></span>需要<span class="heti-skip"><span class="heti-spacing"> </span>RM + PPO<span class="heti-spacing"> </span></span>两套模型，训练复杂、不稳定。后续提出<strong>直接偏好优化<span><span class="heti-spacing"> </span>DPO</span></strong>：
+- 抛弃显式奖励模型，<strong>直接用偏好数据优化策略</strong>，不需要单独训<span><span class="heti-spacing"> </span>RM</span>、不需要<span><span class="heti-spacing"> </span>PPO</span>
+- 把偏好约束转化为策略之间的对数比率损失，等价于隐式的奖励优化
+- 训练更简单、稳定、成本更低，现在已经成为主流对齐方案</p>
+<p>还有其他分支：
+- RLAIF：用AI反馈替代人类标注，AI生成偏好对，减少人工成本
+- KTO、IPO：其他偏好优化变体
+- ORPO：把SFT和偏好对齐合并到一个阶段</p>
+<blockquote>
+<p>一句话总结演进：RLHF = SFT + RM + PPO；<span>DPO<span class="heti-spacing"> </span></span>干掉<span class="heti-skip"><span class="heti-spacing"> </span>RM<span class="heti-spacing"> </span></span>和<span><span class="heti-spacing"> </span>PPO</span>，一步到位做偏好对齐。</p>
+</blockquote>
+<h2 id="5-rlhf"><span>5. RLHF<span class="heti-spacing"> </span></span>整体公式汇总<a class="headerlink" href="#5-rlhf" title="Permanent link"><span><span class="heti-spacing"> </span>¶</span></a></h2>
+<ol>
+<li><span>SFT<span class="heti-spacing"> </span></span>目标
+$$
+\mathcal{L}<em _text_sft="\text{SFT">{\text{SFT}} = -\log \pi</em>(y|x)
+$$}</li>
+<li><span>RM pairwise<span class="heti-spacing"> </span></span>损失
+$$
+\mathcal{L}<em>{\text{RM}} = -\log\sigma\big(R</em>\psi(x,y_l)-R_\psi(x,y_w)\big)
+$$</li>
+<li><span>Token<span class="heti-spacing"> </span></span>级奖励（<span>RLHF<span class="heti-spacing"> </span></span>核心）
+$$
+r_t
+=
+-\beta \log \frac{\pi_\theta(y_t\mid x,y_{&lt;t})}{\pi_{\text{ref}}(y_t\mid x,y_{&lt;t})}
++
+\mathbb{1}[t=T]\cdot R_\psi(x,y)
+$$</li>
+<li><span>PPO clip<span class="heti-spacing"> </span></span>目标
+$$
+J^{\text{PPO}} = \mathbb{E}\left[\min\left(r_t(\theta)\hat A_t,\; \text{clip}(r_t(\theta),1-\epsilon,1+\epsilon)\hat A_t\right)\right]
+$$
+$$
+r_t(\theta)=\frac{\pi_\theta(y_t\mid x,y_{&lt;t})}{\pi_{\theta_{\text{old}}}(y_t\mid x,y_{&lt;t})}
+$$</li>
+<li><span>PPO-PTX<span class="heti-spacing"> </span></span>总目标
+$$
+J_{\text{total}} = J_{\text{PPO}} + \lambda_{\text{ptx}} J_{\text{pretrain}}
+$$</li>
+</ol>
+<hr/>
+<blockquote>
+<p>下一章：<span>LLM<span class="heti-spacing"> </span></span>强化学习前沿——DPO（直接偏好优化，<span>RLHF<span class="heti-spacing"> </span></span>的替代方案）</p>
+</blockquote>
+<hr/>
+<h2 id="4-ppo-llm-rlhf"><span>4. PPO<span class="heti-spacing"> </span></span>在<span class="heti-skip"><span class="heti-spacing"> </span>LLM RLHF<span class="heti-spacing"> </span></span>中的映射<a class="headerlink" href="#4-ppo-llm-rlhf" title="Permanent link"><span><span class="heti-spacing"> </span>¶</span></a></h2>
+<p><span>PPO<span class="heti-spacing"> </span></span>之所以成为<span class="heti-skip"><span class="heti-spacing"> </span>LLM<span class="heti-spacing"> </span></span>对齐的主力，是因为它的<span class="heti-skip"><span class="heti-spacing"> </span>Clip<span class="heti-spacing"> </span></span>目标可以<strong>逐<span><span class="heti-spacing"> </span>token</span></strong> 地施加信任区域，而不需要对整个序列的概率做复杂的约束设计。</p>
+<p><strong>四个模型</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>角色</th>
+<th>符号</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Actor（策略）</strong></td>
+<td><span class="arithmatex">\(\pi_\theta(y_t\mid x,y_{&lt;t})\)</span></td>
+<td>被训练的语言模型，执行生成</td>
+</tr>
+<tr>
+<td><strong>Critic（价值）</strong></td>
+<td><span class="arithmatex">\(V_\phi(x,y_{\le t})\)</span></td>
+<td>同一<span class="heti-skip"><span class="heti-spacing"> </span>backbone +<span class="heti-spacing"> </span></span>标量头，估计每个前缀的期望回报</td>
+</tr>
+<tr>
+<td><strong>Reference（参考）</strong></td>
+<td><span class="arithmatex">\(\pi_{\text{ref}}\)</span></td>
+<td><span>SFT<span class="heti-spacing"> </span></span>模型的冻结副本，用于<span class="heti-skip"><span class="heti-spacing"> </span>KL<span class="heti-spacing"> </span></span>锚定</td>
+</tr>
+<tr>
+<td><strong>Reward Model</strong></td>
+<td><span class="arithmatex">\(R_\psi(x,y)\)</span></td>
+<td>对完整回复给出标量奖励</td>
+</tr>
+</tbody>
+</table>
+<p><strong><span>Token<span class="heti-spacing"> </span></span>级奖励的构造</strong>：</p>
+<p>奖励模型只在序列末尾给一个标量<span><span class="heti-spacing"> </span><span class="arithmatex">\(R_\psi(x,y)\)</span></span>；在每一个生成<span class="heti-skip"><span class="heti-spacing"> </span>token<span class="heti-spacing"> </span></span>上，加入对<span class="heti-skip"><span class="heti-spacing"> </span>reference<span class="heti-spacing"> </span></span>的<span class="heti-skip"><span class="heti-spacing"> </span>KL<span class="heti-spacing"> </span></span>惩罚：</p>
+<div class="highlight"><pre><span></span><code>$$
+r_t
+=
+-\beta \log \frac{\pi_\theta(y_t\mid x,y_{&lt;t})}{\pi_{\text{ref}}(y_t\mid x,y_{&lt;t})}
++
+\mathbb{1}[t=T]\cdot R_\psi(x,y).
+$$
+</code></pre></div>
+<p>这意味着<strong>每一步都有稠密的<span class="heti-skip"><span class="heti-spacing"> </span>KL<span class="heti-spacing"> </span></span>塑形信号，任务奖励只在终止位置稀疏出现</strong>。然后在这个<span class="heti-skip"><span class="heti-spacing"> </span>token<span class="heti-spacing"> </span></span>级奖励序列上计算<span><span class="heti-spacing"> </span>GAE</span>，得到逐<span class="heti-skip"><span class="heti-spacing"> </span>token<span class="heti-spacing"> </span></span>优势<span><span class="heti-spacing"> </span><span class="arithmatex">\(\hat A_t\)</span></span>，再代入<span class="heti-skip"><span class="heti-spacing"> </span>PPO-Clip<span class="heti-spacing"> </span></span>目标。<span>token<span class="heti-spacing"> </span></span>级概率比为：</p>
+<div class="arithmatex">\[
+r_t(\theta)
+=
+\frac{\pi_\theta(y_t\mid x,y_{&lt;t})}{\pi_{\theta_{\text{old}}}(y_t\mid x,y_{&lt;t})}.
+\]</div>
+<p><strong><span>KL<span class="heti-spacing"> </span></span>惩罚在<span class="heti-skip"><span class="heti-spacing"> </span>RLHF<span class="heti-spacing"> </span></span>中承担双重角色</strong>：它既是<span class="heti-skip"><span class="heti-spacing"> </span>PPO<span class="heti-spacing"> </span></span>信任区域的实现方式，也是防止 <strong>reward hacking</strong> 的核心机制——没有<span class="heti-skip"><span class="heti-spacing"> </span>KL<span class="heti-spacing"> </span></span>锚定，策略会找到奖励模型的盲区，生成高奖励但质量低下的文本。</p>
+<aside class="md-source-file">
+<span class="md-source-file__fact">
+<span class="md-icon" title="最后更新">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
+</span>
+<span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime" title="2026年11月19日 19:04:40 CST">2026年11月19日 19:04:40</span>
+</span>
+</aside>
+<!-- Giscus -->
+<h2 id="__comments">评论</h2>
+<!-- 这里改成你的Giscus代码 -->
+<script async="" crossorigin="anonymous" data-category="General" data-category-id="DIC_kwDOQ48d-s4C05yJ" data-emit-metadata="0" data-input-position="bottom" data-lang="zh-CN" data-mapping="pathname" data-reactions-enabled="1" data-repo="fishedCat/fishedCat.github.io" data-repo-id="R_kgDOQ48d-g" data-strict="0" data-theme="light" src="https://giscus.app/client.js">
+</script>
+<!-- Reload on palette change -->
+<script>
+    var palette = __md_get("__palette")
+    if (palette && typeof palette.color === "object")
+        if (palette.color.scheme === "slate") {
+            var giscus = document.querySelector("script[src*=giscus]")
+            giscus.setAttribute("data-theme", "dark")
+        }
+
+    /* Register event handlers after documented loaded */
+    document.addEventListener("DOMContentLoaded", function () {
+        var ref = document.querySelector("[data-md-component=palette]")
+        ref.addEventListener("change", function () {
+            var palette = __md_get("__palette")
+            if (palette && typeof palette.color === "object") {
+                var theme = palette.color.scheme === "slate" ? "dark" : "light"
+
+                /* Instruct Giscus to change theme */
+                var frame = document.querySelector(".giscus-frame")
+                frame.contentWindow.postMessage(
+                    { giscus: { setConfig: { theme } } },
+                    "https://giscus.app"
+                )
+            }
+        })
+    })
+</script>
+</article>
+</div>
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+</div>
+<button class="md-top md-icon" data-md-component="top" hidden="" type="button">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"></path></svg>
+  回到页面顶部
+</button>
+</main>
+<footer class="md-footer">
+<div class="md-footer-meta md-typeset">
+<div class="md-footer-meta__inner md-grid">
+<div class="md-copyright">
+<div class="md-copyright__highlight">
+      Copyright © 2026 <a href="https://github.com/fishedCat" rel="noopener" target="_blank">fishedCat</a>
+</div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" rel="noopener" target="_blank">
+      Material for MkDocs
+    </a>
+</div>
+<div class="md-social">
+<a class="md-social__link" href="https://github.com/fishedCat/" rel="noopener" target="_blank" title="github.com">
+<svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"></path></svg>
+</a>
+</div>
+</div>
+</div>
+</footer>
+</div>
+<div class="md-dialog" data-md-component="dialog">
+<div class="md-dialog__inner md-typeset"></div>
+</div>
+<script id="__config" type="application/json">{"base": "../..", "features": ["content.code.annotate", "navigation.tracking", "navigation.tabs", "navigation.indexes", "navigation.top"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+<script src="../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+<script src="../../js/baidu-tongji.js"></script>
+<script src="https://gcore.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+<script src="../../js/katex.js"></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script src="../../js/mathjax.js"></script>
+</body>
+</html>
