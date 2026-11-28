@@ -752,6 +752,14 @@
   </span>
 </a>
 </li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../rl_rlhf/">
+<span class="md-ellipsis">
+    RLHF
+    
+  </span>
+</a>
+</li>
 </ul>
 </nav>
 </li>
@@ -870,11 +878,11 @@
 <article class="md-content__inner md-typeset">
 <h1 id="-">强化学习<span class="heti-skip"><span class="heti-spacing"> </span>-<span class="heti-spacing"> </span></span>策略梯度方法<a class="headerlink" href="#-" title="Permanent link"><span><span class="heti-spacing"> </span>¶</span></a></h1>
 <div style="margin-top: -30px; font-size: 0.75em; opacity: 0.7;">
-<p><span class="twemoji"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10h-2a8 8 0 0 1-8 8 8 8 0 0 1-8-8 8 8 0 0 1 8-8zm6.78 1a.7.7 0 0 0-.48.2l-1.22 1.21 2.5 2.5L20.8 5.7c.26-.26.26-.7 0-.95L19.25 3.2c-.13-.13-.3-.2-.47-.2m-2.41 2.12L9 12.5V15h2.5l7.37-7.38z"></path></svg></span> 约<span class="heti-skip"><span class="heti-spacing"> </span>4253<span class="heti-spacing"> </span></span>个字 <span class="twemoji"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 20c4.42 0 8-3.58 8-8s-3.58-8-8-8-8 3.58-8 8 3.58 8 8 8m0-18c5.5 0 10 4.5 10 10s-4.5 10-10 10C6.47 22 2 17.5 2 12S6.5 2 12 2m.5 11H11V7h1.5v4.26l3.7-2.13.75 1.3z"></path></svg></span> 预计阅读时间<span class="heti-skip"><span class="heti-spacing"> </span>14<span class="heti-spacing"> </span></span>分钟</p>
+<p><span class="twemoji"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10h-2a8 8 0 0 1-8 8 8 8 0 0 1-8-8 8 8 0 0 1 8-8zm6.78 1a.7.7 0 0 0-.48.2l-1.22 1.21 2.5 2.5L20.8 5.7c.26-.26.26-.7 0-.95L19.25 3.2c-.13-.13-.3-.2-.47-.2m-2.41 2.12L9 12.5V15h2.5l7.37-7.38z"></path></svg></span> 约<span class="heti-skip"><span class="heti-spacing"> </span>4252<span class="heti-spacing"> </span></span>个字 <span class="twemoji"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 20c4.42 0 8-3.58 8-8s-3.58-8-8-8-8 3.58-8 8 3.58 8 8 8m0-18c5.5 0 10 4.5 10 10s-4.5 10-10 10C6.47 22 2 17.5 2 12S6.5 2 12 2m.5 11H11V7h1.5v4.26l3.7-2.13.75 1.3z"></path></svg></span> 预计阅读时间<span class="heti-skip"><span class="heti-spacing"> </span>14<span class="heti-spacing"> </span></span>分钟</p>
 </div>
 <blockquote>
-<p>本篇为强化学习系列第<span class="heti-skip"><span class="heti-spacing"> </span>6<span class="heti-spacing"> </span></span>篇：策略梯度方法<span class="heti-skip"><span class="heti-spacing"> </span>(<span class="heti-spacing"> </span></span>从评估价值再选择动作，转向直接评估策略<span><span class="heti-spacing"> </span>)</span>
-承接上一篇 基于价值的方法DQN：先估计价值，再枚举动作求max。这就天然受限在离散动作空间，而策略梯度直接参数化策略 <span class="arithmatex">\(\pi_\theta(a|s)\)</span>，成功扩展到连续动作空间</p>
+<p>本篇为强化学习系列第<span class="heti-skip"><span class="heti-spacing"> </span>6<span class="heti-spacing"> </span></span>篇：策略梯度方法<span class="heti-skip"><span class="heti-spacing"> </span>(<span class="heti-spacing"> </span></span>从评估价值再选择动作，转向直接评估策略<span><span class="heti-spacing"> </span>)</span></p>
+<p>承接上一篇 基于价值的方法<span><span class="heti-spacing"> </span>DQN</span>：先估计价值，再枚举动作求<span><span class="heti-spacing"> </span>max</span>。这就天然受限在离散动作空间，而策略梯度直接参数化策略<span><span class="heti-spacing"> </span><span class="arithmatex">\(\pi_\theta(a|s)\)</span></span>，成功扩展到连续动作空间</p>
 </blockquote>
 <h2 id="_1">前置回顾<a class="headerlink" href="#_1" title="Permanent link"><span><span class="heti-spacing"> </span>¶</span></a></h2>
 <ul>
@@ -894,7 +902,7 @@
 <ul>
 <li>直接把策略本身拿来参数化，优化策略参数<span><span class="heti-spacing"> </span><span class="arithmatex">\(\theta\)</span></span>，而不是先学价值</li>
 <li>
-<p>参数化策略：<span class="arithmatex">\(\bm{\pi_\theta(a|s)}\)</span>，输入状态<span><span class="heti-spacing"> </span><span class="arithmatex">\(s\)</span></span>，输出动作的概率分布
+<p>参数化策略：<span class="arithmatex">\(\pi_\theta(a|s)\)</span>，输入状态<span><span class="heti-spacing"> </span><span class="arithmatex">\(s\)</span></span>，输出动作的概率分布
     $$
     \pi_\theta(a|s) = P(a\mid s;\theta)
     $$</p>
@@ -915,12 +923,12 @@
 </ol>
 </li>
 <li>
-<p>目标函数：最大化从初始状态出发的期望总回报
-    $$
-    J(\theta) = \mathbb{E}<em>{\tau \sim \pi</em>\theta}\big[R(\tau)\big]
-    $$</p>
+<p>目标函数：最大化从初始状态出发的期望总回报</p>
+<div class="arithmatex">\[
+J(\theta) = \mathbb{E}_{\tau \sim \pi_\theta}\big[R(\tau)\big]
+\]</div>
 <ul>
-<li>其中<span class="heti-skip"><span class="heti-spacing"> </span><span class="arithmatex">\(\bm{\tau=(s_0,a_0,r_0,s_1,a_1,r_1,\dots,s_T)}\)</span><span class="heti-spacing"> </span></span>代表一条完整轨迹；<span><span class="arithmatex">\(G(\tau)\)</span><span class="heti-spacing"> </span></span>为这条轨迹的折扣总回报</li>
+<li>其中<span class="heti-skip"><span class="heti-spacing"> </span><span class="arithmatex">\(\tau=(s_0,a_0,r_0,s_1,a_1,r_1,\dots,s_T)\)</span><span class="heti-spacing"> </span></span>代表一条完整轨迹；<span><span class="arithmatex">\(G(\tau)\)</span><span class="heti-spacing"> </span></span>为这条轨迹的折扣总回报</li>
 <li>更新时要做梯度上升：<span class="arithmatex">\(\theta\leftarrow\theta+\alpha\nabla J(\theta)\)</span>。</li>
 </ul>
 </li>
@@ -938,8 +946,8 @@ J(\theta) = \underbrace{\mathbb{E}_{\tau \sim \pi_\theta}\big[R(\tau)\big]}_{所
 \]</div>
 <p>其中：</p>
 <ul>
-<li><span><span class="arithmatex">\(\bm{R(\tau)}\)</span><span class="heti-spacing"> </span></span>是轨迹<span class="heti-skip"><span class="heti-spacing"> </span><span class="arithmatex">\(\tau\)</span><span class="heti-spacing"> </span></span>的回报<span class="heti-skip"><span class="heti-spacing"> </span>(<span class="heti-spacing"> </span></span>累计折扣奖励<span><span class="heti-spacing"> </span>)</span>，<span class="arithmatex">\(R(\tau) = r_1+\gamma r_2+\cdots+\gamma^{T-1}r_T = \sum_{t=0}^{T-1}\gamma^t r_{t+1}\)</span></li>
-<li><span><span class="arithmatex">\(\bm{p(\tau; \theta)}\)</span><span class="heti-spacing"> </span></span>是轨迹<span class="heti-skip"><span class="heti-spacing"> </span><span class="arithmatex">\(\tau\)</span><span class="heti-spacing"> </span></span>的发生概率，与策略模型参数<span class="heti-skip"><span class="heti-spacing"> </span><span class="arithmatex">\(\theta\)</span><span class="heti-spacing"> </span></span>有关，因为策略会影响动作选择与轨迹形成</li>
+<li><span><span class="arithmatex">\(R(\tau)\)</span><span class="heti-spacing"> </span></span>是轨迹<span class="heti-skip"><span class="heti-spacing"> </span><span class="arithmatex">\(\tau\)</span><span class="heti-spacing"> </span></span>的回报<span class="heti-skip"><span class="heti-spacing"> </span>(<span class="heti-spacing"> </span></span>累计折扣奖励<span><span class="heti-spacing"> </span>)</span>，<span class="arithmatex">\(R(\tau) = r_1+\gamma r_2+\cdots+\gamma^{T-1}r_T = \sum_{t=0}^{T-1}\gamma^t r_{t+1}\)</span></li>
+<li><span><span class="arithmatex">\(p(\tau; \theta)\)</span><span class="heti-spacing"> </span></span>是轨迹<span class="heti-skip"><span class="heti-spacing"> </span><span class="arithmatex">\(\tau\)</span><span class="heti-spacing"> </span></span>的发生概率，与策略模型参数<span class="heti-skip"><span class="heti-spacing"> </span><span class="arithmatex">\(\theta\)</span><span class="heti-spacing"> </span></span>有关，因为策略会影响动作选择与轨迹形成</li>
 </ul>
 </li>
 <li>
@@ -951,7 +959,7 @@ J(\theta) = \underbrace{\mathbb{E}_{\tau \sim \pi_\theta}\big[R(\tau)\big]}_{所
     其中：</p>
 <ul>
 <li><span class="arithmatex">\(\rho_0\)</span>：初始状态分布。意思是：先从<span class="heti-skip"><span class="heti-spacing"> </span><span class="arithmatex">\(\rho_0\)</span><span class="heti-spacing"> </span></span>中采样一个初始状态<span><span class="heti-spacing"> </span><span class="arithmatex">\(s_0\)</span></span>，再计算该状态下的价值<span><span class="heti-spacing"> </span><span class="arithmatex">\(V_\pi(s_0)\)</span></span>，最后对所有可能的初始状态按<span class="heti-skip"><span class="heti-spacing"> </span><span class="arithmatex">\(\rho_0\)</span><span class="heti-spacing"> </span></span>的概率加权平均</li>
-<li><span class="arithmatex">\(\bm{\pi_\theta(a_t|s_t)}\)</span>：策略模型<span class="heti-skip"><span class="heti-spacing"> </span><span class="arithmatex">\(\pi\)</span><span class="heti-spacing"> </span></span>在状态<span class="heti-skip"><span class="heti-spacing"> </span><span class="arithmatex">\(s_t\)</span><span class="heti-spacing"> </span></span>下选择动作<span class="heti-skip"><span class="heti-spacing"> </span><span class="arithmatex">\(a_t\)</span><span class="heti-spacing"> </span></span>的概率</li>
+<li><span class="arithmatex">\(\pi_\theta(a_t|s_t)\)</span>：策略模型<span class="heti-skip"><span class="heti-spacing"> </span><span class="arithmatex">\(\pi\)</span><span class="heti-spacing"> </span></span>在状态<span class="heti-skip"><span class="heti-spacing"> </span><span class="arithmatex">\(s_t\)</span><span class="heti-spacing"> </span></span>下选择动作<span class="heti-skip"><span class="heti-spacing"> </span><span class="arithmatex">\(a_t\)</span><span class="heti-spacing"> </span></span>的概率</li>
 <li><span class="arithmatex">\(\prod\)</span>：从起始时间步<span class="heti-skip"><span class="heti-spacing"> </span><span class="arithmatex">\(t=0\)</span><span class="heti-spacing"> </span></span>到时间步<span class="heti-skip"><span class="heti-spacing"> </span><span class="arithmatex">\(t=T-1\)</span><span class="heti-spacing"> </span></span>的所有动作选择概率和状态转移概率的乘积<span class="heti-skip"><span class="heti-spacing"> </span>(<span class="heti-spacing"> </span></span>注意终止状态是<span><span class="heti-spacing"> </span><span class="arithmatex">\(s_T\)</span>)</span></li>
 </ul>
 </li>
@@ -988,21 +996,23 @@ $$</li>
 <li>轨迹概率如果展开：</li>
 </ul>
 <div class="arithmatex">\[
-\nabla_\theta J(\theta) = \mathbb{E}_{\tau \sim p(\tau;\theta)}\big[R(\tau) \cdot \nabla_\theta \log p(\tau;\theta) \big] \\
-= \mathbb{E}_{\tau \sim p(\tau;\theta)}\big[R(\tau) \cdot \nabla_\theta \big(\sum_{t=0}^{T-1}\log \pi_\theta (a_t \mid s_t) + \sum_{t=0}^{T-1}\log \underbrace{P(s_{t+1} | s_t,a_t)}_{与\theta无关，求导为0} \big) \big] \\
-= \mathbb{E}_{\tau \sim p(\tau;\theta)}\big[R(\tau) \cdot \nabla_\theta \sum_{t=0}^{T-1}\log \pi_\theta (a_t \mid s_t) \big] \\
-= \mathbb{E}_{\tau \sim p(\tau;\theta)}\big[R(\tau) \cdot \underbrace{\sum_{t=0}^{T-1} \nabla_\theta \log \pi_\theta (a_t \mid s_t)}_{动作偏好梯度} \big]
+\begin{align}
+\nabla_\theta J(\theta) &amp;= \mathbb{E}_{\tau \sim p(\tau;\theta)}\big[R(\tau) \cdot \nabla_\theta \log p(\tau;\theta) \big] \\
+&amp;= \mathbb{E}_{\tau \sim p(\tau;\theta)}\big[R(\tau) \cdot \nabla_\theta \big(\sum_{t=0}^{T-1}\log \pi_\theta (a_t \mid s_t) + \sum_{t=0}^{T-1}\log \underbrace{P(s_{t+1} | s_t,a_t)}_{与\theta无关，求导为0} \big) \big] \\
+&amp;= \mathbb{E}_{\tau \sim p(\tau;\theta)}\big[R(\tau) \cdot \nabla_\theta \sum_{t=0}^{T-1}\log \pi_\theta (a_t \mid s_t) \big] \\
+&amp;= \mathbb{E}_{\tau \sim p(\tau;\theta)}\big[R(\tau) \cdot \underbrace{\sum_{t=0}^{T-1} \nabla_\theta \log \pi_\theta (a_t \mid s_t)}_{动作偏好梯度} \big]
+\end{align}
 \]</div>
 </li>
 <li>
 <p><strong>策略梯度定理</strong>：</p>
 <ul>
 <li>
-<p>公式：
-    $$
-    \nabla_\theta J(\theta) = \mathbb{E}<em>{\tau \sim p(\tau;\theta)}\big[R(\tau) \cdot \nabla</em>\theta \log p(\tau;\theta) \big] \
-    = \mathbb{E}<em t="0">{\tau \sim p(\tau;\theta)}\big[R(\tau) \cdot \sum</em> \nabla_\theta \log \pi_\theta (a_t \mid s_t) \big]
-    $$}^{T-1</p>
+<p>公式：</p>
+<div class="arithmatex">\[
+\nabla_\theta J(\theta) = \mathbb{E}_{\tau \sim p(\tau;\theta)}\big[R(\tau) \cdot \nabla_\theta \log p(\tau;\theta) \big] \\
+= \mathbb{E}_{\tau \sim p(\tau;\theta)}\big[R(\tau) \cdot \sum_{t=0}^{T-1} \nabla_\theta \log \pi_\theta (a_t \mid s_t) \big]
+\]</div>
 <ul>
 <li>上面两式都是策略梯度算法，只是形式不同</li>
 <li>意义：参数更新的幅度不仅取决于动作偏好梯度本身，还受到轨迹回报的影响<ul>
@@ -1018,10 +1028,10 @@ $$</li>
     <strong>轨迹回报可以换成其他形式，内涵一致</strong></p>
 <ul>
 <li>
-<p>核心形式：
-    $$
-    \nabla_\theta J(\theta) = \mathbb{E}<em t="0">{\tau \sim p(\theta)}\big[\Psi_t \cdot \sum</em>(a_t \mid s_t) \big] 
-    $$}^{T-1}\nabla_\theta \log \pi_{\theta</p>
+<p>核心形式：</p>
+<div class="arithmatex">\[
+\nabla_\theta J(\theta) = \mathbb{E}_{\tau \sim p(\theta)}\big[\Psi_t \cdot \sum_{t=0}^{T-1}\nabla_\theta \log \pi_{\theta}(a_t \mid s_t) \big] 
+\]</div>
 <ul>
 <li><span><span class="arithmatex">\(\Psi_t\)</span><span class="heti-spacing"> </span></span>就是不同形式的核心差异点，它代表了如何衡量在时刻<span class="heti-skip"><span class="heti-spacing"> </span><span class="arithmatex">\(t\)</span><span class="heti-spacing"> </span></span>采取动作<span class="heti-skip"><span class="heti-spacing"> </span><span class="arithmatex">\(a_t\)</span><span class="heti-spacing"> </span></span>的好坏</li>
 </ul>
@@ -1030,24 +1040,28 @@ $$</li>
 <p>起始状态价值形式<span><span class="heti-spacing"> </span>(Start-Value Form)</span>：</p>
 <ul>
 <li>
-<p>目标函数直接定义为初始状态的期望价值：
-    $$
-    J(\theta) = \mathbb{E}<em _pi__theta="\pi_\theta">{s_0} \big[V</em>(s_0) \big]
-    $$</p>
+<p>目标函数直接定义为初始状态的期望价值：</p>
+<div class="arithmatex">\[
+J(\theta) = \mathbb{E}_{s_0} \big[V_{\pi_\theta}(s_0) \big]
+\]</div>
 </li>
 <li>
-<p>相应的策略梯度定理形式：
-    $$
-    \nabla_\theta J(\theta) \propto \sum_{s} \mu(s)  \cdot \sum_{a}\nabla_\theta \pi_{\theta}(a \mid s) Q_{\pi_\theta}(s,a)
-    $$
-        - 奖励-to-go形式(Reward-to-Go Form)：</p>
+<p>相应的策略梯度定理形式：</p>
+<div class="arithmatex">\[
+\nabla_\theta J(\theta) \propto \sum_{s} \mu(s)  \cdot \sum_{a}\nabla_\theta \pi_{\theta}(a \mid s) Q_{\pi_\theta}(s,a)
+\]</div>
 </li>
+</ul>
+</li>
+<li>
+<p>奖励<span class="heti-skip"><span class="heti-spacing"> </span>-to-go<span class="heti-spacing"> </span></span>形式<span><span class="heti-spacing"> </span>(Reward-to-Go Form)</span>：</p>
+<ul>
 <li>利用“因果性”原则：时刻<span class="heti-skip"><span class="heti-spacing"> </span><span class="arithmatex">\(t\)</span><span class="heti-spacing"> </span></span>的动作只能影响<span class="heti-skip"><span class="heti-spacing"> </span><span class="arithmatex">\(t\)</span><span class="heti-spacing"> </span></span>时刻及以后的奖励，而无法改变过去的奖励</li>
 <li>
-<p>相应的策略梯度定理形式：
-    $$
-    \nabla_\theta J(\theta) = \mathbb{E}<em>{\pi</em>\theta}\big[\sum_{t=0}^{T-1} G_t \cdot \nabla_\theta \log \pi_{\theta}(a_t \mid s_t) \big] 
-    $$ </p>
+<p>相应的策略梯度定理形式：</p>
+<div class="arithmatex">\[
+\nabla_\theta J(\theta) = \mathbb{E}_{\pi_\theta}\big[\sum_{t=0}^{T-1} G_t \cdot \nabla_\theta \log \pi_{\theta}(a_t \mid s_t) \big] 
+\]</div>
 <ul>
 <li><span class="arithmatex">\(\Psi_t = G_t = \sum_{t'=t}^{T-1}r_{t'}\)</span>：从时刻<span class="heti-skip"><span class="heti-spacing"> </span><span class="arithmatex">\(t\)</span><span class="heti-spacing"> </span></span>开始的累积回报，剔除了与当前动作无关的过去奖励</li>
 </ul>
@@ -1067,13 +1081,14 @@ $$</li>
 </ul>
 <blockquote>
 <p>解读目标函数定义为<span class="heti-skip"><span class="heti-spacing"> </span><span class="arithmatex">\(E[V(s_0)]\)</span><span class="heti-spacing"> </span></span>或者<span><span class="heti-spacing"> </span><span class="arithmatex">\(E[R(\tau)]\)</span></span>：
-这两个写法在定义一致时是同一个目标函数，只是用了不同的“期望分解”方式
-$$
-V_\pi(s_0) = \mathbb{E}<em>{\tau \sim p</em>\theta(\tau \mid s_0)} \big[R(\tau) | s_0 \big]
-$$
-由全期望公式：$$
-\mathbb{E}<em _pi__theta="\pi_\theta">{s_0 \sim \rho_0}\big[V</em>}(s_0) \big] = \mathbb{E<em _="|" _sim="\sim" _tau="\tau" p__theta_tau="p_\theta(\tau" s_0_="s_0)">{s_0 \sim \rho_0}\mathbb{E}</em>}\big[R(\tau) | s_0 \big] = \mathbb{E<em>{\tau \sim p</em>\theta(\tau)}\big[R(\tau) \big]
-$$</p>
+这两个写法在定义一致时是同一个目标函数，只是用了不同的“期望分解”方式</p>
+<div class="arithmatex">\[
+V_\pi(s_0) = \mathbb{E}_{\tau \sim p_\theta(\tau \mid s_0)} \big[R(\tau) | s_0 \big]
+\]</div>
+<p>由全期望公式：</p>
+<div class="arithmatex">\[
+\mathbb{E}_{s_0 \sim \rho_0}\big[V_{\pi_\theta}(s_0) \big] = \mathbb{E}_{s_0 \sim \rho_0}\mathbb{E}_{\tau \sim p_\theta(\tau | s_0)}\big[R(\tau) | s_0 \big] = \mathbb{E}_{\tau \sim p_\theta(\tau)}\big[R(\tau) \big]
+\]</div>
 <ul>
 <li><span class="arithmatex">\(E[V(s_0)]\)</span>：先对初始状态<span class="heti-skip"><span class="heti-spacing"> </span><span class="arithmatex">\(s_0\)</span><span class="heti-spacing"> </span></span>求期望，状态内部再对后续轨迹求期望</li>
 <li><span class="arithmatex">\(E[R(\tau)]\)</span>：直接对完整轨迹分布求期望</li>
@@ -1134,10 +1149,10 @@ $$</p>
 <p><span>Critic(<span class="heti-spacing"> </span></span>评论家<span><span class="heti-spacing"> </span>)</span>，价值网络<span class="heti-skip"><span class="heti-spacing"> </span><span class="arithmatex">\(V_w(s)\)</span><span class="heti-spacing"> </span></span>或<span><span class="heti-spacing"> </span><span class="arithmatex">\(Q_w(s,a)\)</span></span>：负责评价当前状态<span class="heti-skip"><span class="heti-spacing"> </span>/<span class="heti-spacing"> </span></span>动作的好坏，<strong>用<span class="heti-skip"><span class="heti-spacing"> </span>TD<span class="heti-spacing"> </span></span>时序差分做即时估计，不需要等<span class="heti-skip"><span class="heti-spacing"> </span>episode<span class="heti-spacing"> </span></span>结束</strong></p>
 </li>
 <li>
-<p>策略梯度公式：
-$$
-\nabla_\theta J(\theta) = \mathbb{E}<em t="0">{\tau \sim p(\tau;\theta)}\big[\underbrace{\sum</em>}^{T-1}\nabla_\theta \log \pi_\theta(a_t | s_t)<em><span>{<span class="heti-spacing"> </span></span>动作偏好梯度<span><span class="heti-spacing"> </span>} \underbrace{Q_w(s_t,a_t)}</span></em>  \big]
-$$</p>
+<p>策略梯度公式：</p>
+<div class="arithmatex">\[
+\nabla_\theta J(\theta) = \mathbb{E}_{\tau \sim p(\tau;\theta)}\big[\underbrace{\sum_{t=0}^{T-1}\nabla_\theta \log \pi_\theta(a_t | s_t)}_{动作偏好梯度} \underbrace{Q_w(s_t,a_t)}_{价值}  \big]
+\]</div>
 </li>
 </ul>
 </li>
@@ -1146,10 +1161,10 @@ $$</p>
 <ul>
 <li>优势：执行某个动作的相对优势，而非动作的绝对价值</li>
 <li>
-<p>公式：
-    $$
-    A(s_t,a_t)=Q(s_t,a_t)-V(s_t)
-    $$</p>
+<p>公式：</p>
+<div class="arithmatex">\[
+A(s_t,a_t)=Q(s_t,a_t)-V(s_t)
+\]</div>
 </li>
 <li>
 <p>作用：</p>
@@ -1237,10 +1252,12 @@ $$</p>
 &amp;= \delta_t + (\gamma\lambda)\cdot \hat A_{t+1}^{GAE(\gamma,\lambda)}
 \end{align}
 \]</div>
-<p>其中：
-- <span class="arithmatex">\(A_t^{\text{GAE}(\gamma,\lambda)}\)</span>：优势估计
-- <span class="arithmatex">\(\lambda\)</span>：权衡偏差和方差的因子，用于调节多个时间步的TD误差的衰减，取值范围<span class="arithmatex">\([0,1]\)</span>
-- <span class="arithmatex">\(\delta_{t+k}\)</span>：时间步<span class="arithmatex">\(t+k\)</span>的TD误差，<span class="arithmatex">\(\delta_t = r_t + \gamma V_w(s_{t+1}) - V_w(s_t)\)</span></p>
+<p>其中：</p>
+<ul>
+<li><span class="arithmatex">\(A_t^{\text{GAE}(\gamma,\lambda)}\)</span>：优势估计</li>
+<li><span class="arithmatex">\(\lambda\)</span>：权衡偏差和方差的因子，用于调节多个时间步的<span class="heti-skip"><span class="heti-spacing"> </span>TD<span class="heti-spacing"> </span></span>误差的衰减，取值范围<span><span class="heti-spacing"> </span><span class="arithmatex">\([0,1]\)</span></span></li>
+<li><span class="arithmatex">\(\delta_{t+k}\)</span>：时间步<span class="heti-skip"><span class="heti-spacing"> </span><span class="arithmatex">\(t+k\)</span><span class="heti-spacing"> </span></span>的<span class="heti-skip"><span class="heti-spacing"> </span>TD<span class="heti-spacing"> </span></span>误差，<span class="arithmatex">\(\delta_t = r_t + \gamma V_w(s_{t+1}) - V_w(s_t)\)</span></li>
+</ul>
 </li>
 <li>
 <p>特点：</p>
@@ -1255,11 +1272,13 @@ $$</p>
 <p><span class="arithmatex">\(\lambda\)</span>： </p>
 <ol>
 <li>可以调节多步<span class="heti-skip"><span class="heti-spacing"> </span>TD<span class="heti-spacing"> </span></span>误差在优势估计中的权重分布和衰减程度，可以更直接地在方差和偏差间取得平衡</li>
-<li>当<span class="heti-skip"><span class="heti-spacing"> </span><span class="arithmatex">\(\lambda=0\)</span><span class="heti-spacing"> </span></span>时，<span>GAE<span class="heti-spacing"> </span></span>退化为单步<span class="heti-skip"><span class="heti-spacing"> </span>TD<span class="heti-spacing"> </span></span>优势，方差最小，偏差最大</li>
-</ol>
+<li>
+<p>当<span class="heti-skip"><span class="heti-spacing"> </span><span class="arithmatex">\(\lambda=0\)</span><span class="heti-spacing"> </span></span>时，<span>GAE<span class="heti-spacing"> </span></span>退化为单步<span class="heti-skip"><span class="heti-spacing"> </span>TD<span class="heti-spacing"> </span></span>优势，方差最小，偏差最大</p>
 <div class="arithmatex">\[\hat A_t=r_t+\gamma V(s_{t+1})-V(s_t)\]</div>
-<ol start="3">
-<li>当<span class="heti-skip"><span class="heti-spacing"> </span><span class="arithmatex">\(\lambda\to1\)</span><span class="heti-spacing"> </span></span>时，<span>GAE<span class="heti-spacing"> </span></span>趋近于<span class="heti-skip"><span class="heti-spacing"> </span>Monte Carlo<span class="heti-spacing"> </span></span>优势，方差最大，偏差最小</li>
+</li>
+<li>
+<p>当<span class="heti-skip"><span class="heti-spacing"> </span><span class="arithmatex">\(\lambda\to1\)</span><span class="heti-spacing"> </span></span>时，<span>GAE<span class="heti-spacing"> </span></span>趋近于<span class="heti-skip"><span class="heti-spacing"> </span>Monte Carlo<span class="heti-spacing"> </span></span>优势，方差最大，偏差最小</p>
+</li>
 </ol>
 <div class="arithmatex">\[
 \begin{align}
@@ -1404,7 +1423,7 @@ J(\pi) = \mathbb{E}\left[\sum_t \gamma^t\left(r_t + \alpha \mathcal{H}(\pi(\cdot
 <span class="md-icon" title="最后更新">
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
 </span>
-<span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime" title="2026年11月19日 19:04:40 CST">2026年11月19日 19:04:40</span>
+<span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime" title="2026年10月28日 22:11:39 CST">2026年10月28日 22:11:39</span>
 </span>
 </aside>
 <!-- Giscus -->

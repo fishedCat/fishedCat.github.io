@@ -777,6 +777,14 @@
   </span>
 </a>
 </li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../rl_rlhf/">
+<span class="md-ellipsis">
+    RLHF
+    
+  </span>
+</a>
+</li>
 </ul>
 </nav>
 </li>
@@ -923,8 +931,8 @@
 <p><span class="twemoji"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10h-2a8 8 0 0 1-8 8 8 8 0 0 1-8-8 8 8 0 0 1 8-8zm6.78 1a.7.7 0 0 0-.48.2l-1.22 1.21 2.5 2.5L20.8 5.7c.26-.26.26-.7 0-.95L19.25 3.2c-.13-.13-.3-.2-.47-.2m-2.41 2.12L9 12.5V15h2.5l7.37-7.38z"></path></svg></span> 约<span class="heti-skip"><span class="heti-spacing"> </span>5556<span class="heti-spacing"> </span></span>个字 <span class="twemoji"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M21 17H7V3h14m0-2H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2M3 5H1v16a2 2 0 0 0 2 2h16v-2H3m12.96-10.71-2.75 3.54-1.96-2.36L8.5 15h11z"></path></svg></span> <span>2<span class="heti-spacing"> </span></span>张图片 <span class="twemoji"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 20c4.42 0 8-3.58 8-8s-3.58-8-8-8-8 3.58-8 8 3.58 8 8 8m0-18c5.5 0 10 4.5 10 10s-4.5 10-10 10C6.47 22 2 17.5 2 12S6.5 2 12 2m.5 11H11V7h1.5v4.26l3.7-2.13.75 1.3z"></path></svg></span> 预计阅读时间<span class="heti-skip"><span class="heti-spacing"> </span>19<span class="heti-spacing"> </span></span>分钟</p>
 </div>
 <blockquote>
-<p>本篇为强化学习系列第<span class="heti-skip"><span class="heti-spacing"> </span>7<span class="heti-spacing"> </span></span>篇：更稳定的策略梯度算法——<span>TRPO<span class="heti-spacing"> </span></span>与<span class="heti-skip"><span class="heti-spacing"> </span>PPO(<span class="heti-spacing"> </span></span>限制策略更新步长<span><span class="heti-spacing"> </span>)</span>
-承接上一篇：A2C 已经解决了策略梯度方差大、需要完整episode的问题，但依然存在一个致命痛点：<strong>学习率很难调，对“一次更新走多远”仍然没有任何显式控制</strong>。策略一旦一步跨太大，新策略和旧策略分布差异巨大，梯度估计直接失效，训练极易崩溃。<span>TRPO<span class="heti-spacing"> </span></span>提出用约束限制新旧策略距离；<span>PPO<span class="heti-spacing"> </span></span>在<span class="heti-skip"><span class="heti-spacing"> </span>TRPO<span class="heti-spacing"> </span></span>基础上简化，也是现在大模型<span class="heti-skip"><span class="heti-spacing"> </span>RLHF<span class="heti-spacing"> </span></span>的主力算法。</p>
+<p>本篇为强化学习系列第<span class="heti-skip"><span class="heti-spacing"> </span>7<span class="heti-spacing"> </span></span>篇：更稳定的策略梯度算法——<span>TRPO<span class="heti-spacing"> </span></span>与<span class="heti-skip"><span class="heti-spacing"> </span>PPO(<span class="heti-spacing"> </span></span>限制策略更新步长<span><span class="heti-spacing"> </span>)</span></p>
+<p>承接上一篇：<span>A2C<span class="heti-spacing"> </span></span>已经解决了策略梯度方差大、需要完整<span class="heti-skip"><span class="heti-spacing"> </span>episode<span class="heti-spacing"> </span></span>的问题，但依然存在一个致命痛点：<strong>学习率很难调，对“一次更新走多远”仍然没有任何显式控制</strong>。策略一旦一步跨太大，新策略和旧策略分布差异巨大，梯度估计直接失效，训练极易崩溃。<span>TRPO<span class="heti-spacing"> </span></span>提出用约束限制新旧策略距离；<span>PPO<span class="heti-spacing"> </span></span>在<span class="heti-skip"><span class="heti-spacing"> </span>TRPO<span class="heti-spacing"> </span></span>基础上简化，也是现在大模型<span class="heti-skip"><span class="heti-spacing"> </span>RLHF<span class="heti-spacing"> </span></span>的主力算法。</p>
 </blockquote>
 <h2 id="_1">前置回顾<a class="headerlink" href="#_1" title="Permanent link"><span><span class="heti-spacing"> </span>¶</span></a></h2>
 <ul>
@@ -1090,12 +1098,12 @@ $$
 </ul>
 <blockquote>
 <p>本质：
-<strong>在旧策略收集的样本上，评估新策略能获得的期望优势</strong>
-直观理解：
-如果动作 <span class="arithmatex">\(a_t\)</span> 在旧策略里概率很低、新策略概率很高，权重 <span class="arithmatex">\(r_t\)</span> 会很大，单点样本就会主导梯度，造成不可控更新。
-需要注意：
-<strong>新旧策略分布不能相差太远</strong>；如果分布差距巨大，权重爆炸，估计完全不可靠
-重要性采样在策略梯度里不是“策略梯度本身”，而是一个<strong>分布变换工具</strong>：当样本来自行为策略<span><span class="heti-spacing"> </span><span class="arithmatex">\(\pi_{old}\)</span></span>，而你想估计目标策略<span class="heti-skip"><span class="heti-spacing"> </span><span class="arithmatex">\(\pi_\theta\)</span><span class="heti-spacing"> </span></span>下的期望<span class="heti-skip"><span class="heti-spacing"> </span>/<span class="heti-spacing"> </span></span>梯度时，用重要性权重把<span class="heti-skip"><span class="heti-spacing"> </span><span class="arithmatex">\(\pi_{old}\)</span><span class="heti-spacing"> </span></span>下的期望改写成<span class="heti-skip"><span class="heti-spacing"> </span><span class="arithmatex">\(\pi_\theta\)</span><span class="heti-spacing"> </span></span>下的期望</p>
+<strong>在旧策略收集的样本上，评估新策略能获得的期望优势</strong></p>
+<p>直观理解：
+如果动作 <span class="arithmatex">\(a_t\)</span> 在旧策略里概率很低、新策略概率很高，权重 <span class="arithmatex">\(r_t\)</span> 会很大，单点样本就会主导梯度，造成不可控更新。</p>
+<p>需要注意：
+<strong>新旧策略分布不能相差太远</strong>；如果分布差距巨大，权重爆炸，估计完全不可靠</p>
+<p>重要性采样在策略梯度里不是“策略梯度本身”，而是一个<strong>分布变换工具</strong>：当样本来自行为策略<span><span class="heti-spacing"> </span><span class="arithmatex">\(\pi_{old}\)</span></span>，而你想估计目标策略<span class="heti-skip"><span class="heti-spacing"> </span><span class="arithmatex">\(\pi_\theta\)</span><span class="heti-spacing"> </span></span>下的期望<span class="heti-skip"><span class="heti-spacing"> </span>/<span class="heti-spacing"> </span></span>梯度时，用重要性权重把<span class="heti-skip"><span class="heti-spacing"> </span><span class="arithmatex">\(\pi_{old}\)</span><span class="heti-spacing"> </span></span>下的期望改写成<span class="heti-skip"><span class="heti-spacing"> </span><span class="arithmatex">\(\pi_\theta\)</span><span class="heti-spacing"> </span></span>下的期望</p>
 </blockquote>
 <h2 id="2-trpo"><span>2. TRPO(<span class="heti-spacing"> </span></span>置信域策略优化<span><span class="heti-spacing"> </span>)</span><a class="headerlink" href="#2-trpo" title="Permanent link"><span><span class="heti-spacing"> </span>¶</span></a></h2>
 <ul>
@@ -1242,10 +1250,10 @@ J(\theta) = \mathbb{E_t}\big[\frac{\pi_\theta(a_t|s_t)}{\pi_{old}(a_t|s_t)}\hat 
 <p>核心思想：在目标函数中加入<span class="heti-skip"><span class="heti-spacing"> </span>KL<span class="heti-spacing"> </span></span>散度作为正则项，并动态调整<span><span class="heti-spacing"> </span><span class="arithmatex">\(\beta\)</span></span>，以限制新旧策略间的差异</p>
 </li>
 <li>
-<p>目标函数：
-    $$
-    J^{PPO-Penalty}(\theta) = \mathbb{E}<em>t\big[\frac{\pi</em>\theta(a_t|s_t)}{\pi_{old}(a_t|s_t)}\hat A_t^{old} \big] - \beta \cdot KL\big(\pi_{old}(\cdot|s_t),\pi_\theta(\cdot|s_t)\big)
-    $$</p>
+<p>目标函数：</p>
+<div class="arithmatex">\[
+J^{PPO-Penalty}(\theta) = \mathbb{E}_t\big[\frac{\pi_\theta(a_t|s_t)}{\pi_{old}(a_t|s_t)}\hat A_t^{old} \big] - \beta \cdot KL\big(\pi_{old}(\cdot|s_t),\pi_\theta(\cdot|s_t)\big)
+\]</div>
 </li>
 <li>
 <p>自适应<span class="heti-skip"><span class="heti-spacing"> </span>KL<span class="heti-spacing"> </span></span>惩罚<span class="heti-skip"><span class="heti-spacing"> </span>(<span class="heti-spacing"> </span></span>动态调整<span><span class="heti-spacing"> </span><span class="arithmatex">\(\beta\)</span>)</span>：</p>
@@ -1266,10 +1274,12 @@ J(\theta) = \mathbb{E_t}\big[\frac{\pi_\theta(a_t|s_t)}{\pi_{old}(a_t|s_t)}\hat 
 <div class="arithmatex">\[
 J^{PPO-Clip}(\theta) = \mathbb{E}_t\left[ \min \left\{ \frac{\pi_\theta(a_t|s_t)}{\pi_{old}(a_t|s_t)}\hat A_t^{\pi_{old}},\; \text{clip}\left(\frac{\pi_\theta(a_t|s_t)}{\pi_{old}(a_t|s_t)},1-\epsilon,1+\epsilon \right)\cdot \hat A_t^{\pi_{old}} \right\} \right]
 \]</div>
-<p>其中：
-- <span class="arithmatex">\(\pi_{old}\)</span>：生成当前大批次数据的旧策略的参数，一个大批次数据会被打散并切分为<span class="arithmatex">\(M\)</span>个小批次，进行<span class="arithmatex">\(M\)</span>次小批量训练与参数更新，更新过程中<span class="arithmatex">\(\pi_{old}\)</span>不变。将对应的策略<span class="arithmatex">\(\pi_{old}\)</span>称为旧策略，将当前版本参数<span class="arithmatex">\(\theta\)</span>对应策略<span class="arithmatex">\(\pi_\theta\)</span>称为新策略(<strong>其实按这种写法，旧策略应写为<span><span class="heti-spacing"> </span><span class="arithmatex">\(\theta_{old}\)</span></span></strong>)
-- <span class="arithmatex">\(\epsilon\)</span>：裁剪阈值参数，通常取值 0.1~0.3，用于控制裁剪强度
-- <span class="arithmatex">\(\text{clip}(r, 1-\epsilon, 1+\epsilon)\)</span>：截断函数，把重要性权重<span class="arithmatex">\(r\)</span>截断到 <span class="arithmatex">\([1-\epsilon,1+\epsilon]\)</span>区间内</p>
+<p>其中：</p>
+<ul>
+<li><span class="arithmatex">\(\pi_{old}\)</span>：生成当前大批次数据的旧策略的参数，一个大批次数据会被打散并切分为<span class="heti-skip"><span class="heti-spacing"> </span><span class="arithmatex">\(M\)</span><span class="heti-spacing"> </span></span>个小批次，进行<span class="heti-skip"><span class="heti-spacing"> </span><span class="arithmatex">\(M\)</span><span class="heti-spacing"> </span></span>次小批量训练与参数更新，更新过程中<span class="heti-skip"><span class="heti-spacing"> </span><span class="arithmatex">\(\pi_{old}\)</span><span class="heti-spacing"> </span></span>不变。将对应的策略<span class="heti-skip"><span class="heti-spacing"> </span><span class="arithmatex">\(\pi_{old}\)</span><span class="heti-spacing"> </span></span>称为旧策略，将当前版本参数<span class="heti-skip"><span class="heti-spacing"> </span><span class="arithmatex">\(\theta\)</span><span class="heti-spacing"> </span></span>对应策略<span class="heti-skip"><span class="heti-spacing"> </span><span class="arithmatex">\(\pi_\theta\)</span><span class="heti-spacing"> </span></span>称为新策略<span><span class="heti-spacing"> </span>(</span><strong>其实按这种写法，旧策略应写为<span><span class="heti-spacing"> </span><span class="arithmatex">\(\theta_{old}\)</span></span></strong>)</li>
+<li><span class="arithmatex">\(\epsilon\)</span>：裁剪阈值参数，通常取值<span><span class="heti-spacing"> </span>0.1~0.3</span>，用于控制裁剪强度</li>
+<li><span class="arithmatex">\(\text{clip}(r, 1-\epsilon, 1+\epsilon)\)</span>：截断函数，把重要性权重<span class="heti-skip"><span class="heti-spacing"> </span><span class="arithmatex">\(r\)</span><span class="heti-spacing"> </span></span>截断到<span class="heti-skip"><span class="heti-spacing"> </span><span class="arithmatex">\([1-\epsilon,1+\epsilon]\)</span><span class="heti-spacing"> </span></span>区间内</li>
+</ul>
 </li>
 <li>
 <p>策略概率比的新说明：</p>
@@ -1280,12 +1290,8 @@ J^{PPO-Clip}(\theta) = \mathbb{E}_t\left[ \min \left\{ \frac{\pi_\theta(a_t|s_t)
 r_t(\theta) = \frac{\pi_\theta(a_t|s_t)}{\pi_{old}(a_t|s_t)}
 \]</div>
 <ul>
-<li>
-<p><span class="arithmatex">\(r_t(\theta)\)</span>：衡量新旧策略在特定状态<span class="heti-skip"><span class="heti-spacing"> </span><span class="arithmatex">\(s_t\)</span><span class="heti-spacing"> </span></span>下选择相同动作<span class="heti-skip"><span class="heti-spacing"> </span><span class="arithmatex">\(a_t\)</span><span class="heti-spacing"> </span></span>的概率差异，反映参数更新后策略的变化程度</p>
-</li>
-<li>
-<p>计算时一般用对数概率<span class="heti-skip"><span class="heti-spacing"> </span><span class="arithmatex">\(\text{logProbs}\)</span><span class="heti-spacing"> </span></span>的形式使用：</p>
-</li>
+<li><span class="arithmatex">\(r_t(\theta)\)</span>：衡量新旧策略在特定状态<span class="heti-skip"><span class="heti-spacing"> </span><span class="arithmatex">\(s_t\)</span><span class="heti-spacing"> </span></span>下选择相同动作<span class="heti-skip"><span class="heti-spacing"> </span><span class="arithmatex">\(a_t\)</span><span class="heti-spacing"> </span></span>的概率差异，反映参数更新后策略的变化程度</li>
+<li>计算时一般用对数概率<span class="heti-skip"><span class="heti-spacing"> </span><span class="arithmatex">\(\text{logProbs}\)</span><span class="heti-spacing"> </span></span>的形式使用：</li>
 </ul>
 <div class="arithmatex">\[
 \begin{align}
@@ -1472,9 +1478,9 @@ TRPO是“不能超过KL上限”；PPO-Clip是“权重不能涨/跌超过固�
 </li>
 <li>
 <p><span>PPO<span class="heti-spacing"> </span></span>与<span class="heti-skip"><span class="heti-spacing"> </span>A2C<span class="heti-spacing"> </span></span>算法的区别</p>
-<p>它们的共同点有都基于策略梯度，都用<span class="heti-skip"><span class="heti-spacing"> </span>Actor-Critic<span class="heti-spacing"> </span></span>架构
-第一个区别是策略更新限制：PPO用剪裁限制策略更新幅度，从而提高训练稳定性，而A2C没有，可能导致策略更新过大，进而影响训练稳定性
-第二个区别是样本收集与训练效率：PPO可以用旧策略收集大量样本，并对同一个大批次的样本进行多次训练和参数更新，大大提高了样本利用率和训练效率，而A2C每个样本只用一次，样本效率较低</p>
+<p>它们的共同点有都基于策略梯度，都用<span class="heti-skip"><span class="heti-spacing"> </span>Actor-Critic<span class="heti-spacing"> </span></span>架构</p>
+<p>第一个区别是策略更新限制：<span>PPO<span class="heti-spacing"> </span></span>用剪裁限制策略更新幅度，从而提高训练稳定性，而<span class="heti-skip"><span class="heti-spacing"> </span>A2C<span class="heti-spacing"> </span></span>没有，可能导致策略更新过大，进而影响训练稳定性</p>
+<p>第二个区别是样本收集与训练效率：<span>PPO<span class="heti-spacing"> </span></span>可以用旧策略收集大量样本，并对同一个大批次的样本进行多次训练和参数更新，大大提高了样本利用率和训练效率，而<span class="heti-skip"><span class="heti-spacing"> </span>A2C<span class="heti-spacing"> </span></span>每个样本只用一次，样本效率较低</p>
 </li>
 </ol>
 <hr/>
@@ -1486,7 +1492,7 @@ TRPO是“不能超过KL上限”；PPO-Clip是“权重不能涨/跌超过固�
 <span class="md-icon" title="最后更新">
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
 </span>
-<span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime" title="2026年11月19日 19:04:41 CST">2026年11月19日 19:04:41</span>
+<span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime" title="2026年11月3日 10:25:51 CST">2026年11月3日 10:25:51</span>
 </span>
 </aside>
 <!-- Giscus -->
